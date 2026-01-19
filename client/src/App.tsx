@@ -9,8 +9,8 @@ import Deals from "./pages/Deals";
 import DealDetail from "./pages/DealDetail";
 import Destinations from "./pages/Destinations";
 import MAInsights from "./pages/MAInsights";
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path="/" component={Home} />

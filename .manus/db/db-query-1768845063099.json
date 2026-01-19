@@ -1,0 +1,20 @@
+{
+  "query": "SELECT COUNT(*) as total, investment_type, SUM(deal_size_usd) as total_amount FROM investments GROUP BY investment_type;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT COUNT(*) as total, investment_type, SUM(deal_size_usd) as total_amount FROM investments GROUP BY investment_type;",
+  "rows": [
+    {
+      "total": "10",
+      "investment_type": "Greenfield",
+      "total_amount": "5840000000.00"
+    },
+    {
+      "total": "12",
+      "investment_type": "M&A",
+      "total_amount": "21482000000.00"
+    }
+  ],
+  "messages": [],
+  "stdout": "total\tinvestment_type\ttotal_amount\n10\tGreenfield\t5840000000.00\n12\tM&A\t21482000000.00\n",
+  "stderr": "",
+  "execution_time_ms": 1608
+}

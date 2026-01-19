@@ -1,0 +1,299 @@
+import { eq, desc, sql, and, like, or } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/mysql2";
+import { InsertUser, users, investments, InsertInvestment, Investment } from "../drizzle/schema";
+import { ENV } from './_core/env';
+
+let _db: ReturnType<typeof drizzle> | null = null;
+
+// Lazily create the drizzle instance so local tooling can run without a DB.
+export async function getDb() {
+  if (!_db && process.env.DATABASE_URL) {
+    try {
+      _db = drizzle(process.env.DATABASE_URL);
+    } catch (error) {
+      console.warn("[Database] Failed to connect:", error);
+      _db = null;
+    }
+  }
+  return _db;
+}
+
+export async function upsertUser(user: InsertUser): Promise<void> {
+  if (!user.openId) {
+    throw new Error("User openId is required for upsert");
+  }
+
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot upsert user: database not available");
+    return;
+  }
+
+  try {
+    const values: InsertUser = {
+      openId: user.openId,
+    };
+    const updateSet: Record<string, unknown> = {};
+
+    const textFields = ["name", "email", "loginMethod"] as const;
+    type TextField = (typeof textFields)[number];
+
+    const assignNullable = (field: TextField) => {
+      const value = user[field];
+      if (value === undefined) return;
+      const normalized = value ?? null;
+      values[field] = normalized;
+      updateSet[field] = normalized;
+    };
+
+    textFields.forEach(assignNullable);
+
+    if (user.lastSignedIn !== undefined) {
+      values.lastSignedIn = user.lastSignedIn;
+      updateSet.lastSignedIn = user.lastSignedIn;
+    }
+    if (user.role !== undefined) {
+      values.role = user.role;
+      updateSet.role = user.role;
+    } else if (user.openId === ENV.ownerOpenId) {
+      values.role = 'admin';
+      updateSet.role = 'admin';
+    }
+
+    if (!values.lastSignedIn) {
+      values.lastSignedIn = new Date();
+    }
+
+    if (Object.keys(updateSet).length === 0) {
+      updateSet.lastSignedIn = new Date();
+    }
+
+    await db.insert(users).values(values).onDuplicateKeyUpdate({
+      set: updateSet,
+    });
+  } catch (error) {
+    console.error("[Database] Failed to upsert user:", error);
+    throw error;
+  }
+}
+
+export async function getUserByOpenId(openId: string) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get user: database not available");
+    return undefined;
+  }
+
+  const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
+
+  return result.length > 0 ? result[0] : undefined;
+}
+
+// ============================================
+// Investment queries
+// ============================================
+
+export interface InvestmentFilters {
+  type?: 'M&A' | 'Greenfield' | null;
+  country?: string | null;
+  industry?: string | null;
+  status?: 'Completed' | 'Pending' | 'Terminated' | null;
+  search?: string | null;
+}
+
+export async function getAllInvestments(filters?: InvestmentFilters): Promise<Investment[]> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get investments: database not available");
+    return [];
+  }
+
+  try {
+    let query = db.select().from(investments);
+    
+    const conditions = [];
+    
+    if (filters?.type) {
+      conditions.push(eq(investments.investmentType, filters.type));
+    }
+    if (filters?.country) {
+      conditions.push(eq(investments.targetCountry, filters.country));
+    }
+    if (filters?.industry) {
+      conditions.push(eq(investments.targetIndustry, filters.industry));
+    }
+    if (filters?.status) {
+      conditions.push(eq(investments.status, filters.status));
+    }
+    if (filters?.search) {
+      const searchTerm = `%${filters.search}%`;
+      conditions.push(
+        or(
+          like(investments.investorName, searchTerm),
+          like(investments.targetCompanyName, searchTerm)
+        )
+      );
+    }
+    
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions)) as typeof query;
+    }
+    
+    const result = await query.orderBy(desc(investments.announcementDate));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get investments:", error);
+    return [];
+  }
+}
+
+export async function getInvestmentById(id: number): Promise<Investment | null> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get investment: database not available");
+    return null;
+  }
+
+  try {
+    const result = await db.select().from(investments).where(eq(investments.id, id)).limit(1);
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error("[Database] Failed to get investment:", error);
+    return null;
+  }
+}
+
+export async function createInvestment(data: InsertInvestment): Promise<number | null> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create investment: database not available");
+    return null;
+  }
+
+  try {
+    const result = await db.insert(investments).values(data);
+    return result[0].insertId;
+  } catch (error) {
+    console.error("[Database] Failed to create investment:", error);
+    return null;
+  }
+}
+
+export async function createManyInvestments(data: InsertInvestment[]): Promise<boolean> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create investments: database not available");
+    return false;
+  }
+
+  try {
+    await db.insert(investments).values(data);
+    return true;
+  } catch (error) {
+    console.error("[Database] Failed to create investments:", error);
+    return false;
+  }
+}
+
+export async function getInvestmentStats() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get stats: database not available");
+    return null;
+  }
+
+  try {
+    // Get all investments for aggregation
+    const allInvestments = await db.select().from(investments);
+    
+    // Calculate stats
+    const maDeals = allInvestments.filter(i => i.investmentType === 'M&A');
+    const greenfieldDeals = allInvestments.filter(i => i.investmentType === 'Greenfield');
+    
+    const maTotal = maDeals.reduce((sum, i) => sum + (parseFloat(i.dealSizeUsd || '0')), 0);
+    const greenfieldTotal = greenfieldDeals.reduce((sum, i) => sum + (parseFloat(i.dealSizeUsd || '0')), 0);
+    
+    // Country stats
+    const countryMap = new Map<string, { count: number; total: number }>();
+    allInvestments.forEach(i => {
+      const country = i.targetCountry || 'Unknown';
+      const current = countryMap.get(country) || { count: 0, total: 0 };
+      countryMap.set(country, {
+        count: current.count + 1,
+        total: current.total + (parseFloat(i.dealSizeUsd || '0'))
+      });
+    });
+    
+    // Industry stats
+    const industryMap = new Map<string, { count: number; total: number }>();
+    allInvestments.forEach(i => {
+      const industry = i.targetIndustry || 'Unknown';
+      const current = industryMap.get(industry) || { count: 0, total: 0 };
+      industryMap.set(industry, {
+        count: current.count + 1,
+        total: current.total + (parseFloat(i.dealSizeUsd || '0'))
+      });
+    });
+    
+    // Monthly stats
+    const monthlyMap = new Map<string, { ma: number; greenfield: number }>();
+    allInvestments.forEach(i => {
+      const date = new Date(i.announcementDate);
+      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      const current = monthlyMap.get(monthKey) || { ma: 0, greenfield: 0 };
+      if (i.investmentType === 'M&A') {
+        current.ma++;
+      } else {
+        current.greenfield++;
+      }
+      monthlyMap.set(monthKey, current);
+    });
+    
+    return {
+      typeStats: {
+        ma: { count: maDeals.length, total: maTotal },
+        greenfield: { count: greenfieldDeals.length, total: greenfieldTotal }
+      },
+      countryStats: Array.from(countryMap.entries())
+        .map(([country, stats]) => ({ country, ...stats }))
+        .sort((a, b) => b.total - a.total),
+      industryStats: Array.from(industryMap.entries())
+        .map(([industry, stats]) => ({ industry, ...stats }))
+        .sort((a, b) => b.total - a.total),
+      monthlyStats: Array.from(monthlyMap.entries())
+        .map(([month, stats]) => ({ month, ...stats }))
+        .sort((a, b) => a.month.localeCompare(b.month)),
+      totalDeals: allInvestments.length,
+      totalAmount: maTotal + greenfieldTotal
+    };
+  } catch (error) {
+    console.error("[Database] Failed to get stats:", error);
+    return null;
+  }
+}
+
+export async function getDistinctCountries(): Promise<string[]> {
+  const db = await getDb();
+  if (!db) return [];
+  
+  try {
+    const result = await db.selectDistinct({ country: investments.targetCountry }).from(investments);
+    return result.map(r => r.country).filter((c): c is string => c !== null);
+  } catch (error) {
+    console.error("[Database] Failed to get countries:", error);
+    return [];
+  }
+}
+
+export async function getDistinctIndustries(): Promise<string[]> {
+  const db = await getDb();
+  if (!db) return [];
+  
+  try {
+    const result = await db.selectDistinct({ industry: investments.targetIndustry }).from(investments);
+    return result.map(r => r.industry).filter((i): i is string => i !== null);
+  } catch (error) {
+    console.error("[Database] Failed to get industries:", error);
+    return [];
+  }
+}
