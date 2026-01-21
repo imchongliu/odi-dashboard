@@ -82,3 +82,13 @@ export function isMADeal(specifics: unknown): specifics is { type: 'ma' } {
 export function isGreenfieldDeal(specifics: unknown): specifics is { type: 'greenfield' } {
   return specifics !== null && typeof specifics === 'object' && 'type' in specifics && (specifics as { type: string }).type === 'greenfield';
 }
+
+// Helper function to format date
+export function formatDate(dateString: string | Date): string {
+  const date = typeof dateString === 'string' ? new Date(dateString) : dateString;
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }).format(date);
+}

@@ -1,0 +1,13 @@
+{
+  "query": "SELECT COUNT(*) as total_records FROM investments;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT COUNT(*) as total_records FROM investments;",
+  "rows": [
+    {
+      "total_records": "258"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_records\n258\n",
+  "stderr": "",
+  "execution_time_ms": 1547
+}

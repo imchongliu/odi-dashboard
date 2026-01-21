@@ -29,27 +29,25 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Search, Filter, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Filter, X, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import {
-  investments,
-  filterInvestments,
-  getUniqueCountries,
-  getUniqueIndustries,
-} from '@/lib/data';
-import { formatCurrency, formatDate, isMASpecifics, isGreenfieldSpecifics } from '@/lib/types';
-import type { Investment } from '@/lib/types';
+import { trpc } from '@/lib/trpc';
+import { formatCurrency, formatDate } from '@/lib/api';
 
 const ITEMS_PER_PAGE = 12;
 
-function TypeBadge({ type }: { type: 'M&A' | 'Greenfield' }) {
+function TypeBadge({ type }: { type: string }) {
+  const isMA = type === 'M&A';
+  const isGreenfield = type === 'Greenfield';
   return (
     <span
       className={cn(
         'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-        type === 'M&A'
+        isMA
           ? 'bg-[oklch(0.585_0.233_292.717/0.12)] text-[oklch(0.485_0.233_292.717)]'
-          : 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]'
+          : isGreenfield
+          ? 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]'
+          : 'bg-muted text-muted-foreground'
       )}
     >
       {type}
@@ -57,14 +55,18 @@ function TypeBadge({ type }: { type: 'M&A' | 'Greenfield' }) {
   );
 }
 
-function StatusBadge({ status }: { status: 'Completed' | 'Pending' | 'Terminated' }) {
+function StatusBadge({ status }: { status: string }) {
+  const isCompleted = status === '完成' || status === 'Completed';
+  const isPending = status === '筹划' || status === 'Pending';
+  const isTerminated = status === '终止' || status === 'Terminated';
+  
   return (
     <span
       className={cn(
         'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-        status === 'Completed' && 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]',
-        status === 'Pending' && 'bg-[oklch(0.769_0.188_70.08/0.12)] text-[oklch(0.6_0.188_70.08)]',
-        status === 'Terminated' && 'bg-[oklch(0.577_0.245_27.325/0.12)] text-[oklch(0.5_0.245_27.325)]'
+        isCompleted && 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]',
+        isPending && 'bg-[oklch(0.769_0.188_70.08/0.12)] text-[oklch(0.6_0.188_70.08)]',
+        isTerminated && 'bg-[oklch(0.577_0.245_27.325/0.12)] text-[oklch(0.5_0.245_27.325)]'
       )}
     >
       {status}
@@ -82,13 +84,61 @@ export default function Deals() {
   });
   const [currentPage, setCurrentPage] = useState(1);
 
-  const countries = getUniqueCountries();
-  const industries = getUniqueIndustries();
+  // Fetch data from database via tRPC
+  const { data: investments, isLoading } = trpc.investments.list.useQuery({});
+  const { data: countriesData } = trpc.investments.countries.useQuery();
+  const { data: industriesData } = trpc.investments.industries.useQuery();
+
+  const countries: string[] = countriesData || [];
+  const industries: string[] = industriesData || [];
 
   // Filter investments
   const filteredDeals = useMemo(() => {
-    return filterInvestments(filters);
-  }, [filters]);
+    if (!investments) return [];
+    
+    return investments.filter(inv => {
+      // Type filter
+      if (filters.type !== 'all' && inv.investmentType !== filters.type) {
+        return false;
+      }
+      
+      // Country filter
+      if (filters.country !== 'all' && inv.targetCountryName !== filters.country) {
+        return false;
+      }
+      
+      // Industry filter
+      if (filters.industry !== 'all' && inv.targetIndustry !== filters.industry) {
+        return false;
+      }
+      
+      // Status filter
+      if (filters.status !== 'all') {
+        const statusMap: Record<string, string[]> = {
+          'Completed': ['完成', 'Completed'],
+          'Pending': ['筹划', 'Pending'],
+          'Terminated': ['终止', 'Terminated'],
+        };
+        const validStatuses = statusMap[filters.status] || [];
+        if (!validStatuses.includes(inv.announcementStage || '')) {
+          return false;
+        }
+      }
+      
+      // Search filter
+      if (filters.search) {
+        const searchLower = filters.search.toLowerCase();
+        const matchesInvestor = inv.companyName?.toLowerCase().includes(searchLower);
+        const matchesTarget = inv.targetName?.toLowerCase().includes(searchLower);
+        const matchesCountry = inv.targetCountryName?.toLowerCase().includes(searchLower);
+        if (!matchesInvestor && !matchesTarget && !matchesCountry) {
+          return false;
+        }
+      }
+      
+      return true;
+    }).sort((a, b) => new Date(b.announcementDate).getTime() - new Date(a.announcementDate).getTime());
+  }, [investments, filters]);
 
   // Pagination
   const totalPages = Math.ceil(filteredDeals.length / ITEMS_PER_PAGE);
@@ -120,16 +170,21 @@ export default function Deals() {
     filters.status !== 'all' ||
     filters.search !== '';
 
-  // Get type-specific column value
-  const getTypeSpecificValue = (deal: Investment) => {
-    if (isMASpecifics(deal.deal_specifics)) {
-      return deal.deal_specifics.transaction_type || 'N/A';
-    }
-    if (isGreenfieldSpecifics(deal.deal_specifics)) {
-      return deal.deal_specifics.investment_phase || 'N/A';
-    }
-    return 'N/A';
-  };
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <p className="text-muted-foreground">Loading deals...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -171,6 +226,7 @@ export default function Deals() {
                   <SelectItem value="all">All Types</SelectItem>
                   <SelectItem value="M&A">M&A</SelectItem>
                   <SelectItem value="Greenfield">Greenfield</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
                 </SelectContent>
               </Select>
 
@@ -184,7 +240,7 @@ export default function Deals() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Countries</SelectItem>
-                  {countries.map((country) => (
+                  {countries.map((country: string) => (
                     <SelectItem key={country} value={country}>
                       {country}
                     </SelectItem>
@@ -202,7 +258,7 @@ export default function Deals() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Industries</SelectItem>
-                  {industries.map((industry) => (
+                  {industries.map((industry: string) => (
                     <SelectItem key={industry} value={industry}>
                       {industry}
                     </SelectItem>
@@ -259,9 +315,6 @@ export default function Deals() {
                     <TableHead>Country</TableHead>
                     <TableHead>Industry</TableHead>
                     <TableHead className="text-right">Deal Size</TableHead>
-                    <TableHead className="w-[120px]">
-                      {filters.type === 'M&A' ? 'Transaction' : filters.type === 'Greenfield' ? 'Phase' : 'Details'}
-                    </TableHead>
                     <TableHead className="w-[100px]">Status</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -273,37 +326,36 @@ export default function Deals() {
                       onClick={() => window.location.href = `/deals/${deal.id}`}
                     >
                       <TableCell className="font-medium tabular-nums text-muted-foreground">
-                        {formatDate(deal.announcement_date)}
+                        {formatDate(deal.announcementDate instanceof Date 
+                          ? deal.announcementDate.toISOString() 
+                          : String(deal.announcementDate))}
                       </TableCell>
                       <TableCell>
-                        <TypeBadge type={deal.investment_type} />
+                        <TypeBadge type={deal.investmentType || 'Other'} />
                       </TableCell>
                       <TableCell className="font-medium">
-                        <div className="max-w-[180px] truncate" title={deal.investor_name}>
-                          {deal.investor_name}
+                        <div className="max-w-[180px] truncate" title={deal.companyName}>
+                          {deal.companyName}
                         </div>
                       </TableCell>
                       <TableCell>
-                        <div className="max-w-[160px] truncate text-muted-foreground" title={deal.target_company_name || 'N/A'}>
-                          {deal.target_company_name || <span className="italic">New project</span>}
+                        <div className="max-w-[160px] truncate text-muted-foreground" title={deal.targetName || 'N/A'}>
+                          {deal.targetName || <span className="italic">New project</span>}
                         </div>
                       </TableCell>
                       <TableCell className="text-muted-foreground">
-                        {deal.target_country || 'N/A'}
+                        {deal.targetCountryName || 'N/A'}
                       </TableCell>
                       <TableCell className="text-muted-foreground">
-                        <div className="max-w-[140px] truncate" title={deal.target_industry || 'N/A'}>
-                          {deal.target_industry || 'N/A'}
+                        <div className="max-w-[140px] truncate" title={deal.targetIndustry || 'N/A'}>
+                          {deal.targetIndustry || 'N/A'}
                         </div>
                       </TableCell>
                       <TableCell className="text-right font-medium tabular-nums">
-                        {formatCurrency(deal.deal_size_usd, true)}
-                      </TableCell>
-                      <TableCell className="text-muted-foreground text-sm">
-                        {getTypeSpecificValue(deal)}
+                        {formatCurrency(parseFloat(deal.dealSizeUsd || '0'), true)}
                       </TableCell>
                       <TableCell>
-                        <StatusBadge status={deal.status} />
+                        <StatusBadge status={deal.announcementStage || 'Pending'} />
                       </TableCell>
                     </TableRow>
                   ))}

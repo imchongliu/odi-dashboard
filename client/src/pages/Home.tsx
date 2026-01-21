@@ -19,29 +19,91 @@ import { CountryBarChart } from '@/components/charts/CountryBarChart';
 import { IndustryBarChart } from '@/components/charts/IndustryBarChart';
 import { TopCountriesTable } from '@/components/stats/TopCountriesTable';
 import { RecentDealsTable } from '@/components/deals/RecentDealsTable';
-import {
-  investments,
-  getTypeStats,
-  getCountryStats,
-  getIndustryStats,
-  getMonthlyStats,
-  getRecentDeals,
-} from '@/lib/data';
-import { formatCurrency } from '@/lib/types';
-import { DollarSign, TrendingUp, Globe, Factory } from 'lucide-react';
+import { trpc } from '@/lib/trpc';
+import { formatCurrency } from '@/lib/api';
+import { DollarSign, TrendingUp, Globe, Factory, Loader2 } from 'lucide-react';
 
 export default function Home() {
-  // Compute statistics
-  const typeStats = getTypeStats();
-  const countryStats = getCountryStats();
-  const industryStats = getIndustryStats();
-  const monthlyStats = getMonthlyStats();
-  const recentDeals = getRecentDeals(8);
+  // Fetch data from database via tRPC
+  const { data: stats, isLoading: statsLoading } = trpc.investments.stats.useQuery();
+  const { data: investments, isLoading: investmentsLoading } = trpc.investments.list.useQuery({});
   
-  const totalDeals = investments.length;
-  const totalAmount = investments.reduce((sum, i) => sum + (i.deal_size_usd || 0), 0);
+  const isLoading = statsLoading || investmentsLoading;
+  
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <p className="text-muted-foreground">Loading investment data...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+  
+  // Extract stats from API response
+  const typeStats = stats?.typeStats || { ma: { count: 0, total: 0 }, greenfield: { count: 0, total: 0 } };
+  const rawCountryStats = stats?.countryStats || [];
+  const rawIndustryStats = stats?.industryStats || [];
+  const rawMonthlyStats = stats?.monthlyStats || [];
+  
+  // Transform monthly stats to match component interface
+  const monthlyStats = rawMonthlyStats.map(m => ({
+    month: m.month,
+    count: m.ma + m.greenfield,
+    maCount: m.ma,
+    greenfieldCount: m.greenfield,
+    totalAmount: 0 // Not available from API, using 0
+  }));
+  const totalDeals = stats?.totalDeals || 0;
+  const totalAmount = stats?.totalAmount || 0;
+  
+  // Transform country stats to match component interface
+  const countryStats = rawCountryStats.map(c => ({
+    country: c.country,
+    count: c.count,
+    totalAmount: c.total
+  }));
+  
+  // Transform industry stats to match component interface
+  const industryStats = rawIndustryStats.map(i => ({
+    industry: i.industry,
+    count: i.count,
+    totalAmount: i.total
+  }));
+  
   const topCountry = countryStats[0]?.country || 'N/A';
   const topIndustry = industryStats[0]?.industry || 'N/A';
+  
+  // Get recent deals (last 8) - transform to match Investment interface
+  const recentDeals = (investments || [])
+    .sort((a, b) => new Date(b.announcementDate).getTime() - new Date(a.announcementDate).getTime())
+    .slice(0, 8)
+    .map(inv => ({
+      id: inv.id,
+      announcement_date: inv.announcementDate instanceof Date 
+        ? inv.announcementDate.toISOString().split('T')[0] 
+        : String(inv.announcementDate).split('T')[0],
+      investor_name: inv.companyName,
+      investor_stock_code: inv.stockCode || null,
+      target_country: inv.targetCountryName,
+      target_company_name: inv.targetName || 'New project',
+      target_industry: inv.targetIndustry || null,
+      investment_type: (inv.investmentType === 'M&A' || inv.investmentType === 'Greenfield' 
+        ? inv.investmentType : 'M&A') as 'M&A' | 'Greenfield',
+      deal_size_usd: parseFloat(inv.dealSizeUsd || '0'),
+      status: (inv.announcementStage === '完成' ? 'Completed' : 
+               inv.announcementStage === '筹划' ? 'Pending' : 'Pending') as 'Completed' | 'Pending' | 'Terminated',
+      deal_specifics: null as any,
+      created_at: inv.createdAt instanceof Date 
+        ? inv.createdAt.toISOString() 
+        : String(inv.createdAt || new Date().toISOString()),
+    }));
 
   return (
     <div className="min-h-screen flex flex-col bg-background">

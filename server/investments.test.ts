@@ -8,14 +8,14 @@ vi.mock("./db", () => ({
     {
       id: 1,
       announcementDate: new Date("2024-01-15"),
-      investorName: "CATL",
-      investorStockCode: "300750.SZ",
-      targetCountry: "Germany",
-      targetCompanyName: "Varta AG",
+      companyName: "CATL",
+      stockCode: "300750.SZ",
+      targetCountryName: "Germany",
+      targetName: "Varta AG",
       targetIndustry: "Automotive & EV",
       investmentType: "M&A",
       dealSizeUsd: "1500000000",
-      status: "Completed",
+      announcementStage: "完成",
       dealSpecifics: { type: "ma" },
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -23,14 +23,14 @@ vi.mock("./db", () => ({
     {
       id: 2,
       announcementDate: new Date("2024-02-20"),
-      investorName: "BYD",
-      investorStockCode: "002594.SZ",
-      targetCountry: "Hungary",
-      targetCompanyName: null,
+      companyName: "BYD",
+      stockCode: "002594.SZ",
+      targetCountryName: "Hungary",
+      targetName: null,
       targetIndustry: "Automotive & EV",
       investmentType: "Greenfield",
       dealSizeUsd: "800000000",
-      status: "Pending",
+      announcementStage: "筹划",
       dealSpecifics: { type: "greenfield" },
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -41,14 +41,14 @@ vi.mock("./db", () => ({
       return Promise.resolve({
         id: 1,
         announcementDate: new Date("2024-01-15"),
-        investorName: "CATL",
-        investorStockCode: "300750.SZ",
-        targetCountry: "Germany",
-        targetCompanyName: "Varta AG",
+        companyName: "CATL",
+        stockCode: "300750.SZ",
+        targetCountryName: "Germany",
+        targetName: "Varta AG",
         targetIndustry: "Automotive & EV",
         investmentType: "M&A",
         dealSizeUsd: "1500000000",
-        status: "Completed",
+        announcementStage: "完成",
         dealSpecifics: { type: "ma" },
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -60,6 +60,7 @@ vi.mock("./db", () => ({
     typeStats: {
       ma: { count: 12, total: 20000000000 },
       greenfield: { count: 10, total: 5000000000 },
+      other: { count: 0, total: 0 },
     },
     countryStats: [
       { country: "Germany", count: 2, total: 2000000000 },
@@ -72,6 +73,7 @@ vi.mock("./db", () => ({
       { month: "2024-01", ma: 1, greenfield: 0 },
       { month: "2024-02", ma: 0, greenfield: 1 },
     ],
+    recentDeals: [],
     totalDeals: 22,
     totalAmount: 25000000000,
   }),
@@ -85,6 +87,8 @@ vi.mock("./db", () => ({
     "Technology & Gaming",
   ]),
   createManyInvestments: vi.fn().mockResolvedValue(true),
+  upsertUser: vi.fn().mockResolvedValue(undefined),
+  getUserByOpenId: vi.fn().mockResolvedValue(null),
 }));
 
 function createPublicContext(): TrpcContext {
@@ -109,21 +113,23 @@ describe("investments router", () => {
     const ctx = createPublicContext();
     const caller = appRouter.createCaller(ctx);
 
-    const result = await caller.investments.list();
+    // Pass empty object as required by the schema
+    const result = await caller.investments.list({});
 
     expect(result).toHaveLength(2);
-    expect(result[0].investorName).toBe("CATL");
-    expect(result[1].investorName).toBe("BYD");
+    expect(result[0].companyName).toBe("CATL");
+    expect(result[1].companyName).toBe("BYD");
   });
 
   it("returns investment by id", async () => {
     const ctx = createPublicContext();
     const caller = appRouter.createCaller(ctx);
 
-    const result = await caller.investments.getById({ id: 1 });
+    // Use 'detail' instead of 'getById'
+    const result = await caller.investments.detail({ id: 1 });
 
     expect(result).not.toBeNull();
-    expect(result?.investorName).toBe("CATL");
+    expect(result?.companyName).toBe("CATL");
     expect(result?.investmentType).toBe("M&A");
   });
 
@@ -131,7 +137,8 @@ describe("investments router", () => {
     const ctx = createPublicContext();
     const caller = appRouter.createCaller(ctx);
 
-    const result = await caller.investments.getById({ id: 999 });
+    // Use 'detail' instead of 'getById'
+    const result = await caller.investments.detail({ id: 999 });
 
     expect(result).toBeNull();
   });
