@@ -1,0 +1,85 @@
+{
+  "query": "SELECT DISTINCT company_province FROM investments WHERE company_province IS NOT NULL AND company_province != '' ORDER BY company_province;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT DISTINCT company_province FROM investments WHERE company_province IS NOT NULL AND company_province != '' ORDER BY company_province;",
+  "rows": [
+    {
+      "company_province": "上海"
+    },
+    {
+      "company_province": "云南省"
+    },
+    {
+      "company_province": "内蒙古自治区"
+    },
+    {
+      "company_province": "北京"
+    },
+    {
+      "company_province": "吉林省"
+    },
+    {
+      "company_province": "四川省"
+    },
+    {
+      "company_province": "天津"
+    },
+    {
+      "company_province": "安徽省"
+    },
+    {
+      "company_province": "山东省"
+    },
+    {
+      "company_province": "山西省"
+    },
+    {
+      "company_province": "广东省"
+    },
+    {
+      "company_province": "新疆维吾尔自治区"
+    },
+    {
+      "company_province": "江苏省"
+    },
+    {
+      "company_province": "江西省"
+    },
+    {
+      "company_province": "河北省"
+    },
+    {
+      "company_province": "河南省"
+    },
+    {
+      "company_province": "浙江省"
+    },
+    {
+      "company_province": "湖北省"
+    },
+    {
+      "company_province": "湖南省"
+    },
+    {
+      "company_province": "福建省"
+    },
+    {
+      "company_province": "贵州省"
+    },
+    {
+      "company_province": "辽宁省"
+    },
+    {
+      "company_province": "重庆"
+    },
+    {
+      "company_province": "陕西省"
+    },
+    {
+      "company_province": "黑龙江省"
+    }
+  ],
+  "messages": [],
+  "stdout": "company_province\n上海\n云南省\n内蒙古自治区\n北京\n吉林省\n四川省\n天津\n安徽省\n山东省\n山西省\n广东省\n新疆维吾尔自治区\n江苏省\n江西省\n河北省\n河南省\n浙江省\n湖北省\n湖南省\n福建省\n贵州省\n辽宁省\n重庆\n陕西省\n黑龙江省\n",
+  "stderr": "",
+  "execution_time_ms": 1643
+}

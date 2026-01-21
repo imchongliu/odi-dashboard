@@ -145,3 +145,9 @@
 - [x] 检查InvestmentDetailModal的翻译实现
 - [x] 更新所有页面使用翻译后的Investor和Target
 - [x] 测试中英文切换效果
+
+## 添加Province和Region字段值的英文翻译
+- [x] 在翻译文件中添加省份英文映射
+- [x] 在LanguageContext中添加translateProvince函数
+- [x] 更新InvestmentDetailModal使用translateProvince翻译Province和Region
+- [x] 测试中英文切换效果

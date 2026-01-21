@@ -11,6 +11,7 @@ interface LanguageContextType {
   t: Translations;
   translateCountry: (countryZh: string) => string;
   translateIndustry: (industryZh: string) => string;
+  translateProvince: (provinceZh: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -42,12 +43,18 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return translations[language].industries[industryZh as keyof typeof translations.en.industries] || industryZh;
   };
 
+  const translateProvince = (provinceZh: string): string => {
+    if (language === 'zh') return provinceZh;
+    return translations[language].provinces[provinceZh as keyof typeof translations.en.provinces] || provinceZh;
+  };
+
   const value = {
     language,
     setLanguage,
     t: translations[language],
     translateCountry,
     translateIndustry,
+    translateProvince,
   };
 
   return (
