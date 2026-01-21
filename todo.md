@@ -151,3 +151,9 @@
 - [x] 在LanguageContext中添加translateProvince函数
 - [x] 更新InvestmentDetailModal使用translateProvince翻译Province和Region
 - [x] 测试中英文切换效果
+
+## 修改香港翻译为中国香港
+- [x] 在en.ts的countries中将香港翻译改为"Hong Kong (PRC)"
+- [x] 在zh.ts的countries中将香港翻译改为"中国香港"
+- [x] 在en.ts的provinces中将香港相关条目改为"Hong Kong (PRC)"
+- [x] 测试所有页面的香港显示

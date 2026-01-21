@@ -136,7 +136,7 @@ export const en = {
   countries: {
     '英国': 'United Kingdom',
     '巴西': 'Brazil',
-    '香港': 'Hong Kong',
+    '香港': 'Hong Kong (PRC)',
     '尼日利亚': 'Nigeria',
     '新加坡': 'Singapore',
     '哈萨克斯坦': 'Kazakhstan',
@@ -229,7 +229,7 @@ export const en = {
     '西藏自治区': 'Tibet',
     '宁夏回族自治区': 'Ningxia',
     '新疆维吾尔自治区': 'Xinjiang',
-    '香港特别行政区': 'Hong Kong SAR',
+    '香港特别行政区': 'Hong Kong (PRC)',
     '澳门特别行政区': 'Macau SAR',
     // Common regions
     '北京': 'Beijing',
