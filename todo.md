@@ -162,3 +162,10 @@
 - [x] 检查LanguageContext中translateCountry的实现逻辑
 - [x] 修改translateCountry函数，让中文模式也查找映射表
 - [x] 测试Deals页面和首页的香港显示为"中国香港"
+
+## 完善Deals页面下拉菜单翻译
+- [x] 为All Countries下拉菜单添加英文翻译支持
+- [x] 为All Industries下拉菜单添加英文翻译支持
+- [x] 修改Status下拉菜单为筹划/进展/完成三个选项
+- [x] 为Status下拉菜单添加英文翻译（Planning/In Progress/Completed）
+- [x] 测试所有下拉菜单的中英文切换

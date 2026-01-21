@@ -256,10 +256,10 @@ export default function Deals() {
                   <SelectValue placeholder="Country" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Countries</SelectItem>
+                  <SelectItem value="all">{t.deals.allCountries}</SelectItem>
                   {countries.map((country: string) => (
                     <SelectItem key={country} value={country}>
-                      {country}
+                      {translateCountry(country)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -274,10 +274,10 @@ export default function Deals() {
                   <SelectValue placeholder="Industry" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Industries</SelectItem>
+                  <SelectItem value="all">{t.deals.allIndustries}</SelectItem>
                   {industries.map((industry: string) => (
                     <SelectItem key={industry} value={industry}>
-                      {industry}
+                      {translateIndustry(industry)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -292,10 +292,10 @@ export default function Deals() {
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="Completed">Completed</SelectItem>
-                  <SelectItem value="Pending">Pending</SelectItem>
-                  <SelectItem value="Terminated">Terminated</SelectItem>
+                  <SelectItem value="all">{t.deals.allStatus}</SelectItem>
+                  <SelectItem value="Planning">{t.status.planning}</SelectItem>
+                  <SelectItem value="In Progress">{t.status.progress}</SelectItem>
+                  <SelectItem value="Completed">{t.status.completed}</SelectItem>
                 </SelectContent>
               </Select>
 

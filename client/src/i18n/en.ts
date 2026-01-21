@@ -54,6 +54,7 @@ export const en = {
     allTypes: 'All Types',
     status: 'Status',
     allStatuses: 'All Statuses',
+    allStatus: 'All Status',
     country: 'Country',
     allCountries: 'All Countries',
     industry: 'Industry',
