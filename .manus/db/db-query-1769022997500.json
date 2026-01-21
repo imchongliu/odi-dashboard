@@ -1,0 +1,42 @@
+{
+  "query": "SELECT company_name, announcement_stage FROM investments ORDER BY announcement_date DESC LIMIT 8",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT company_name, announcement_stage FROM investments ORDER BY announcement_date DESC LIMIT 8",
+  "rows": [
+    {
+      "company_name": "厦门钨业股份有限公司",
+      "announcement_stage": "筹划"
+    },
+    {
+      "company_name": "铜陵洁雅生物科技股份有限公司",
+      "announcement_stage": "进展"
+    },
+    {
+      "company_name": "北京科锐集团股份有限公司",
+      "announcement_stage": "筹划"
+    },
+    {
+      "company_name": "立中四通轻合金集团股份有限公司",
+      "announcement_stage": "完成"
+    },
+    {
+      "company_name": "三川智慧科技股份有限公司",
+      "announcement_stage": "筹划"
+    },
+    {
+      "company_name": "海安橡胶集团股份公司",
+      "announcement_stage": "筹划"
+    },
+    {
+      "company_name": "九江德福科技股份有限公司",
+      "announcement_stage": "进展"
+    },
+    {
+      "company_name": "佳禾智能科技股份有限公司",
+      "announcement_stage": "进展"
+    }
+  ],
+  "messages": [],
+  "stdout": "company_name\tannouncement_stage\n厦门钨业股份有限公司\t筹划\n铜陵洁雅生物科技股份有限公司\t进展\n北京科锐集团股份有限公司\t筹划\n立中四通轻合金集团股份有限公司\t完成\n三川智慧科技股份有限公司\t筹划\n海安橡胶集团股份公司\t筹划\n九江德福科技股份有限公司\t进展\n佳禾智能科技股份有限公司\t进展\n",
+  "stderr": "",
+  "execution_time_ms": 1782
+}

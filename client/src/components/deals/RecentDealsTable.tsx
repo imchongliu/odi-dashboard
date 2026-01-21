@@ -52,18 +52,28 @@ function TypeBadge({ type }: { type: string }) {
   );
 }
 
-function StatusBadge({ status }: { status: 'Completed' | 'Pending' | 'Terminated' }) {
+function StatusBadge({ status }: { status: string }) {
   const { t } = useLanguage();
+  
+  // Translate status value (handles both Chinese and English)
+  const translatedStatus = t.status[status as keyof typeof t.status] || status;
+  
+  // Determine color based on status value
+  const isCompleted = status === 'Completed' || status === '完成';
+  const isPending = status === 'Pending' || status === '筹划';
+  const isProgress = status === 'In Progress' || status === '进展';
+  const isTerminated = status === 'Terminated' || status === '终止';
+  
   return (
     <span
       className={cn(
         'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-        status === 'Completed' && 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]',
-        status === 'Pending' && 'bg-[oklch(0.769_0.188_70.08/0.12)] text-[oklch(0.6_0.188_70.08)]',
-        status === 'Terminated' && 'bg-[oklch(0.577_0.245_27.325/0.12)] text-[oklch(0.5_0.245_27.325)]'
+        isCompleted && 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]',
+        (isPending || isProgress) && 'bg-[oklch(0.769_0.188_70.08/0.12)] text-[oklch(0.6_0.188_70.08)]',
+        isTerminated && 'bg-[oklch(0.577_0.245_27.325/0.12)] text-[oklch(0.5_0.245_27.325)]'
       )}
     >
-      {t.status[status.toLowerCase() as 'completed' | 'pending' | 'terminated'] || status}
+      {translatedStatus}
     </span>
   );
 }
@@ -131,7 +141,7 @@ export function RecentDealsTable({ deals, showViewAll = true, onDealClick }: Rec
                   {formatCurrency(deal.deal_size_usd, true)}
                 </TableCell>
                 <TableCell>
-                  <StatusBadge status={deal.status} />
+                  <StatusBadge status={(deal as any).announcementStage || (deal as any).announcement_stage || '筹划'} />
                 </TableCell>
               </TableRow>
             ))}

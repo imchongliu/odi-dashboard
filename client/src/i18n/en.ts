@@ -125,6 +125,9 @@ export const en = {
     completed: 'Completed',
     pending: 'Pending',
     terminated: 'Terminated',
+    '筹划': 'Planning',
+    '进展': 'In Progress',
+    '完成': 'Completed',
   },
 
   // Countries (major ones, add more as needed)

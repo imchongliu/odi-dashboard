@@ -1,0 +1,22 @@
+{
+  "query": "SELECT DISTINCT announcement_stage, COUNT(*) as count FROM investments GROUP BY announcement_stage ORDER BY announcement_stage",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT DISTINCT announcement_stage, COUNT(*) as count FROM investments GROUP BY announcement_stage ORDER BY announcement_stage",
+  "rows": [
+    {
+      "announcement_stage": "完成",
+      "count": "78"
+    },
+    {
+      "announcement_stage": "筹划",
+      "count": "150"
+    },
+    {
+      "announcement_stage": "进展",
+      "count": "97"
+    }
+  ],
+  "messages": [],
+  "stdout": "announcement_stage\tcount\n完成\t78\n筹划\t150\n进展\t97\n",
+  "stderr": "",
+  "execution_time_ms": 1637
+}

@@ -125,6 +125,11 @@ export const zh: TranslationKeys = {
     planning: '筹划',
     progress: '进展',
     completed: '完成',
+    pending: '待定',
+    terminated: '终止',
+    '筹划': '筹划',
+    '进展': '进展',
+    '完成': '完成',
   },
 
   // Countries (keep Chinese names as is)

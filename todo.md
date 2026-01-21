@@ -89,3 +89,9 @@
 - [x] 添加“日常消费”和“通讯服务”的英文翻译
 - [x] 在Recent Deals表格中翻译Country列的国家名称
 - [x] 确认Investor列不需要翻译（公司名称保持原文）
+
+## 修复剩余翻译问题
+- [x] 修正status中“进展”的英文翻译为“In Progress”
+- [x] 确认Investor和Target列标题已正确翻译
+- [x] 修复StatusBadge组件支持中文状态值
+- [x] 修复RecentDealsTable使用正确的announcement_stage字段
