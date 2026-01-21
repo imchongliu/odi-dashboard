@@ -61,7 +61,7 @@ function TypeBadge({ type }: { type: string }) {
 }
 
 function StatusBadge({ status }: { status: string }) {
-  const { t } = useLanguage();
+  const { t, translateCountry, translateIndustry } = useLanguage();
   
   // Translate status value (handles both Chinese and English)
   const translatedStatus = t.status[status as keyof typeof t.status] || status;
@@ -88,6 +88,8 @@ function StatusBadge({ status }: { status: string }) {
 }
 
 export default function Deals() {
+  const { t, translateCountry, translateIndustry } = useLanguage();
+  
   const [filters, setFilters] = useState({
     type: 'all',
     country: 'all',
@@ -362,11 +364,11 @@ export default function Deals() {
                         </div>
                       </TableCell>
                       <TableCell className="text-muted-foreground">
-                        {deal.targetCountryName || 'N/A'}
+                        {translateCountry(deal.targetCountryName || 'N/A')}
                       </TableCell>
                       <TableCell className="text-muted-foreground">
-                        <div className="max-w-[140px] truncate" title={deal.companyIndustry || 'N/A'}>
-                          {deal.companyIndustry || 'N/A'}
+                        <div className="max-w-[140px] truncate" title={translateIndustry(deal.companyIndustry || 'N/A')}>
+                          {translateIndustry(deal.companyIndustry || 'N/A')}
                         </div>
                       </TableCell>
                       <TableCell className="text-right font-medium tabular-nums">

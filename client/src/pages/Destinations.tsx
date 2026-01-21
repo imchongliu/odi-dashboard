@@ -37,6 +37,7 @@ import { cn } from '@/lib/utils';
 import { trpc } from '@/lib/trpc';
 import { formatCurrency, formatDate } from '@/lib/api';
 import { InvestmentDetailModal } from '@/components/deals/InvestmentDetailModal';
+import { InvestmentMap } from '@/components/destinations/InvestmentMap';
 
 function TypeBadge({ type }: { type: string }) {
   const isMA = type === 'M&A';
@@ -221,6 +222,22 @@ export default function Destinations() {
                   <p className="text-sm text-muted-foreground">Greenfield</p>
                   <p className="text-xl font-bold">{gfCount}</p>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Investment Map */}
+          <div className="mb-6">
+            <div className="chart-container">
+              <div className="mb-4">
+                <h3 className="text-lg font-semibold">Global Investment Distribution</h3>
+                <p className="text-sm text-muted-foreground">Click on markers to view country details</p>
+              </div>
+              <div className="h-[500px]">
+                <InvestmentMap 
+                  countryStats={countryStats} 
+                  onCountryClick={(country) => setSelectedCountry(country)}
+                />
               </div>
             </div>
           </div>

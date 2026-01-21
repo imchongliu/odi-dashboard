@@ -122,3 +122,14 @@
 ## 修改最大交易显示数量为6条
 - [x] 修改Home.tsx中TopDealsTable的limit参数为6
 - [x] 测试显示效果
+
+## 完善Deals页面英文翻译
+- [x] 检查当前Country和Industry的翻译实现
+- [x] 补充缺失的英文翻译映射
+- [x] 测试Deals页面英文显示
+
+## 完善Destinations页面
+- [x] 设计Destinations页面布局（地图+统计卡片+图表）
+- [x] 实现国家/地区投资分布地图可视化
+- [x] 添加按国家统计的投资数据展示
+- [x] 测试Destinations页面功能
