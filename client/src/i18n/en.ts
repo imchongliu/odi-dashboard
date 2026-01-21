@@ -37,6 +37,7 @@ export const en = {
     topIndustriesByValue: 'Top Industries by Value',
     topCountries: 'Deal Size Top 10',
     topCountriesSubtitle: 'Countries ranked by investment value',
+    topDeals: 'Top Deals',
     topDealsSubtitle: 'Largest deals by transaction value',
     topIndustries: 'Top 10 Industries by Value',
     recentDeals: 'Recent Deals',

@@ -113,3 +113,8 @@
 - [x] 在首页替换TopCountriesTable为TopDealsTable
 - [x] 添加"View More Deals"链接跳转到Deals页面
 - [x] 测试新组件显示和链接功能
+
+## 修改Deal Size Top 10标题为Top Deals
+- [x] 在翻译文件中添加topDeals键
+- [x] 更新TopDealsTable组件使用新的翻译键
+- [x] 测试中英文标题显示

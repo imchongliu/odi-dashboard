@@ -99,7 +99,7 @@ export function TopDealsTable({ deals, limit = 10 }: TopDealsTableProps) {
     <div className="chart-container">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-semibold">{t.overview.topCountries}</h3>
+          <h3 className="text-lg font-semibold">{t.overview.topDeals}</h3>
           <p className="text-sm text-muted-foreground">
             {t.overview.topDealsSubtitle || 'Largest deals by transaction value'}
           </p>
