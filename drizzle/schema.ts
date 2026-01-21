@@ -27,27 +27,46 @@ export type InsertUser = typeof users.$inferInsert;
 
 /**
  * Investments table for ODI data
- * Uses JSONB-style field (deal_specifics) for flexible M&A/Greenfield specific data
+ * Updated schema to support real investment data from Chinese listed companies
  */
 export const investments = mysqlTable("investments", {
   id: int("id").autoincrement().primaryKey(),
   
-  // Announcement date
+  // Data source and quality
+  sourceFile: varchar("source_file", { length: 500 }),
+  extractionModel: varchar("extraction_model", { length: 100 }),
+  extractionTokens: int("extraction_tokens"),
+  confidenceScore: decimal("confidence_score", { precision: 5, scale: 4 }),
+  validatedAt: timestamp("validated_at"),
+  dataCompleteness: mysqlEnum("data_completeness", ["high", "medium", "low"]).default("high"),
+  
+  // Announcement information
   announcementDate: date("announcement_date").notNull(),
+  announcementTitle: varchar("announcement_title", { length: 500 }),
+  announcementStage: mysqlEnum("announcement_stage", ["筹划", "进展", "完成"]).default("筹划"),
   
   // Investor information
-  investorName: varchar("investor_name", { length: 255 }).notNull(),
-  investorStockCode: varchar("investor_stock_code", { length: 50 }),
+  stockCode: varchar("stock_code", { length: 50 }),
+  companyName: varchar("company_name", { length: 255 }).notNull(),
+  exchange: varchar("exchange", { length: 100 }),
+  companyProvince: varchar("company_province", { length: 100 }),
+  companyIndustry: varchar("company_industry", { length: 100 }),
   
-  // Target information
-  targetCountry: varchar("target_country", { length: 100 }),
-  targetCompanyName: varchar("target_company_name", { length: 255 }),
+  // Investment information
+  investmentType: mysqlEnum("investment_type", ["M&A", "Greenfield", "Other"]).notNull(),
+  investmentRationale: text("investment_rationale"),
+  
+  // Target company information
+  targetName: varchar("target_name", { length: 255 }),
   targetIndustry: varchar("target_industry", { length: 100 }),
+  targetCountryCode: varchar("target_country_code", { length: 10 }),
+  targetCountryName: varchar("target_country_name", { length: 100 }).notNull(),
+  targetRegion: varchar("target_region", { length: 100 }),
   
-  // Deal basic information
-  investmentType: mysqlEnum("investment_type", ["M&A", "Greenfield"]).notNull(),
-  dealSizeUsd: decimal("deal_size_usd", { precision: 15, scale: 2 }),
-  status: mysqlEnum("status", ["Completed", "Pending", "Terminated"]).default("Pending").notNull(),
+  // Deal information
+  dealSizeOriginal: decimal("deal_size_original", { precision: 20, scale: 2 }),
+  originalCurrency: varchar("original_currency", { length: 10 }),
+  dealSizeUsd: decimal("deal_size_usd", { precision: 20, scale: 2 }).notNull(),
   
   // Flexible field for type-specific data (M&A or Greenfield specifics)
   dealSpecifics: json("deal_specifics"),

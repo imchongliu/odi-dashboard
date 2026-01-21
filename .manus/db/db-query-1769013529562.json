@@ -1,0 +1,25 @@
+{
+  "query": "SELECT COUNT(*) as total, investment_type, COUNT(*) as count FROM investments GROUP BY investment_type;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT COUNT(*) as total, investment_type, COUNT(*) as count FROM investments GROUP BY investment_type;",
+  "rows": [
+    {
+      "total": "137",
+      "investment_type": "Greenfield",
+      "count": "137"
+    },
+    {
+      "total": "6",
+      "investment_type": "Other",
+      "count": "6"
+    },
+    {
+      "total": "115",
+      "investment_type": "M&A",
+      "count": "115"
+    }
+  ],
+  "messages": [],
+  "stdout": "total\tinvestment_type\tcount\n137\tGreenfield\t137\n6\tOther\t6\n115\tM&A\t115\n",
+  "stderr": "",
+  "execution_time_ms": 1538
+}

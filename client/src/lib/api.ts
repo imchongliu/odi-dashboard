@@ -10,21 +10,21 @@ import { trpc } from './trpc';
 export type { Investment, DealSpecifics, MASpecifics, GreenfieldSpecifics } from '../../../drizzle/schema';
 
 export interface InvestmentFilters {
-  type?: 'M&A' | 'Greenfield' | null;
+  type?: 'M&A' | 'Greenfield' | 'Other' | null;
   country?: string | null;
   industry?: string | null;
-  status?: 'Completed' | 'Pending' | 'Terminated' | null;
+  stage?: '筹划' | '进展' | '完成' | null;
   search?: string | null;
 }
 
 // Hook to get all investments with optional filters
 export function useInvestments(filters?: InvestmentFilters) {
-  return trpc.investments.list.useQuery(filters);
+  return trpc.investments.list.useQuery(filters || {});
 }
 
 // Hook to get a single investment by ID
 export function useInvestment(id: number) {
-  return trpc.investments.getById.useQuery({ id });
+  return trpc.investments.detail.useQuery({ id });
 }
 
 // Hook to get aggregated statistics

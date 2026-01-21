@@ -94,10 +94,10 @@ export async function getUserByOpenId(openId: string) {
 // ============================================
 
 export interface InvestmentFilters {
-  type?: 'M&A' | 'Greenfield' | null;
+  type?: 'M&A' | 'Greenfield' | 'Other' | null;
   country?: string | null;
   industry?: string | null;
-  status?: 'Completed' | 'Pending' | 'Terminated' | null;
+  stage?: '筹划' | '进展' | '完成' | null;
   search?: string | null;
 }
 
@@ -117,20 +117,20 @@ export async function getAllInvestments(filters?: InvestmentFilters): Promise<In
       conditions.push(eq(investments.investmentType, filters.type));
     }
     if (filters?.country) {
-      conditions.push(eq(investments.targetCountry, filters.country));
+      conditions.push(eq(investments.targetCountryName, filters.country));
     }
     if (filters?.industry) {
       conditions.push(eq(investments.targetIndustry, filters.industry));
     }
-    if (filters?.status) {
-      conditions.push(eq(investments.status, filters.status));
+    if (filters?.stage) {
+      conditions.push(eq(investments.announcementStage, filters.stage));
     }
     if (filters?.search) {
       const searchTerm = `%${filters.search}%`;
       conditions.push(
         or(
-          like(investments.investorName, searchTerm),
-          like(investments.targetCompanyName, searchTerm)
+          like(investments.companyName, searchTerm),
+          like(investments.targetName, searchTerm)
         )
       );
     }
@@ -216,7 +216,7 @@ export async function getInvestmentStats() {
     // Country stats
     const countryMap = new Map<string, { count: number; total: number }>();
     allInvestments.forEach(i => {
-      const country = i.targetCountry || 'Unknown';
+      const country = i.targetCountryName || 'Unknown';
       const current = countryMap.get(country) || { count: 0, total: 0 };
       countryMap.set(country, {
         count: current.count + 1,
@@ -277,7 +277,7 @@ export async function getDistinctCountries(): Promise<string[]> {
   if (!db) return [];
   
   try {
-    const result = await db.selectDistinct({ country: investments.targetCountry }).from(investments);
+    const result = await db.selectDistinct({ country: investments.targetCountryName }).from(investments);
     return result.map(r => r.country).filter((c): c is string => c !== null);
   } catch (error) {
     console.error("[Database] Failed to get countries:", error);
