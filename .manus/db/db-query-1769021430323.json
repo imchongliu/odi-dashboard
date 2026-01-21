@@ -1,0 +1,55 @@
+{
+  "query": "SELECT id, announcement_date, investment_type, company_name, target_name, target_country_name, deal_size_usd \nFROM investments \nWHERE target_country_name = '中国' \nORDER BY announcement_date DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT id, announcement_date, investment_type, company_name, target_name, target_country_name, deal_size_usd \nFROM investments \nWHERE target_country_name = '中国' \nORDER BY announcement_date DESC;",
+  "rows": [
+    {
+      "id": "116",
+      "announcement_date": "2025-12-08",
+      "investment_type": "M&A",
+      "company_name": "浙江美力科技股份有限公司",
+      "target_name": "北京美力大圆弹簧有限公司及江苏美力大圆弹簧有限公司",
+      "target_country_name": "中国",
+      "deal_size_usd": "2123359.32"
+    },
+    {
+      "id": "328",
+      "announcement_date": "2025-10-09",
+      "investment_type": "Other",
+      "company_name": "上海铁大电信科技股份有限公司",
+      "target_name": "推移机器人科技（苏州）有限责任公司",
+      "target_country_name": "中国",
+      "deal_size_usd": "3000000.00"
+    },
+    {
+      "id": "9",
+      "announcement_date": "2025-09-24",
+      "investment_type": "M&A",
+      "company_name": "凯撒同盛发展股份有限公司",
+      "target_name": "青岛汉莎天厨食品有限公司",
+      "target_country_name": "中国",
+      "deal_size_usd": "2245892.62"
+    },
+    {
+      "id": "100",
+      "announcement_date": "2025-05-27",
+      "investment_type": "M&A",
+      "company_name": "上海飞凯材料科技股份有限公司",
+      "target_name": "捷恩智液晶材料（苏州）有限公司、捷恩智新材料科技（苏州）有限公司",
+      "target_country_name": "中国",
+      "deal_size_usd": "23634431.59"
+    },
+    {
+      "id": "99",
+      "announcement_date": "2025-03-24",
+      "investment_type": "M&A",
+      "company_name": "上海飞凯材料科技股份有限公司",
+      "target_name": "捷恩智液晶材料（苏州）有限公司和捷恩智新材料科技（苏州）有限公司",
+      "target_country_name": "中国",
+      "deal_size_usd": "50976187.14"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tannouncement_date\tinvestment_type\tcompany_name\ttarget_name\ttarget_country_name\tdeal_size_usd\n116\t2025-12-08\tM&A\t浙江美力科技股份有限公司\t北京美力大圆弹簧有限公司及江苏美力大圆弹簧有限公司\t中国\t2123359.32\n328\t2025-10-09\tOther\t上海铁大电信科技股份有限公司\t推移机器人科技（苏州）有限责任公司\t中国\t3000000.00\n9\t2025-09-24\tM&A\t凯撒同盛发展股份有限公司\t青岛汉莎天厨食品有限公司\t中国\t2245892.62\n100\t2025-05-27\tM&A\t上海飞凯材料科技股份有限公司\t捷恩智液晶材料（苏州）有限公司、捷恩智新材料科技（苏州）有限公司\t中国\t23634431.59\n99\t2025-03-24\tM&A\t上海飞凯材料科技股份有限公司\t捷恩智液晶材料（苏州）有限公司和捷恩智新材料科技（苏州）有限公司\t中国\t50976187.14\n",
+  "stderr": "",
+  "execution_time_ms": 1631
+}

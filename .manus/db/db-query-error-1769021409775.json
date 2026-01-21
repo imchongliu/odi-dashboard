@@ -1,0 +1,8 @@
+{
+  "query": "SELECT id, announcement_date, investment_type, investor_name, target_company_name, target_country, deal_size_usd \nFROM investments \nWHERE target_country = '中国' \nORDER BY announcement_date DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT id, announcement_date, investment_type, investor_name, target_company_name, target_country, deal_size_usd \nFROM investments \nWHERE target_country = '中国' \nORDER BY announcement_date DESC;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'target_country' in 'where clause'"
+  ]
+}

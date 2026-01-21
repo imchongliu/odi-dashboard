@@ -1,0 +1,19 @@
+{
+  "query": "SELECT COUNT(*) as total_records FROM investments;\nSELECT COUNT(*) as china_records FROM investments WHERE target_country_name = '中国';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT COUNT(*) as total_records FROM investments;\nSELECT COUNT(*) as china_records FROM investments WHERE target_country_name = '中国';",
+  "rows": [
+    {
+      "total_records": "325"
+    },
+    {
+      "total_records": "china_records"
+    },
+    {
+      "total_records": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "total_records\n325\nchina_records\n0\n",
+  "stderr": "",
+  "execution_time_ms": 1855
+}
