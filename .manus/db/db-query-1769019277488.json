@@ -1,0 +1,25 @@
+{
+  "query": "SELECT \n  investment_type, \n  COUNT(*) as count,\n  SUM(CAST(deal_size_usd AS DECIMAL(20,2))) as total_usd\nFROM investments\nGROUP BY investment_type\nORDER BY count DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT \n  investment_type, \n  COUNT(*) as count,\n  SUM(CAST(deal_size_usd AS DECIMAL(20,2))) as total_usd\nFROM investments\nGROUP BY investment_type\nORDER BY count DESC;",
+  "rows": [
+    {
+      "investment_type": "Greenfield",
+      "count": "157",
+      "total_usd": "8468659568.86"
+    },
+    {
+      "investment_type": "M&A",
+      "count": "120",
+      "total_usd": "12755694227.07"
+    },
+    {
+      "investment_type": "Other",
+      "count": "76",
+      "total_usd": "2493926827.67"
+    }
+  ],
+  "messages": [],
+  "stdout": "investment_type\tcount\ttotal_usd\nGreenfield\t157\t8468659568.86\nM&A\t120\t12755694227.07\nOther\t76\t2493926827.67\n",
+  "stderr": "",
+  "execution_time_ms": 1498
+}

@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE investments \nSET target_country_code = 'HK', target_country_name = '香港'\nWHERE target_country_name = '香港特别行政区' AND target_country_code != 'HK';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute UPDATE investments \nSET target_country_code = 'HK', target_country_name = '香港'\nWHERE target_country_name = '香港特别行政区' AND target_country_code != 'HK';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1552
+}
