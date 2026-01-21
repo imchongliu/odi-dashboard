@@ -19,11 +19,16 @@ import { CountryBarChart } from '@/components/charts/CountryBarChart';
 import { IndustryBarChart } from '@/components/charts/IndustryBarChart';
 import { TopCountriesTable } from '@/components/stats/TopCountriesTable';
 import { RecentDealsTable } from '@/components/deals/RecentDealsTable';
+import { InvestmentDetailModal } from '@/components/deals/InvestmentDetailModal';
+import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
 import { formatCurrency } from '@/lib/api';
 import { DollarSign, TrendingUp, Globe, Factory, Loader2 } from 'lucide-react';
 
 export default function Home() {
+  const [selectedInvestment, setSelectedInvestment] = useState<any | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  
   // Fetch data from database via tRPC
   const { data: stats, isLoading: statsLoading } = trpc.investments.stats.useQuery();
   const { data: investments, isLoading: investmentsLoading } = trpc.investments.list.useQuery({});
@@ -179,11 +184,29 @@ export default function Home() {
 
         {/* Recent Deals Section */}
         <section className="container pb-12">
-          <RecentDealsTable deals={recentDeals} showViewAll={true} />
+          <RecentDealsTable 
+            deals={recentDeals} 
+            showViewAll={true}
+            onDealClick={(deal) => {
+              // Convert Investment type to modal format
+              const inv = investments?.find(i => i.id === deal.id);
+              if (inv) {
+                setSelectedInvestment(inv);
+                setModalOpen(true);
+              }
+            }}
+          />
         </section>
       </main>
 
       <Footer />
+      
+      {/* Investment Detail Modal */}
+      <InvestmentDetailModal
+        investment={selectedInvestment}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
     </div>
   );
 }

@@ -57,3 +57,8 @@
 - [x] 在Deals页面集成模态框
 - [x] 实现点击表格行打开模态框功能
 - [x] 测试模态框显示和关闭功能
+
+## 在Overview和Destinations页面集成Investment Detail Modal
+- [x] 在Overview页面的Recent Deals表格集成模态框
+- [x] 在Destinations页面的投资记录表格集成模态框
+- [x] 测试两个页面的模态框功能

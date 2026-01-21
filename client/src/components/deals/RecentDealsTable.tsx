@@ -25,16 +25,24 @@ import {
 interface RecentDealsTableProps {
   deals: Investment[];
   showViewAll?: boolean;
+  onDealClick?: (deal: Investment) => void;
 }
 
-function TypeBadge({ type }: { type: 'M&A' | 'Greenfield' }) {
+function TypeBadge({ type }: { type: string }) {
+  const isMA = type === 'M&A';
+  const isGreenfield = type === 'Greenfield';
+  const isOther = type === 'Other';
   return (
     <span
       className={cn(
         'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-        type === 'M&A'
+        isMA
           ? 'bg-[oklch(0.585_0.233_292.717/0.12)] text-[oklch(0.485_0.233_292.717)]'
-          : 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]'
+          : isGreenfield
+          ? 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]'
+          : isOther
+          ? 'bg-[oklch(0.75_0.15_50/0.12)] text-[oklch(0.65_0.15_50)]'
+          : 'bg-muted text-muted-foreground'
       )}
     >
       {type}
@@ -57,7 +65,7 @@ function StatusBadge({ status }: { status: 'Completed' | 'Pending' | 'Terminated
   );
 }
 
-export function RecentDealsTable({ deals, showViewAll = true }: RecentDealsTableProps) {
+export function RecentDealsTable({ deals, showViewAll = true, onDealClick }: RecentDealsTableProps) {
   return (
     <div className="chart-container">
       <div className="flex items-center justify-between mb-4">
@@ -94,7 +102,7 @@ export function RecentDealsTable({ deals, showViewAll = true }: RecentDealsTable
               <TableRow
                 key={deal.id}
                 className="table-row-hover cursor-pointer"
-                onClick={() => window.location.href = `/deals/${deal.id}`}
+                onClick={() => onDealClick?.(deal)}
               >
                 <TableCell className="font-medium tabular-nums text-muted-foreground">
                   {formatDate(deal.announcement_date)}

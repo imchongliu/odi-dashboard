@@ -36,10 +36,12 @@ import { MapPin, ArrowRight, DollarSign, Briefcase, Building2, Loader2 } from 'l
 import { cn } from '@/lib/utils';
 import { trpc } from '@/lib/trpc';
 import { formatCurrency, formatDate } from '@/lib/api';
+import { InvestmentDetailModal } from '@/components/deals/InvestmentDetailModal';
 
 function TypeBadge({ type }: { type: string }) {
   const isMA = type === 'M&A';
   const isGreenfield = type === 'Greenfield';
+  const isOther = type === 'Other';
   return (
     <span
       className={cn(
@@ -48,6 +50,8 @@ function TypeBadge({ type }: { type: string }) {
           ? 'bg-[oklch(0.585_0.233_292.717/0.12)] text-[oklch(0.485_0.233_292.717)]'
           : isGreenfield
           ? 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]'
+          : isOther
+          ? 'bg-[oklch(0.75_0.15_50/0.12)] text-[oklch(0.65_0.15_50)]'
           : 'bg-muted text-muted-foreground'
       )}
     >
@@ -79,6 +83,8 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export default function Destinations() {
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+  const [selectedInvestment, setSelectedInvestment] = useState<any | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
   
   // Fetch data from database via tRPC
   const { data: investments, isLoading } = trpc.investments.list.useQuery({});
@@ -386,10 +392,13 @@ export default function Destinations() {
                     <h4 className="font-medium mb-3">Deals in {selectedCountry}</h4>
                     <div className="space-y-3 max-h-[400px] overflow-y-auto">
                       {countryDeals.map((deal) => (
-                        <Link
+                        <div
                           key={deal.id}
-                          href={`/deals/${deal.id}`}
-                          className="block p-3 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+                          onClick={() => {
+                            setSelectedInvestment(deal);
+                            setModalOpen(true);
+                          }}
+                          className="block p-3 rounded-lg border border-border hover:bg-muted/50 transition-colors cursor-pointer"
                         >
                           <div className="flex items-start justify-between gap-2 mb-1">
                             <span className="font-medium text-sm truncate flex-1">
@@ -410,7 +419,7 @@ export default function Destinations() {
                               {formatCurrency(parseFloat(deal.dealSizeUsd || '0'), true)}
                             </span>
                           </div>
-                        </Link>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -430,6 +439,13 @@ export default function Destinations() {
       </main>
 
       <Footer />
+      
+      {/* Investment Detail Modal */}
+      <InvestmentDetailModal
+        investment={selectedInvestment}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
     </div>
   );
 }
