@@ -17,7 +17,7 @@ interface StatCardProps {
   icon?: LucideIcon;
   trend?: 'up' | 'down' | 'neutral';
   trendValue?: string;
-  variant?: 'default' | 'ma' | 'greenfield';
+  variant?: 'default' | 'ma' | 'greenfield' | 'other';
   className?: string;
 }
 
@@ -46,7 +46,8 @@ export function StatCard({
           className={cn(
             'absolute left-0 top-0 bottom-0 w-1 rounded-l-lg',
             variant === 'ma' && 'bg-[oklch(0.585_0.233_292.717)]',
-            variant === 'greenfield' && 'bg-[oklch(0.696_0.17_162.48)]'
+            variant === 'greenfield' && 'bg-[oklch(0.696_0.17_162.48)]',
+            variant === 'other' && 'bg-[oklch(0.75_0.15_50)]'
           )}
         />
       )}
@@ -66,7 +67,8 @@ export function StatCard({
               'flex h-10 w-10 items-center justify-center rounded-lg',
               variant === 'default' && 'bg-primary/10 text-primary',
               variant === 'ma' && 'bg-[oklch(0.585_0.233_292.717/0.1)] text-[oklch(0.485_0.233_292.717)]',
-              variant === 'greenfield' && 'bg-[oklch(0.696_0.17_162.48/0.1)] text-[oklch(0.596_0.17_162.48)]'
+              variant === 'greenfield' && 'bg-[oklch(0.696_0.17_162.48/0.1)] text-[oklch(0.596_0.17_162.48)]',
+              variant === 'other' && 'bg-[oklch(0.75_0.15_50/0.1)] text-[oklch(0.65_0.15_50)]'
             )}
           >
             <Icon className="h-5 w-5" />

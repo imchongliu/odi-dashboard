@@ -46,3 +46,8 @@
 - [x] 修改后端数据库查询按target_country_code聚合
 - [ ] 修改前端页面显示target_country_code对应的国家名
 - [ ] 测试并验证修改
+
+## 添加Other投资类型筛选器
+- [x] 在首页添加Other类型筛选选项
+- [x] 在Deals Database页面添加Other类型筛选选项
+- [x] 测试筛选功能

@@ -47,7 +47,7 @@ export default function Home() {
   }
   
   // Extract stats from API response
-  const typeStats = stats?.typeStats || { ma: { count: 0, total: 0 }, greenfield: { count: 0, total: 0 } };
+  const typeStats = stats?.typeStats || { ma: { count: 0, total: 0 }, greenfield: { count: 0, total: 0 }, other: { count: 0, total: 0 } };
   const rawCountryStats = stats?.countryStats || [];
   const rawIndustryStats = stats?.industryStats || [];
   const rawMonthlyStats = stats?.monthlyStats || [];
@@ -128,6 +128,8 @@ export default function Home() {
               maTotal={typeStats.ma.total}
               greenfieldCount={typeStats.greenfield.count}
               greenfieldTotal={typeStats.greenfield.total}
+              otherCount={typeStats.other?.count || 0}
+              otherTotal={typeStats.other?.total || 0}
             />
             
             {/* Summary stats */}

@@ -210,9 +210,11 @@ export async function getInvestmentStats() {
     // Calculate stats
     const maDeals = allInvestments.filter(i => i.investmentType === 'M&A');
     const greenfieldDeals = allInvestments.filter(i => i.investmentType === 'Greenfield');
+    const otherDeals = allInvestments.filter(i => i.investmentType === 'Other');
     
     const maTotal = maDeals.reduce((sum, i) => sum + (parseFloat(i.dealSizeUsd || '0')), 0);
     const greenfieldTotal = greenfieldDeals.reduce((sum, i) => sum + (parseFloat(i.dealSizeUsd || '0')), 0);
+    const otherTotal = otherDeals.reduce((sum, i) => sum + (parseFloat(i.dealSizeUsd || '0')), 0);
     
     // Country stats - group by target_country_code to avoid duplicates
     // Exclude multi-country records (code = 'MULTI')
@@ -259,7 +261,8 @@ export async function getInvestmentStats() {
     return {
       typeStats: {
         ma: { count: maDeals.length, total: maTotal },
-        greenfield: { count: greenfieldDeals.length, total: greenfieldTotal }
+        greenfield: { count: greenfieldDeals.length, total: greenfieldTotal },
+        other: { count: otherDeals.length, total: otherTotal }
       },
       countryStats: Array.from(countryMap.entries())
         .map(([countryCode, stats]) => ({ 
@@ -276,7 +279,7 @@ export async function getInvestmentStats() {
         .map(([month, stats]) => ({ month, ...stats }))
         .sort((a, b) => a.month.localeCompare(b.month)),
       totalDeals: allInvestments.length,
-      totalAmount: maTotal + greenfieldTotal
+      totalAmount: maTotal + greenfieldTotal + otherTotal
     };
   } catch (error) {
     console.error("[Database] Failed to get stats:", error);

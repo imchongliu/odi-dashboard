@@ -39,6 +39,7 @@ const ITEMS_PER_PAGE = 12;
 function TypeBadge({ type }: { type: string }) {
   const isMA = type === 'M&A';
   const isGreenfield = type === 'Greenfield';
+  const isOther = type === 'Other';
   return (
     <span
       className={cn(
@@ -47,6 +48,8 @@ function TypeBadge({ type }: { type: string }) {
           ? 'bg-[oklch(0.585_0.233_292.717/0.12)] text-[oklch(0.485_0.233_292.717)]'
           : isGreenfield
           ? 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]'
+          : isOther
+          ? 'bg-[oklch(0.75_0.15_50/0.12)] text-[oklch(0.65_0.15_50)]'
           : 'bg-muted text-muted-foreground'
       )}
     >
