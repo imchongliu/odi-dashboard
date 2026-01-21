@@ -246,7 +246,7 @@ export default function Destinations() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left Column - Country Ranking */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-6" style={{height: '766px'}}>
               {/* Country Table */}
               <div className="chart-container">
                 <div className="mb-4">
