@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE investments MODIFY COLUMN investment_type VARCHAR(50) DEFAULT 'Other';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute ALTER TABLE investments MODIFY COLUMN investment_type VARCHAR(50) DEFAULT 'Other';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 2106
+}

@@ -204,7 +204,7 @@ export async function getInvestmentStats() {
   }
 
   try {
-    // Get all investments for aggregation
+    // Get all investments for aggregation (exclude multi-country records)
     const allInvestments = await db.select().from(investments);
     
     // Calculate stats
@@ -214,14 +214,20 @@ export async function getInvestmentStats() {
     const maTotal = maDeals.reduce((sum, i) => sum + (parseFloat(i.dealSizeUsd || '0')), 0);
     const greenfieldTotal = greenfieldDeals.reduce((sum, i) => sum + (parseFloat(i.dealSizeUsd || '0')), 0);
     
-    // Country stats
-    const countryMap = new Map<string, { count: number; total: number }>();
+    // Country stats - group by target_country_code to avoid duplicates
+    // Exclude multi-country records (code = 'MULTI')
+    const countryMap = new Map<string, { count: number; total: number; name: string }>();
     allInvestments.forEach(i => {
-      const country = i.targetCountryName || 'Unknown';
-      const current = countryMap.get(country) || { count: 0, total: 0 };
-      countryMap.set(country, {
+      const countryCode = i.targetCountryCode || 'Unknown';
+      // Skip multi-country records
+      if (countryCode === 'MULTI') return;
+      
+      const countryName = i.targetCountryName || 'Unknown';
+      const current = countryMap.get(countryCode) || { count: 0, total: 0, name: countryName };
+      countryMap.set(countryCode, {
         count: current.count + 1,
-        total: current.total + (parseFloat(i.dealSizeUsd || '0'))
+        total: current.total + (parseFloat(i.dealSizeUsd || '0')),
+        name: countryName // Keep the first name encountered for this code
       });
     });
     
@@ -256,7 +262,12 @@ export async function getInvestmentStats() {
         greenfield: { count: greenfieldDeals.length, total: greenfieldTotal }
       },
       countryStats: Array.from(countryMap.entries())
-        .map(([country, stats]) => ({ country, ...stats }))
+        .map(([countryCode, stats]) => ({ 
+          countryCode, 
+          country: stats.name, 
+          count: stats.count, 
+          total: stats.total 
+        }))
         .sort((a, b) => b.total - a.total),
       industryStats: Array.from(industryMap.entries())
         .map(([industry, stats]) => ({ industry, ...stats }))
@@ -278,8 +289,22 @@ export async function getDistinctCountries(): Promise<string[]> {
   if (!db) return [];
   
   try {
-    const result = await db.selectDistinct({ country: investments.targetCountryName }).from(investments);
-    return result.map(r => r.country).filter((c): c is string => c !== null);
+    // Get distinct country codes to avoid duplicates like "香港", "中国香港", etc.
+    const result = await db.selectDistinct({ 
+      code: investments.targetCountryCode,
+      name: investments.targetCountryName 
+    }).from(investments);
+    
+    // Group by code and return the first name for each code
+    // Exclude multi-country records (code = 'MULTI')
+    const countryMap = new Map<string, string>();
+    result.forEach(r => {
+      if (r.code && r.name && r.code !== 'MULTI' && !countryMap.has(r.code)) {
+        countryMap.set(r.code, r.name);
+      }
+    });
+    
+    return Array.from(countryMap.values());
   } catch (error) {
     console.error("[Database] Failed to get countries:", error);
     return [];

@@ -1,0 +1,110 @@
+{
+  "query": "SELECT target_country_code, target_country_name, COUNT(*) as count\nFROM investments\nGROUP BY target_country_code, target_country_name\nORDER BY count DESC\nLIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT target_country_code, target_country_name, COUNT(*) as count\nFROM investments\nGROUP BY target_country_code, target_country_name\nORDER BY count DESC\nLIMIT 20;",
+  "rows": [
+    {
+      "target_country_code": "SG",
+      "target_country_name": "新加坡",
+      "count": "32"
+    },
+    {
+      "target_country_code": "HK",
+      "target_country_name": "香港",
+      "count": "27"
+    },
+    {
+      "target_country_code": "TH",
+      "target_country_name": "泰国",
+      "count": "21"
+    },
+    {
+      "target_country_code": "DE",
+      "target_country_name": "德国",
+      "count": "18"
+    },
+    {
+      "target_country_code": "MY",
+      "target_country_name": "马来西亚",
+      "count": "11"
+    },
+    {
+      "target_country_code": "AU",
+      "target_country_name": "澳大利亚",
+      "count": "10"
+    },
+    {
+      "target_country_code": "VN",
+      "target_country_name": "越南",
+      "count": "9"
+    },
+    {
+      "target_country_code": "US",
+      "target_country_name": "美国",
+      "count": "8"
+    },
+    {
+      "target_country_code": "FR",
+      "target_country_name": "法国",
+      "count": "8"
+    },
+    {
+      "target_country_code": "GB",
+      "target_country_name": "英国",
+      "count": "7"
+    },
+    {
+      "target_country_code": "KR",
+      "target_country_name": "韩国",
+      "count": "7"
+    },
+    {
+      "target_country_code": "ID",
+      "target_country_name": "印度尼西亚",
+      "count": "7"
+    },
+    {
+      "target_country_code": "SA",
+      "target_country_name": "沙特阿拉伯",
+      "count": "6"
+    },
+    {
+      "target_country_code": "KZ",
+      "target_country_name": "哈萨克斯坦",
+      "count": "5"
+    },
+    {
+      "target_country_code": "NL",
+      "target_country_name": "荷兰",
+      "count": "5"
+    },
+    {
+      "target_country_code": "MA",
+      "target_country_name": "摩洛哥",
+      "count": "5"
+    },
+    {
+      "target_country_code": "CN",
+      "target_country_name": "中国",
+      "count": "4"
+    },
+    {
+      "target_country_code": "EG",
+      "target_country_name": "埃及",
+      "count": "4"
+    },
+    {
+      "target_country_code": "LU",
+      "target_country_name": "卢森堡",
+      "count": "4"
+    },
+    {
+      "target_country_code": "JP",
+      "target_country_name": "日本",
+      "count": "4"
+    }
+  ],
+  "messages": [],
+  "stdout": "target_country_code\ttarget_country_name\tcount\nSG\t新加坡\t32\nHK\t香港\t27\nTH\t泰国\t21\nDE\t德国\t18\nMY\t马来西亚\t11\nAU\t澳大利亚\t10\nVN\t越南\t9\nUS\t美国\t8\nFR\t法国\t8\nGB\t英国\t7\nKR\t韩国\t7\nID\t印度尼西亚\t7\nSA\t沙特阿拉伯\t6\nKZ\t哈萨克斯坦\t5\nNL\t荷兰\t5\nMA\t摩洛哥\t5\nCN\t中国\t4\nEG\t埃及\t4\nLU\t卢森堡\t4\nJP\t日本\t4\n",
+  "stderr": "",
+  "execution_time_ms": 1500
+}

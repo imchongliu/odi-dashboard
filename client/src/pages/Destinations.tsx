@@ -91,6 +91,9 @@ export default function Destinations() {
     const countryMap = new Map<string, { count: number; totalAmount: number }>();
     
     investments.forEach(inv => {
+      // Skip multi-country records (code = 'MULTI')
+      if (inv.targetCountryCode === 'MULTI') return;
+      
       const country = inv.targetCountryName || 'Unknown';
       const amount = parseFloat(inv.dealSizeUsd || '0');
       

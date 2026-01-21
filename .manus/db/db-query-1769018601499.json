@@ -1,0 +1,35 @@
+{
+  "query": "SELECT DISTINCT target_country_code, target_country_name, COUNT(*) as count \nFROM investments \nWHERE target_country_name LIKE '%香港%' OR target_country_name LIKE '%Hong Kong%'\nGROUP BY target_country_code, target_country_name\nORDER BY count DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT DISTINCT target_country_code, target_country_name, COUNT(*) as count \nFROM investments \nWHERE target_country_name LIKE '%香港%' OR target_country_name LIKE '%Hong Kong%'\nGROUP BY target_country_code, target_country_name\nORDER BY count DESC;",
+  "rows": [
+    {
+      "target_country_code": "HK",
+      "target_country_name": "中国香港",
+      "count": "13"
+    },
+    {
+      "target_country_code": "HK",
+      "target_country_name": "香港",
+      "count": "8"
+    },
+    {
+      "target_country_code": "HK",
+      "target_country_name": "香港特别行政区",
+      "count": "5"
+    },
+    {
+      "target_country_code": "MN, NA, HK",
+      "target_country_name": "蒙古国，纳米比亚共和国，中国香港",
+      "count": "1"
+    },
+    {
+      "target_country_code": "HK",
+      "target_country_name": "中国香港特别行政区",
+      "count": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "target_country_code\ttarget_country_name\tcount\nHK\t中国香港\t13\nHK\t香港\t8\nHK\t香港特别行政区\t5\nMN, NA, HK\t蒙古国，纳米比亚共和国，中国香港\t1\nHK\t中国香港特别行政区\t1\n",
+  "stderr": "",
+  "execution_time_ms": 1545
+}

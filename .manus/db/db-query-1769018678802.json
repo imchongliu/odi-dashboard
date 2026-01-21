@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE investments\nSET target_country_code = 'CD', target_country_name = '刚果民主共和国'\nWHERE target_country_name IN ('刚果民主共和国', '刚果（金）');",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute UPDATE investments\nSET target_country_code = 'CD', target_country_name = '刚果民主共和国'\nWHERE target_country_name IN ('刚果民主共和国', '刚果（金）');",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1546
+}

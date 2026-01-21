@@ -41,3 +41,8 @@
 - [x] 修改Deals页面表格中的Industry列使用company_industry
 - [x] 修改Deals页面筛选器使用company_industry
 - [x] 测试并验证修改
+
+## 使用target_country_code统一国家名称
+- [x] 修改后端数据库查询按target_country_code聚合
+- [ ] 修改前端页面显示target_country_code对应的国家名
+- [ ] 测试并验证修改

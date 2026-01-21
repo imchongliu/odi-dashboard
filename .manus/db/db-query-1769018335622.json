@@ -1,0 +1,18 @@
+{
+  "query": "SHOW COLUMNS FROM investments LIKE 'investment_type';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SHOW COLUMNS FROM investments LIKE 'investment_type';",
+  "rows": [
+    {
+      "Field": "investment_type",
+      "Type": "enum('M&A','Greenfield','Other','Capital Increase','Joint Venture')",
+      "Null": "YES",
+      "Key": "MUL",
+      "Default": "Other",
+      "Extra": ""
+    }
+  ],
+  "messages": [],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\ninvestment_type\tenum('M&A','Greenfield','Other','Capital Increase','Joint Venture')\tYES\tMUL\tOther\t\n",
+  "stderr": "",
+  "execution_time_ms": 1509
+}
