@@ -133,6 +133,19 @@ export const en = {
     '完成': 'Completed',
   },
 
+  // M&A Insights Page
+  maInsights: {
+    underDevelopment: 'Under Development',
+    underDevelopmentDesc: 'We are working hard to bring you in-depth M&A analysis and insights. Stay tuned!',
+    feature1Title: 'M&A vs Greenfield Analysis',
+    feature1Desc: 'Compare investment patterns and trends between M&A and Greenfield projects',
+    feature2Title: 'Industry Heatmap',
+    feature2Desc: 'Visualize investment concentration across industries and regions',
+    feature3Title: 'Deal Success Rate',
+    feature3Desc: 'Track completion rates and analyze factors affecting deal outcomes',
+    note: 'This page will include comprehensive M&A analytics, payment structure analysis, premium distribution, and transaction insights.',
+  },
+
   // Countries (major ones, add more as needed)
   countries: {
     '英国': 'United Kingdom',

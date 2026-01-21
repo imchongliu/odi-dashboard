@@ -135,6 +135,19 @@ export const zh: TranslationKeys = {
     '完成': '完成',
   },
 
+  // M&A Insights Page
+  maInsights: {
+    underDevelopment: '待开发',
+    underDevelopmentDesc: '我们正在努力为您带来深入的并购分析和洞察，敬请期待！',
+    feature1Title: 'M&A vs 绿地对比分析',
+    feature1Desc: '对比M&A和绿地项目的投资模式和趋势',
+    feature2Title: '行业热力图',
+    feature2Desc: '可视化展示跨行业和地区的投资集中度',
+    feature3Title: '交易成功率',
+    feature3Desc: '追踪完成率并分析影响交易结果的因素',
+    note: '此页面将包含全面的M&A分析、支付结构分析、溢价分布和交易洞察。',
+  },
+
   // Countries (keep Chinese names as is)
   countries: {
     '英国': '英国',

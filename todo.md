@@ -169,3 +169,9 @@
 - [x] 修改Status下拉菜单为筹划/进展/完成三个选项
 - [x] 为Status下拉菜单添加英文翻译（Planning/In Progress/Completed）
 - [x] 测试所有下拉菜单的中英文切换
+
+## 修复嵌套anchor标签错误和添加M&A Insights待开发说明
+- [x] 查找首页中嵌套的`<a>`标签并修复
+- [x] 为M&A Insights页面添加"待开发"说明
+- [x] 添加中英文翻译支持
+- [x] 测试修复效果
