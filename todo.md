@@ -118,3 +118,7 @@
 - [x] 在翻译文件中添加topDeals键
 - [x] 更新TopDealsTable组件使用新的翻译键
 - [x] 测试中英文标题显示
+
+## 修改最大交易显示数量为6条
+- [x] 修改Home.tsx中TopDealsTable的limit参数为6
+- [x] 测试显示效果

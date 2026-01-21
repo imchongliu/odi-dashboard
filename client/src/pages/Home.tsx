@@ -154,7 +154,7 @@ export default function Home() {
           
           {/* Top Deals Table */}
           <div className="mb-6">
-            <TopDealsTable deals={investments || []} limit={10} />
+            <TopDealsTable deals={investments || []} limit={6} />
           </div>
         </section>
 
