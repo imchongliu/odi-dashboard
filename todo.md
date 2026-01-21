@@ -72,7 +72,14 @@
 - [x] 创建i18n翻译文件结构
 - [x] 创建语言上下文和Hook
 - [x] 在Header添加语言切换按钮
-- [ ] 翻译Overview页面
+- [x] 翻译Overview页面主体内容
+- [x] 翻译TypeStatCards组件
+- [x] 翻译StatCard组件
+- [x] 翻译MonthlyTrendChart组件
+- [x] 翻译CountryBarChart组件
+- [x] 翻译IndustryBarChart组件
+- [x] 翻译TopCountriesTable组件
+- [x] 翻译RecentDealsTable组件
 - [ ] 翻译Deals页面
 - [ ] 翻译Destinations页面
 - [ ] 翻译投资详情模态框

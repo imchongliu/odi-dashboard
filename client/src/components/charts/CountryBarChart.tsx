@@ -18,6 +18,7 @@ import {
   Cell,
 } from 'recharts';
 import { formatCurrency } from '@/lib/types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface CountryData {
   country: string;
@@ -31,17 +32,18 @@ interface CountryBarChartProps {
 }
 
 const CustomTooltip = ({ active, payload, label }: any) => {
+  const { t } = useLanguage();
   if (active && payload && payload.length) {
     return (
       <div className="bg-popover border border-border rounded-lg shadow-lg p-3">
         <p className="font-medium text-sm mb-1">{label}</p>
         <div className="space-y-1">
           <div className="flex items-center justify-between gap-4">
-            <span className="text-sm text-muted-foreground">Deals:</span>
+            <span className="text-sm text-muted-foreground">{t.common.deals}:</span>
             <span className="text-sm font-medium">{payload[0]?.payload?.count}</span>
           </div>
           <div className="flex items-center justify-between gap-4">
-            <span className="text-sm text-muted-foreground">Total:</span>
+            <span className="text-sm text-muted-foreground">{t.common.total}:</span>
             <span className="text-sm font-medium">{formatCurrency(payload[0]?.value, true)}</span>
           </div>
         </div>
@@ -52,12 +54,16 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export function CountryBarChart({ data, limit = 8 }: CountryBarChartProps) {
-  const chartData = data.slice(0, limit);
+  const { t, translateCountry } = useLanguage();
+  const chartData = data.slice(0, limit).map(d => ({
+    ...d,
+    country: translateCountry(d.country)
+  }));
 
   return (
     <div className="chart-container">
       <div className="mb-4">
-        <h3 className="text-lg font-semibold">Top Destinations by Value</h3>
+        <h3 className="text-lg font-semibold">{t.overview.topDestinationsByValue}</h3>
         <p className="text-sm text-muted-foreground">Investment amount by country</p>
       </div>
       <div className="h-[300px]">

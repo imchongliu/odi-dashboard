@@ -24,8 +24,10 @@ import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
 import { formatCurrency } from '@/lib/api';
 import { DollarSign, TrendingUp, Globe, Factory, Loader2 } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Home() {
+  const { t, translateCountry, translateIndustry } = useLanguage();
   const [selectedInvestment, setSelectedInvestment] = useState<any | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   
@@ -43,7 +45,7 @@ export default function Home() {
         <main className="flex-1 flex items-center justify-center">
           <div className="flex flex-col items-center gap-4">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <p className="text-muted-foreground">Loading investment data...</p>
+            <p className="text-muted-foreground">{t.common.loading}</p>
           </div>
         </main>
         <Footer />
@@ -120,10 +122,10 @@ export default function Home() {
           <div className="container py-8">
             <div className="mb-6">
               <h1 className="text-3xl font-bold tracking-tight">
-                China Outbound Investment Dashboard
+                {t.overview.title}
               </h1>
               <p className="text-muted-foreground mt-1">
-                Track M&A and Greenfield investments by Chinese listed companies worldwide
+                {t.overview.subtitle}
               </p>
             </div>
             
@@ -140,23 +142,23 @@ export default function Home() {
             {/* Summary stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
               <StatCard
-                label="Total Deals"
+                label={t.overview.totalDeals}
                 value={totalDeals}
                 icon={TrendingUp}
               />
               <StatCard
-                label="Total Value"
+                label={t.overview.totalValue}
                 value={formatCurrency(totalAmount, true)}
                 icon={DollarSign}
               />
               <StatCard
-                label="Top Destination"
-                value={topCountry}
+                label={t.overview.topDestination}
+                value={translateCountry(topCountry)}
                 icon={Globe}
               />
               <StatCard
-                label="Top Industry"
-                value={topIndustry}
+                label={t.overview.topIndustry}
+                value={translateIndustry(topIndustry)}
                 icon={Factory}
               />
             </div>

@@ -18,6 +18,7 @@ import {
   Legend,
 } from 'recharts';
 import { formatCurrency } from '@/lib/types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface MonthlyData {
   month: string;
@@ -32,6 +33,7 @@ interface MonthlyTrendChartProps {
 }
 
 const CustomTooltip = ({ active, payload, label }: any) => {
+  const { t } = useLanguage();
   if (active && payload && payload.length) {
     return (
       <div className="bg-popover border border-border rounded-lg shadow-lg p-3">
@@ -39,12 +41,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         <div className="space-y-1.5">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-sm bg-[oklch(0.585_0.233_292.717)]" />
-            <span className="text-sm text-muted-foreground">M&A:</span>
+            <span className="text-sm text-muted-foreground">{t.investmentType.ma}:</span>
             <span className="text-sm font-medium">{payload[0]?.value || 0}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-sm bg-[oklch(0.696_0.17_162.48)]" />
-            <span className="text-sm text-muted-foreground">Greenfield:</span>
+            <span className="text-sm text-muted-foreground">{t.investmentType.greenfield}:</span>
             <span className="text-sm font-medium">{payload[1]?.value || 0}</span>
           </div>
         </div>
@@ -55,6 +57,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export function MonthlyTrendChart({ data }: MonthlyTrendChartProps) {
+  const { t } = useLanguage();
   // Format month labels
   const formattedData = data.map(d => ({
     ...d,
@@ -67,8 +70,8 @@ export function MonthlyTrendChart({ data }: MonthlyTrendChartProps) {
   return (
     <div className="chart-container">
       <div className="mb-4">
-        <h3 className="text-lg font-semibold">Monthly Deal Trend</h3>
-        <p className="text-sm text-muted-foreground">Number of deals by month</p>
+        <h3 className="text-lg font-semibold">{t.overview.monthlyTrend}</h3>
+        <p className="text-sm text-muted-foreground">{t.overview.monthlyTrendSubtitle}</p>
       </div>
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">

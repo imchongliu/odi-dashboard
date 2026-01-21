@@ -16,6 +16,8 @@ export const en = {
     viewAll: 'View All',
     showingOf: 'Showing {{current}} of {{total}} deals',
     noData: 'No data available',
+    deals: 'Deals',
+    total: 'Total',
   },
 
   // Overview Page
@@ -31,7 +33,10 @@ export const en = {
     topIndustry: 'Top Industry',
     monthlyTrend: 'Monthly Deal Trend',
     monthlyTrendSubtitle: 'Number of deals by month',
+    topDestinationsByValue: 'Top Destinations by Value',
+    topIndustriesByValue: 'Top Industries by Value',
     topCountries: 'Top 10 Countries by Value',
+    topCountriesSubtitle: 'Countries ranked by investment value',
     topIndustries: 'Top 10 Industries by Value',
     recentDeals: 'Recent Deals',
     recentDealsSubtitle: 'Latest investment announcements',
@@ -118,6 +123,8 @@ export const en = {
     planning: 'Planning',
     progress: 'In Progress',
     completed: 'Completed',
+    pending: 'Pending',
+    terminated: 'Terminated',
   },
 
   // Countries (major ones, add more as needed)

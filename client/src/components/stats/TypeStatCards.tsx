@@ -10,6 +10,7 @@
 import { Briefcase, Building2, PlusCircle } from 'lucide-react';
 import { StatCard } from './StatCard';
 import { formatCurrency } from '@/lib/types';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TypeStatCardsProps {
   maCount: number;
@@ -28,24 +29,26 @@ export function TypeStatCards({
   otherCount = 0,
   otherTotal = 0,
 }: TypeStatCardsProps) {
+  const { t } = useLanguage();
+  
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <StatCard
-        label="M&A Deals"
+        label={t.investmentType.ma}
         value={maCount}
         subValue={formatCurrency(maTotal, true)}
         icon={Briefcase}
         variant="ma"
       />
       <StatCard
-        label="Greenfield Investments"
+        label={t.investmentType.greenfield}
         value={greenfieldCount}
         subValue={formatCurrency(greenfieldTotal, true)}
         icon={Building2}
         variant="greenfield"
       />
       <StatCard
-        label="Other Investments"
+        label={t.investmentType.other}
         value={otherCount}
         subValue={formatCurrency(otherTotal, true)}
         icon={PlusCircle}

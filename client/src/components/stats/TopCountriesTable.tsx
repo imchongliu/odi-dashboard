@@ -9,6 +9,7 @@
 
 import { formatCurrency } from '@/lib/types';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface CountryData {
   country: string;
@@ -22,14 +23,15 @@ interface TopCountriesTableProps {
 }
 
 export function TopCountriesTable({ data, limit = 10 }: TopCountriesTableProps) {
+  const { t, translateCountry } = useLanguage();
   const topCountries = data.slice(0, limit);
   const maxAmount = topCountries[0]?.totalAmount || 1;
 
   return (
     <div className="chart-container">
       <div className="mb-4">
-        <h3 className="text-lg font-semibold">Top 10 Destinations</h3>
-        <p className="text-sm text-muted-foreground">Countries ranked by investment value</p>
+        <h3 className="text-lg font-semibold">{t.overview.topCountries}</h3>
+        <p className="text-sm text-muted-foreground">{t.overview.topCountriesSubtitle || 'Countries ranked by investment value'}</p>
       </div>
       
       <div className="space-y-3">
@@ -50,11 +52,11 @@ export function TopCountriesTable({ data, limit = 10 }: TopCountriesTableProps) 
                   >
                     {index + 1}
                   </span>
-                  <span className="font-medium">{country.country}</span>
+                  <span className="font-medium">{translateCountry(country.country)}</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="text-sm text-muted-foreground">
-                    {country.count} deal{country.count !== 1 ? 's' : ''}
+                    {country.count} {t.common.deals.toLowerCase()}
                   </span>
                   <span className="font-semibold tabular-nums min-w-[80px] text-right">
                     {formatCurrency(country.totalAmount, true)}

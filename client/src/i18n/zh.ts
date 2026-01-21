@@ -18,6 +18,8 @@ export const zh: TranslationKeys = {
     viewAll: '查看全部',
     showingOf: '显示 {{current}} / {{total}} 笔交易',
     noData: '暂无数据',
+    deals: '交易',
+    total: '总计',
   },
 
   // Overview Page
@@ -33,7 +35,10 @@ export const zh: TranslationKeys = {
     topIndustry: '主要行业',
     monthlyTrend: '月度交易趋势',
     monthlyTrendSubtitle: '每月交易数量',
+    topDestinationsByValue: '按投资额排名的主要目的地',
+    topIndustriesByValue: '按投资额排名的主要行业',
     topCountries: '投资额前10国家',
+    topCountriesSubtitle: '按投资额排名的国家',
     topIndustries: '投资额前10行业',
     recentDeals: '最新交易',
     recentDealsSubtitle: '最新投资公告',

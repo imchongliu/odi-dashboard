@@ -13,6 +13,7 @@ import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Investment } from '@/lib/types';
 import { formatCurrency, formatDate } from '@/lib/types';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Table,
   TableBody,
@@ -29,6 +30,7 @@ interface RecentDealsTableProps {
 }
 
 function TypeBadge({ type }: { type: string }) {
+  const { t } = useLanguage();
   const isMA = type === 'M&A';
   const isGreenfield = type === 'Greenfield';
   const isOther = type === 'Other';
@@ -45,12 +47,13 @@ function TypeBadge({ type }: { type: string }) {
           : 'bg-muted text-muted-foreground'
       )}
     >
-      {type}
+      {t.investmentType[type.toLowerCase() as 'ma' | 'greenfield' | 'other'] || type}
     </span>
   );
 }
 
 function StatusBadge({ status }: { status: 'Completed' | 'Pending' | 'Terminated' }) {
+  const { t } = useLanguage();
   return (
     <span
       className={cn(
@@ -60,25 +63,26 @@ function StatusBadge({ status }: { status: 'Completed' | 'Pending' | 'Terminated
         status === 'Terminated' && 'bg-[oklch(0.577_0.245_27.325/0.12)] text-[oklch(0.5_0.245_27.325)]'
       )}
     >
-      {status}
+      {t.status[status.toLowerCase() as 'completed' | 'pending' | 'terminated'] || status}
     </span>
   );
 }
 
 export function RecentDealsTable({ deals, showViewAll = true, onDealClick }: RecentDealsTableProps) {
+  const { t, translateCountry } = useLanguage();
   return (
     <div className="chart-container">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-lg font-semibold">Recent Deals</h3>
-          <p className="text-sm text-muted-foreground">Latest investment announcements</p>
+          <h3 className="text-lg font-semibold">{t.overview.recentDeals}</h3>
+          <p className="text-sm text-muted-foreground">{t.overview.recentDealsSubtitle}</p>
         </div>
         {showViewAll && (
           <Link
             href="/deals"
             className="flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
           >
-            View all
+            {t.common.viewAll}
             <ArrowRight className="h-4 w-4" />
           </Link>
         )}
@@ -88,13 +92,13 @@ export function RecentDealsTable({ deals, showViewAll = true, onDealClick }: Rec
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className="w-[100px]">Date</TableHead>
-              <TableHead className="w-[80px]">Type</TableHead>
-              <TableHead>Investor</TableHead>
-              <TableHead>Target</TableHead>
-              <TableHead>Country</TableHead>
-              <TableHead className="text-right">Deal Size</TableHead>
-              <TableHead className="w-[100px]">Status</TableHead>
+              <TableHead className="w-[100px]">{t.deals.columns.date}</TableHead>
+              <TableHead className="w-[80px]">{t.deals.columns.type}</TableHead>
+              <TableHead>{t.deals.columns.investor}</TableHead>
+              <TableHead>{t.deals.columns.target}</TableHead>
+              <TableHead>{t.deals.columns.country}</TableHead>
+              <TableHead className="text-right">{t.deals.columns.dealSize}</TableHead>
+              <TableHead className="w-[100px]">{t.deals.columns.status}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
