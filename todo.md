@@ -36,3 +36,8 @@
 - [x] 修正Destinations页面使用target_country_name而非target_region
 - [x] 修正行业统计使用company_industry而非target_industry
 - [x] 测试并验证所有修改
+
+## Deal Database页面Industry字段修正
+- [x] 修改Deals页面表格中的Industry列使用company_industry
+- [x] 修改Deals页面筛选器使用company_industry
+- [x] 测试并验证修改

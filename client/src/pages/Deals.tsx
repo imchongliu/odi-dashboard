@@ -107,8 +107,8 @@ export default function Deals() {
         return false;
       }
       
-      // Industry filter
-      if (filters.industry !== 'all' && inv.targetIndustry !== filters.industry) {
+      // Industry filter - use company_industry (investor's industry)
+      if (filters.industry !== 'all' && inv.companyIndustry !== filters.industry) {
         return false;
       }
       
@@ -347,8 +347,8 @@ export default function Deals() {
                         {deal.targetCountryName || 'N/A'}
                       </TableCell>
                       <TableCell className="text-muted-foreground">
-                        <div className="max-w-[140px] truncate" title={deal.targetIndustry || 'N/A'}>
-                          {deal.targetIndustry || 'N/A'}
+                        <div className="max-w-[140px] truncate" title={deal.companyIndustry || 'N/A'}>
+                          {deal.companyIndustry || 'N/A'}
                         </div>
                       </TableCell>
                       <TableCell className="text-right font-medium tabular-nums">
