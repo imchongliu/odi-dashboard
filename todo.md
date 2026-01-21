@@ -133,3 +133,9 @@
 - [x] 实现国家/地区投资分布地图可视化
 - [x] 添加按国家统计的投资数据展示
 - [x] 测试Destinations页面功能
+
+## 优化Destinations页面
+- [x] 删除"Top 10 Destinations by Value"柱状图部分
+- [x] 添加Destinations页面翻译键到en.ts和zh.ts
+- [x] 更新Destinations页面使用翻译函数
+- [x] 测试中英文切换效果

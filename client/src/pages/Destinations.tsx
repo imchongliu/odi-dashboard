@@ -38,6 +38,7 @@ import { trpc } from '@/lib/trpc';
 import { formatCurrency, formatDate } from '@/lib/api';
 import { InvestmentDetailModal } from '@/components/deals/InvestmentDetailModal';
 import { InvestmentMap } from '@/components/destinations/InvestmentMap';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 function TypeBadge({ type }: { type: string }) {
   const isMA = type === 'M&A';
@@ -83,6 +84,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export default function Destinations() {
+  const { t, translateCountry } = useLanguage();
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [selectedInvestment, setSelectedInvestment] = useState<any | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -172,9 +174,9 @@ export default function Destinations() {
         <div className="container py-8">
           {/* Page Header */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold tracking-tight">Investment Destinations</h1>
+            <h1 className="text-2xl font-bold tracking-tight">{t.destinations.title}</h1>
             <p className="text-muted-foreground mt-1">
-              Explore Chinese outbound investments by destination country
+              {t.destinations.subtitle}
             </p>
           </div>
 
@@ -186,7 +188,7 @@ export default function Destinations() {
                   <MapPin className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Countries</p>
+                  <p className="text-sm text-muted-foreground">{t.destinations.countries}</p>
                   <p className="text-xl font-bold">{totalCountries}</p>
                 </div>
               </div>
@@ -197,7 +199,7 @@ export default function Destinations() {
                   <DollarSign className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Total Value</p>
+                  <p className="text-sm text-muted-foreground">{t.destinations.totalValue}</p>
                   <p className="text-xl font-bold">{formatCurrency(totalAmount, true)}</p>
                 </div>
               </div>
@@ -208,7 +210,7 @@ export default function Destinations() {
                   <Briefcase className="h-5 w-5 text-[oklch(0.485_0.233_292.717)]" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">M&A Deals</p>
+                  <p className="text-sm text-muted-foreground">{t.destinations.maDeals}</p>
                   <p className="text-xl font-bold">{maCount}</p>
                 </div>
               </div>
@@ -219,7 +221,7 @@ export default function Destinations() {
                   <Building2 className="h-5 w-5 text-[oklch(0.55_0.17_162.48)]" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Greenfield</p>
+                  <p className="text-sm text-muted-foreground">{t.destinations.greenfield}</p>
                   <p className="text-xl font-bold">{gfCount}</p>
                 </div>
               </div>
@@ -230,8 +232,8 @@ export default function Destinations() {
           <div className="mb-6">
             <div className="chart-container">
               <div className="mb-4">
-                <h3 className="text-lg font-semibold">Global Investment Distribution</h3>
-                <p className="text-sm text-muted-foreground">Click on markers to view country details</p>
+                <h3 className="text-lg font-semibold">{t.destinations.mapTitle}</h3>
+                <p className="text-sm text-muted-foreground">{t.destinations.mapSubtitle}</p>
               </div>
               <div className="h-[500px]">
                 <InvestmentMap 
@@ -245,72 +247,20 @@ export default function Destinations() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left Column - Country Ranking */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Bar Chart */}
-              <div className="chart-container">
-                <div className="mb-4">
-                  <h3 className="text-lg font-semibold">Top 10 Destinations by Value</h3>
-                  <p className="text-sm text-muted-foreground">Click on a bar to view deals</p>
-                </div>
-                <div className="h-[400px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart
-                      data={topCountries}
-                      layout="vertical"
-                      margin={{ top: 0, right: 20, left: 0, bottom: 0 }}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.9 0 0)" horizontal={false} />
-                      <XAxis
-                        type="number"
-                        axisLine={false}
-                        tickLine={false}
-                        tick={{ fontSize: 12, fill: 'oklch(0.55 0.02 260)' }}
-                        tickFormatter={(value) => formatCurrency(value, true)}
-                      />
-                      <YAxis
-                        type="category"
-                        dataKey="country"
-                        axisLine={false}
-                        tickLine={false}
-                        tick={{ fontSize: 12, fill: 'oklch(0.35 0.02 260)' }}
-                        width={100}
-                      />
-                      <Tooltip content={<CustomTooltip />} cursor={{ fill: 'oklch(0.95 0 0)' }} />
-                      <Bar
-                        dataKey="totalAmount"
-                        radius={[0, 4, 4, 0]}
-                        maxBarSize={28}
-                        onClick={(data) => setSelectedCountry(data.country)}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        {topCountries.map((entry, index) => (
-                          <Cell
-                            key={`cell-${index}`}
-                            fill={entry.country === selectedCountry 
-                              ? 'oklch(0.623 0.214 259.815)' 
-                              : `oklch(0.623 0.214 259.815 / ${0.9 - index * 0.07})`
-                            }
-                          />
-                        ))}
-                      </Bar>
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-
               {/* Country Table */}
               <div className="chart-container">
                 <div className="mb-4">
-                  <h3 className="text-lg font-semibold">All Destinations</h3>
-                  <p className="text-sm text-muted-foreground">Complete list of investment destinations</p>
+                  <h3 className="text-lg font-semibold">{t.destinations.allDestinations}</h3>
+                  <p className="text-sm text-muted-foreground">{t.destinations.allDestinationsSubtitle}</p>
                 </div>
                 <div className="overflow-x-auto max-h-[400px]">
                   <Table>
                     <TableHeader>
                       <TableRow className="hover:bg-transparent">
-                        <TableHead className="w-[50px]">#</TableHead>
-                        <TableHead>Country</TableHead>
-                        <TableHead className="text-center">Deals</TableHead>
-                        <TableHead className="text-right">Total Value</TableHead>
+                        <TableHead className="w-[50px]">{t.destinations.columns.rank}</TableHead>
+                        <TableHead>{t.destinations.columns.country}</TableHead>
+                        <TableHead className="text-center">{t.destinations.columns.deals}</TableHead>
+                        <TableHead className="text-right">{t.destinations.columns.totalValue}</TableHead>
                         <TableHead className="w-[100px]"></TableHead>
                       </TableRow>
                     </TableHeader>
@@ -328,7 +278,7 @@ export default function Destinations() {
                             {index + 1}
                           </TableCell>
                           <TableCell className="font-medium">
-                            {country.country}
+                            {translateCountry(country.country)}
                           </TableCell>
                           <TableCell className="text-center tabular-nums">
                             {country.count}
@@ -360,7 +310,7 @@ export default function Destinations() {
                         <MapPin className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold">{selectedCountry}</h3>
+                        <h3 className="text-lg font-semibold">{translateCountry(selectedCountry)}</h3>
                         <p className="text-sm text-muted-foreground">
                           {countryDeals.length} deal{countryDeals.length !== 1 ? 's' : ''}
                         </p>
@@ -445,8 +395,8 @@ export default function Destinations() {
                 <div className="chart-container">
                   <div className="text-center py-12 text-muted-foreground">
                     <MapPin className="h-12 w-12 mx-auto mb-3 opacity-30" />
-                    <p className="font-medium">Select a country</p>
-                    <p className="text-sm mt-1">Click on a bar or table row to view deals</p>
+                    <p className="font-medium">{t.destinations.selectCountry}</p>
+                    <p className="text-sm mt-1">{t.destinations.selectCountrySubtitle}</p>
                   </div>
                 </div>
               )}
