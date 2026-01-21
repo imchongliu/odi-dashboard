@@ -203,6 +203,9 @@ export const en = {
     '房地产': 'Real Estate',
     '电信服务': 'Telecommunication Services',
     '日常消费品': 'Consumer Staples',
+    '日常消费': 'Consumer Staples',
+    '通讯服务': 'Telecommunication Services',
+    '其他': 'Other',
   },
 };
 

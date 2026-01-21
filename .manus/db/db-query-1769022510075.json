@@ -1,0 +1,40 @@
+{
+  "query": "SELECT DISTINCT company_industry FROM investments WHERE company_industry IS NOT NULL ORDER BY company_industry;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT DISTINCT company_industry FROM investments WHERE company_industry IS NOT NULL ORDER BY company_industry;",
+  "rows": [
+    {
+      "company_industry": "信息技术"
+    },
+    {
+      "company_industry": "公用事业"
+    },
+    {
+      "company_industry": "其他"
+    },
+    {
+      "company_industry": "医疗保健"
+    },
+    {
+      "company_industry": "可选消费"
+    },
+    {
+      "company_industry": "工业"
+    },
+    {
+      "company_industry": "日常消费"
+    },
+    {
+      "company_industry": "材料"
+    },
+    {
+      "company_industry": "能源"
+    },
+    {
+      "company_industry": "通讯服务"
+    }
+  ],
+  "messages": [],
+  "stdout": "company_industry\n信息技术\n公用事业\n其他\n医疗保健\n可选消费\n工业\n日常消费\n材料\n能源\n通讯服务\n",
+  "stderr": "",
+  "execution_time_ms": 1774
+}

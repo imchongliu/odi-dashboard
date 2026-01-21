@@ -125,7 +125,7 @@ export function RecentDealsTable({ deals, showViewAll = true, onDealClick }: Rec
                   </div>
                 </TableCell>
                 <TableCell className="text-muted-foreground">
-                  {deal.target_country || 'N/A'}
+                  {deal.target_country ? translateCountry(deal.target_country) : 'N/A'}
                 </TableCell>
                 <TableCell className="text-right font-medium tabular-nums">
                   {formatCurrency(deal.deal_size_usd, true)}

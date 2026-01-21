@@ -190,7 +190,7 @@ export const zh: TranslationKeys = {
     '萨摩亚': '萨摩亚',
   },
 
-  // Industries
+  // Industries (major ones)
   industries: {
     '工业': '工业',
     '材料': '材料',
@@ -203,5 +203,8 @@ export const zh: TranslationKeys = {
     '房地产': '房地产',
     '电信服务': '电信服务',
     '日常消费品': '日常消费品',
+    '日常消费': '日常消费',
+    '通讯服务': '通讯服务',
+    '其他': '其他',
   },
 };
