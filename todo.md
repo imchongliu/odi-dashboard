@@ -113,8 +113,3 @@
 - [x] 在首页替换TopCountriesTable为TopDealsTable
 - [x] 添加"View More Deals"链接跳转到Deals页面
 - [x] 测试新组件显示和链接功能
-
-## 修改Deal Size Top 10使用表格格式
-- [x] 修改TopDealsTable组件使用与Deals Database相同的表格格式
-- [x] 包含相同的列：Date, Type, Investor, Target, Country, Industry, Deal Size, Status
-- [x] 测试表格显示效果
