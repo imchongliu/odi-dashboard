@@ -16,6 +16,7 @@ import { Separator } from '@/components/ui/separator';
 import { formatCurrency, formatDate } from '@/lib/api';
 import { Building2, Globe, Factory, Calendar, DollarSign, FileText, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Investment {
   id: number;
@@ -100,6 +101,8 @@ function InfoRow({ icon: Icon, label, value }: { icon: any; label: string; value
 }
 
 export function InvestmentDetailModal({ investment, open, onOpenChange }: InvestmentDetailModalProps) {
+  const { t, translateCountry, translateIndustry } = useLanguage();
+  
   if (!investment) return null;
 
   const dealSizeUsd = parseFloat(investment.dealSizeUsd || '0');
@@ -132,30 +135,30 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
           <div>
             <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
               <TrendingUp className="h-4 w-4" />
-              Deal Overview
+              {t.modal.dealOverview}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <InfoRow
                 icon={Calendar}
-                label="Announcement Date"
+                label={t.modal.announcementDate}
                 value={formattedDate}
               />
               <InfoRow
                 icon={DollarSign}
-                label="Deal Size"
+                label={t.modal.dealSize}
                 value={dealSizeUsd > 0 ? formatCurrency(dealSizeUsd) : 'Undisclosed'}
               />
               {investment.dealSizeOriginal && investment.originalCurrency && (
                 <InfoRow
                   icon={DollarSign}
-                  label="Original Amount"
+                  label={t.modal.originalAmount}
                   value={`${investment.dealSizeOriginal} ${investment.originalCurrency}`}
                 />
               )}
               {investment.stockCode && (
                 <InfoRow
                   icon={Building2}
-                  label="Stock Code"
+                  label={t.modal.stockCode}
                   value={`${investment.stockCode}${investment.exchange ? ` (${investment.exchange})` : ''}`}
                 />
               )}
@@ -168,22 +171,22 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
           <div>
             <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
               <Building2 className="h-4 w-4" />
-              Investor Information
+              {t.modal.investorInfo}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <InfoRow
                 icon={Building2}
-                label="Company Name"
+                label={t.modal.companyName}
                 value={investment.companyName}
               />
               <InfoRow
                 icon={Factory}
-                label="Industry"
-                value={investment.companyIndustry}
+                label={t.modal.industry}
+                value={investment.companyIndustry ? translateIndustry(investment.companyIndustry) : null}
               />
               <InfoRow
                 icon={Globe}
-                label="Province"
+                label={t.modal.province}
                 value={investment.companyProvince}
               />
             </div>
@@ -195,27 +198,27 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
           <div>
             <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
               <Globe className="h-4 w-4" />
-              Target Information
+              {t.modal.targetInfo}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <InfoRow
                 icon={Building2}
-                label="Target Name"
+                label={t.modal.targetName}
                 value={investment.targetName || 'New Project'}
               />
               <InfoRow
                 icon={Globe}
-                label="Country"
-                value={investment.targetCountryName}
+                label={t.modal.country}
+                value={translateCountry(investment.targetCountryName)}
               />
               <InfoRow
                 icon={Factory}
-                label="Target Industry"
-                value={investment.targetIndustry}
+                label={t.modal.targetIndustry}
+                value={investment.targetIndustry ? translateIndustry(investment.targetIndustry) : null}
               />
               <InfoRow
                 icon={Globe}
-                label="Region"
+                label={t.modal.region}
                 value={investment.targetRegion}
               />
             </div>
@@ -228,7 +231,7 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
               <div>
                 <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
                   <FileText className="h-4 w-4" />
-                  Investment Rationale
+                  {t.modal.investmentRationale}
                 </h3>
                 <p className="text-sm text-muted-foreground whitespace-pre-wrap break-words">
                   {investment.investmentRationale}
@@ -244,7 +247,7 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
               <div>
                 <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
                   <FileText className="h-4 w-4" />
-                  Announcement Details
+                  {t.modal.announcementDetails}
                 </h3>
                 <p className="text-sm text-muted-foreground break-words">
                   {investment.announcementTitle}

@@ -139,3 +139,9 @@
 - [x] 添加Destinations页面翻译键到en.ts和zh.ts
 - [x] 更新Destinations页面使用翻译函数
 - [x] 测试中英文切换效果
+
+## 添加Investor、Target和交易详情框的英文翻译
+- [x] 检查当前Investor和Target列的显示
+- [x] 检查InvestmentDetailModal的翻译实现
+- [x] 更新所有页面使用翻译后的Investor和Target
+- [x] 测试中英文切换效果

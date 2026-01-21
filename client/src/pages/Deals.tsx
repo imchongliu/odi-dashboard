@@ -325,14 +325,14 @@ export default function Deals() {
               <Table>
                 <TableHeader>
                   <TableRow className="hover:bg-transparent">
-                    <TableHead className="w-[100px]">Date</TableHead>
-                    <TableHead className="w-[90px]">Type</TableHead>
-                    <TableHead>Investor</TableHead>
-                    <TableHead>Target</TableHead>
-                    <TableHead>Country</TableHead>
-                    <TableHead>Industry</TableHead>
-                    <TableHead className="text-right">Deal Size</TableHead>
-                    <TableHead className="w-[100px]">Status</TableHead>
+                    <TableHead className="w-[100px]">{t.deals.columns.date}</TableHead>
+                    <TableHead className="w-[90px]">{t.deals.columns.type}</TableHead>
+                    <TableHead>{t.deals.columns.investor}</TableHead>
+                    <TableHead>{t.deals.columns.target}</TableHead>
+                    <TableHead>{t.deals.columns.country}</TableHead>
+                    <TableHead>{t.deals.columns.industry}</TableHead>
+                    <TableHead className="text-right">{t.deals.columns.dealSize}</TableHead>
+                    <TableHead className="w-[100px]">{t.deals.columns.status}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
