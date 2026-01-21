@@ -9,17 +9,20 @@
 
 import { Link, useLocation } from 'wouter';
 import { cn } from '@/lib/utils';
-import { TrendingUp, Database, MapPin, BarChart3 } from 'lucide-react';
+import { TrendingUp, Database, MapPin, BarChart3, Languages } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Button } from '@/components/ui/button';
 
 const navItems = [
-  { href: '/', label: 'Overview', icon: TrendingUp },
-  { href: '/deals', label: 'Deals Database', icon: Database },
-  { href: '/destinations', label: 'Destinations', icon: MapPin },
-  { href: '/ma-insights', label: 'M&A Insights', icon: BarChart3 },
+  { href: '/', key: 'overview' as const, icon: TrendingUp },
+  { href: '/deals', key: 'deals' as const, icon: Database },
+  { href: '/destinations', key: 'destinations' as const, icon: MapPin },
+  { href: '/ma-insights', key: 'insights' as const, icon: BarChart3 },
 ];
 
 export function Header() {
   const [location] = useLocation();
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -36,7 +39,8 @@ export function Header() {
         </Link>
 
         {/* Navigation */}
-        <nav className="flex items-center gap-1">
+        <div className="flex items-center gap-4">
+          <nav className="flex items-center gap-1">
           {navItems.map((item) => {
             const isActive = location === item.href || 
               (item.href !== '/' && location.startsWith(item.href));
@@ -54,11 +58,23 @@ export function Header() {
                 )}
               >
                 <Icon className="h-4 w-4" />
-                <span>{item.label}</span>
+                <span>{t.nav[item.key]}</span>
               </Link>
             );
           })}
-        </nav>
+          </nav>
+          
+          {/* Language Toggle */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')}
+            className="gap-2"
+          >
+            <Languages className="h-4 w-4" />
+            <span className="text-sm font-medium">{language === 'en' ? '中文' : 'EN'}</span>
+          </Button>
+        </div>
       </div>
     </header>
   );
