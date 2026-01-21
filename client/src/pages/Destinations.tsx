@@ -32,20 +32,23 @@ import {
   PieChart,
   Pie,
 } from 'recharts';
-import { MapPin, ArrowRight, TrendingUp, DollarSign, Briefcase, Building2 } from 'lucide-react';
+import { MapPin, ArrowRight, DollarSign, Briefcase, Building2, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { investments, getCountryStats, filterInvestments } from '@/lib/data';
-import { formatCurrency, formatDate } from '@/lib/types';
-import type { Investment } from '@/lib/types';
+import { trpc } from '@/lib/trpc';
+import { formatCurrency, formatDate } from '@/lib/api';
 
-function TypeBadge({ type }: { type: 'M&A' | 'Greenfield' }) {
+function TypeBadge({ type }: { type: string }) {
+  const isMA = type === 'M&A';
+  const isGreenfield = type === 'Greenfield';
   return (
     <span
       className={cn(
         'inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium',
-        type === 'M&A'
+        isMA
           ? 'bg-[oklch(0.585_0.233_292.717/0.12)] text-[oklch(0.485_0.233_292.717)]'
-          : 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]'
+          : isGreenfield
+          ? 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]'
+          : 'bg-muted text-muted-foreground'
       )}
     >
       {type}
@@ -77,30 +80,79 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 export default function Destinations() {
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   
-  const countryStats = getCountryStats();
+  // Fetch data from database via tRPC
+  const { data: investments, isLoading } = trpc.investments.list.useQuery({});
+  const { data: stats } = trpc.investments.stats.useQuery();
+
+  // Calculate country stats from investments
+  const countryStats = useMemo(() => {
+    if (!investments) return [];
+    
+    const countryMap = new Map<string, { count: number; totalAmount: number }>();
+    
+    investments.forEach(inv => {
+      const country = inv.targetCountryName || 'Unknown';
+      const amount = parseFloat(inv.dealSizeUsd || '0');
+      
+      if (countryMap.has(country)) {
+        const existing = countryMap.get(country)!;
+        existing.count += 1;
+        existing.totalAmount += amount;
+      } else {
+        countryMap.set(country, { count: 1, totalAmount: amount });
+      }
+    });
+    
+    return Array.from(countryMap.entries())
+      .map(([country, data]) => ({
+        country,
+        count: data.count,
+        totalAmount: data.totalAmount,
+      }))
+      .sort((a, b) => b.totalAmount - a.totalAmount);
+  }, [investments]);
+
   const topCountries = countryStats.slice(0, 10);
   
   // Get deals for selected country
   const countryDeals = useMemo(() => {
-    if (!selectedCountry) return [];
-    return filterInvestments({ country: selectedCountry });
-  }, [selectedCountry]);
+    if (!selectedCountry || !investments) return [];
+    return investments.filter(inv => inv.targetCountryName === selectedCountry);
+  }, [selectedCountry, investments]);
 
   // Calculate type breakdown for selected country
   const typeBreakdown = useMemo(() => {
-    if (!selectedCountry) return [];
-    const deals = filterInvestments({ country: selectedCountry });
-    const maDeals = deals.filter(d => d.investment_type === 'M&A');
-    const gfDeals = deals.filter(d => d.investment_type === 'Greenfield');
+    if (!selectedCountry || !investments) return [];
+    const deals = investments.filter(inv => inv.targetCountryName === selectedCountry);
+    const maDeals = deals.filter(d => d.investmentType === 'M&A');
+    const gfDeals = deals.filter(d => d.investmentType === 'Greenfield');
     return [
       { name: 'M&A', value: maDeals.length, color: 'oklch(0.585 0.233 292.717)' },
       { name: 'Greenfield', value: gfDeals.length, color: 'oklch(0.696 0.17 162.48)' },
     ].filter(d => d.value > 0);
-  }, [selectedCountry]);
+  }, [selectedCountry, investments]);
 
   // Summary stats
   const totalCountries = countryStats.length;
   const totalAmount = countryStats.reduce((sum, c) => sum + c.totalAmount, 0);
+  const maCount = investments?.filter(i => i.investmentType === 'M&A').length || 0;
+  const gfCount = investments?.filter(i => i.investmentType === 'Greenfield').length || 0;
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <p className="text-muted-foreground">Loading destinations...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -147,7 +199,7 @@ export default function Destinations() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">M&A Deals</p>
-                  <p className="text-xl font-bold">{investments.filter(i => i.investment_type === 'M&A').length}</p>
+                  <p className="text-xl font-bold">{maCount}</p>
                 </div>
               </div>
             </div>
@@ -158,7 +210,7 @@ export default function Destinations() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Greenfield</p>
-                  <p className="text-xl font-bold">{investments.filter(i => i.investment_type === 'Greenfield').length}</p>
+                  <p className="text-xl font-bold">{gfCount}</p>
                 </div>
               </div>
             </div>
@@ -225,7 +277,7 @@ export default function Destinations() {
                   <h3 className="text-lg font-semibold">All Destinations</h3>
                   <p className="text-sm text-muted-foreground">Complete list of investment destinations</p>
                 </div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto max-h-[400px]">
                   <Table>
                     <TableHeader>
                       <TableRow className="hover:bg-transparent">
@@ -338,19 +390,21 @@ export default function Destinations() {
                         >
                           <div className="flex items-start justify-between gap-2 mb-1">
                             <span className="font-medium text-sm truncate flex-1">
-                              {deal.investor_name}
+                              {deal.companyName}
                             </span>
-                            <TypeBadge type={deal.investment_type} />
+                            <TypeBadge type={deal.investmentType || 'Other'} />
                           </div>
                           <p className="text-sm text-muted-foreground truncate">
-                            {deal.target_company_name || 'New project'}
+                            {deal.targetName || 'New project'}
                           </p>
                           <div className="flex items-center justify-between mt-2 text-sm">
                             <span className="text-muted-foreground">
-                              {formatDate(deal.announcement_date)}
+                              {formatDate(deal.announcementDate instanceof Date 
+                                ? deal.announcementDate.toISOString() 
+                                : String(deal.announcementDate))}
                             </span>
                             <span className="font-medium tabular-nums">
-                              {formatCurrency(deal.deal_size_usd, true)}
+                              {formatCurrency(parseFloat(deal.dealSizeUsd || '0'), true)}
                             </span>
                           </div>
                         </Link>
