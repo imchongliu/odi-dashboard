@@ -1,0 +1,22 @@
+{
+  "query": "SELECT \n  'Total' as category,\n  COUNT(*) as count\nFROM investments\nUNION ALL\nSELECT \n  'Multi-country (MULTI)' as category,\n  COUNT(*) as count\nFROM investments\nWHERE target_country_code = 'MULTI'\nUNION ALL\nSELECT \n  'Single country' as category,\n  COUNT(*) as count\nFROM investments\nWHERE target_country_code != 'MULTI' OR target_country_code IS NULL;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT \n  'Total' as category,\n  COUNT(*) as count\nFROM investments\nUNION ALL\nSELECT \n  'Multi-country (MULTI)' as category,\n  COUNT(*) as count\nFROM investments\nWHERE target_country_code = 'MULTI'\nUNION ALL\nSELECT \n  'Single country' as category,\n  COUNT(*) as count\nFROM investments\nWHERE target_country_code != 'MULTI' OR target_country_code IS NULL;",
+  "rows": [
+    {
+      "category": "Total",
+      "count": "351"
+    },
+    {
+      "category": "Single country",
+      "count": "348"
+    },
+    {
+      "category": "Multi-country (MULTI)",
+      "count": "3"
+    }
+  ],
+  "messages": [],
+  "stdout": "category\tcount\nTotal\t351\nSingle country\t348\nMulti-country (MULTI)\t3\n",
+  "stderr": "",
+  "execution_time_ms": 1527
+}

@@ -1,0 +1,9 @@
+{
+  "query": "DELETE t1 FROM investments t1\nINNER JOIN investments t2 \nWHERE t1.id > t2.id\n  AND t1.company_name = t2.company_name\n  AND t1.announcement_date = t2.announcement_date\n  AND t1.target_country_name = t2.target_country_name\n  AND COALESCE(t1.target_name, '') = COALESCE(t2.target_name, '')\n  AND t1.deal_size_usd = t2.deal_size_usd;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute DELETE t1 FROM investments t1\nINNER JOIN investments t2 \nWHERE t1.id > t2.id\n  AND t1.company_name = t2.company_name\n  AND t1.announcement_date = t2.announcement_date\n  AND t1.target_country_name = t2.target_country_name\n  AND COALESCE(t1.target_name, '') = COALESCE(t2.target_name, '')\n  AND t1.deal_size_usd = t2.deal_size_usd;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1547
+}

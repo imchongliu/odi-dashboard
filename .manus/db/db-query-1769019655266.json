@@ -1,0 +1,9 @@
+{
+  "query": "SELECT \n  company_name,\n  announcement_date,\n  target_country_name,\n  target_name,\n  investment_type,\n  deal_size_usd,\n  COUNT(*) as duplicate_count\nFROM investments\nGROUP BY company_name, announcement_date, target_country_name, target_name, investment_type, deal_size_usd\nHAVING COUNT(*) > 1\nORDER BY duplicate_count DESC\nLIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT \n  company_name,\n  announcement_date,\n  target_country_name,\n  target_name,\n  investment_type,\n  deal_size_usd,\n  COUNT(*) as duplicate_count\nFROM investments\nGROUP BY company_name, announcement_date, target_country_name, target_name, investment_type, deal_size_usd\nHAVING COUNT(*) > 1\nORDER BY duplicate_count DESC\nLIMIT 10;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1522
+}

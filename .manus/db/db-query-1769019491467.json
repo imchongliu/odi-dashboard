@@ -1,0 +1,46 @@
+{
+  "query": "SELECT \n  id,\n  company_name,\n  announcement_date,\n  target_country_name,\n  target_name,\n  investment_type,\n  deal_size_usd\nFROM investments\nWHERE (company_name, announcement_date, target_country_name) IN (\n  SELECT company_name, announcement_date, target_country_name\n  FROM investments\n  GROUP BY company_name, announcement_date, target_country_name\n  HAVING COUNT(*) > 1\n)\nORDER BY company_name, announcement_date;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute SELECT \n  id,\n  company_name,\n  announcement_date,\n  target_country_name,\n  target_name,\n  investment_type,\n  deal_size_usd\nFROM investments\nWHERE (company_name, announcement_date, target_country_name) IN (\n  SELECT company_name, announcement_date, target_country_name\n  FROM investments\n  GROUP BY company_name, announcement_date, target_country_name\n  HAVING COUNT(*) > 1\n)\nORDER BY company_name, announcement_date;",
+  "rows": [
+    {
+      "id": "149",
+      "company_name": "湖南崇德科技股份有限公司",
+      "announcement_date": "2025-04-01",
+      "target_country_name": "德国",
+      "target_name": "Levicron GmbH",
+      "investment_type": "M&A",
+      "deal_size_usd": "9169800.00"
+    },
+    {
+      "id": "150",
+      "company_name": "湖南崇德科技股份有限公司",
+      "announcement_date": "2025-04-01",
+      "target_country_name": "德国",
+      "target_name": "Levicron GmbH",
+      "investment_type": "M&A",
+      "deal_size_usd": "9169800.00"
+    },
+    {
+      "id": "225",
+      "company_name": "金诚信矿业管理股份有限公司",
+      "announcement_date": "2025-05-09",
+      "target_country_name": "哥伦比亚",
+      "target_name": "CMH Colombia S.A.S.",
+      "investment_type": "M&A",
+      "deal_size_usd": "10000000.00"
+    },
+    {
+      "id": "226",
+      "company_name": "金诚信矿业管理股份有限公司",
+      "announcement_date": "2025-05-09",
+      "target_country_name": "哥伦比亚",
+      "target_name": "CMH公司",
+      "investment_type": "M&A",
+      "deal_size_usd": "10000000.00"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tcompany_name\tannouncement_date\ttarget_country_name\ttarget_name\tinvestment_type\tdeal_size_usd\n149\t湖南崇德科技股份有限公司\t2025-04-01\t德国\tLevicron GmbH\tM&A\t9169800.00\n150\t湖南崇德科技股份有限公司\t2025-04-01\t德国\tLevicron GmbH\tM&A\t9169800.00\n225\t金诚信矿业管理股份有限公司\t2025-05-09\t哥伦比亚\tCMH Colombia S.A.S.\tM&A\t10000000.00\n226\t金诚信矿业管理股份有限公司\t2025-05-09\t哥伦比亚\tCMH公司\tM&A\t10000000.00\n",
+  "stderr": "",
+  "execution_time_ms": 1532
+}

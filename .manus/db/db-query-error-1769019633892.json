@@ -1,0 +1,8 @@
+{
+  "query": "CREATE TEMPORARY TABLE unique_investments AS\nSELECT MIN(id) as id\nFROM investments\nGROUP BY company_name, announcement_date, target_country_name, target_name, deal_size_usd;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute CREATE TEMPORARY TABLE unique_investments AS\nSELECT MIN(id) as id\nFROM investments\nGROUP BY company_name, announcement_date, target_country_name, target_name, deal_size_usd;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1105 (HY000) at line 1: 'CREATE TABLE ... SELECT' is not implemented yet"
+  ]
+}

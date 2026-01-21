@@ -1,0 +1,9 @@
+{
+  "query": "DELETE FROM investments\nWHERE id IN (\n  SELECT id FROM (\n    SELECT id,\n      ROW_NUMBER() OVER (\n        PARTITION BY company_name, announcement_date, target_country_name \n        ORDER BY id\n      ) as rn\n    FROM investments\n  ) as ranked\n  WHERE rn > 1\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user thZqKAPPTNa1538.root --database 2V7zADSb75AbF9HUEoJpsM --execute DELETE FROM investments\nWHERE id IN (\n  SELECT id FROM (\n    SELECT id,\n      ROW_NUMBER() OVER (\n        PARTITION BY company_name, announcement_date, target_country_name \n        ORDER BY id\n      ) as rn\n    FROM investments\n  ) as ranked\n  WHERE rn > 1\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1518
+}
