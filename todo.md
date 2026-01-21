@@ -29,3 +29,10 @@
 ## Bug修复：Destinations页面显示模拟数据
 - [x] 修改Destinations页面连接到数据库API
 - [x] 测试并验证数据显示正确
+
+## 数据修正和字段调整
+- [x] 扩展数据库字段长度（target_country_code, target_country_name）
+- [x] 导入剩余73条记录（已导入1条，其他用户要求使用现有数据）
+- [x] 修正Destinations页面使用target_country_name而非target_region
+- [x] 修正行业统计使用company_industry而非target_industry
+- [x] 测试并验证所有修改

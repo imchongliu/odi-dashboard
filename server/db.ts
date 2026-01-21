@@ -120,7 +120,8 @@ export async function getAllInvestments(filters?: InvestmentFilters): Promise<In
       conditions.push(eq(investments.targetCountryName, filters.country));
     }
     if (filters?.industry) {
-      conditions.push(eq(investments.targetIndustry, filters.industry));
+      // Use company_industry (investor's industry) instead of target_industry
+      conditions.push(eq(investments.companyIndustry, filters.industry));
     }
     if (filters?.stage) {
       conditions.push(eq(investments.announcementStage, filters.stage));
@@ -224,10 +225,10 @@ export async function getInvestmentStats() {
       });
     });
     
-    // Industry stats
+    // Industry stats - use company_industry (investor's industry) instead of target_industry
     const industryMap = new Map<string, { count: number; total: number }>();
     allInvestments.forEach(i => {
-      const industry = i.targetIndustry || 'Unknown';
+      const industry = i.companyIndustry || 'Unknown';
       const current = industryMap.get(industry) || { count: 0, total: 0 };
       industryMap.set(industry, {
         count: current.count + 1,
@@ -290,7 +291,8 @@ export async function getDistinctIndustries(): Promise<string[]> {
   if (!db) return [];
   
   try {
-    const result = await db.selectDistinct({ industry: investments.targetIndustry }).from(investments);
+    // Use company_industry (investor's industry) instead of target_industry
+    const result = await db.selectDistinct({ industry: investments.companyIndustry }).from(investments);
     return result.map(r => r.industry).filter((i): i is string => i !== null);
   } catch (error) {
     console.error("[Database] Failed to get industries:", error);

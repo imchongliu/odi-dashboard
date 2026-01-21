@@ -1,0 +1,803 @@
+[
+  {
+    "source_file": "000680 山推股份 2025-07-17  关于全资子公司在境外设立子公司的公告.md.json.validated",
+    "stock_code": "000680",
+    "company_name": "山推工程机械股份有限公司",
+    "announcement_date": "2025-07-17",
+    "target_country_name": "印度尼西亚,澳大利亚,尼日利亚,泰国",
+    "deal_size_usd": 8390900,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "001233 海安集团 2025-12-27  关于对外投资暨在境外设立合资工厂的公告.md.json.validated",
+    "stock_code": "001233",
+    "company_name": "海安橡胶集团股份公司",
+    "announcement_date": "2025-12-27",
+    "target_country_name": "俄罗斯",
+    "deal_size_usd": 542401392.48,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "001267 汇绿生态 2025-02-14  关于与关联方共同投资设立海外子公司的进展公告.md.json.validated",
+    "stock_code": "001267",
+    "company_name": "汇绿生态科技集团股份有限公司",
+    "announcement_date": "2025-02-14",
+    "target_country_name": "马来西亚",
+    "deal_size_usd": 2254.79,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "001313 粤海饲料 2025-04-29  关于终止收购境外公司51%股权的公告.md.json.validated",
+    "stock_code": "001313",
+    "company_name": "广东粤海饲料集团股份有限公司",
+    "announcement_date": "2025-04-29",
+    "deal_size_usd": 50000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "001356 富岭股份 2025-02-20  关于向境外全资子公司增加投资的公告.md.json.validated",
+    "stock_code": "001356",
+    "company_name": "富岭科技股份有限公司",
+    "announcement_date": "2025-02-20",
+    "target_country_name": "印度尼西亚",
+    "deal_size_usd": 50000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002073 软控股份 2025-09-06  关于控股子公司对外投资的公告.md.json.validated",
+    "stock_code": "002073",
+    "company_name": "软控股份有限公司",
+    "announcement_date": "2025-09-06",
+    "target_country_name": "柬埔寨",
+    "deal_size_usd": 13870000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002098 浔兴股份 2025-01-24  关于对境外子公司增资的公告.md.json.validated",
+    "stock_code": "002098",
+    "company_name": "福建浔兴拉链科技股份有限公司",
+    "announcement_date": "2025-01-24",
+    "target_country_name": "孟加拉国",
+    "deal_size_usd": 13798737.66,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002126 银轮股份 2025-08-27  关于向上海银轮投资有限公司增资暨对外投资的公告.md.json.validated",
+    "stock_code": "002126",
+    "company_name": "浙江银轮机械股份有限公司",
+    "announcement_date": "2025-08-27",
+    "target_country_name": "泰国",
+    "deal_size_usd": 20944391.58,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002262 恩华药业 2025-03-06  关于对外投资暨签署Pre-A轮优先股购买协议的公告.md.json.validated",
+    "stock_code": "002262",
+    "company_name": "江苏恩华药业股份有限公司",
+    "announcement_date": "2025-03-06",
+    "target_country_name": "开曼群岛",
+    "deal_size_usd": 3500000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002350 北京科锐 2025-12-30  关于子公司拟合资设立海外二级控股子公司的公告.md.json.validated",
+    "stock_code": "002350",
+    "company_name": "北京科锐集团股份有限公司",
+    "announcement_date": "2025-12-30",
+    "target_country_name": "爱尔兰",
+    "deal_size_usd": 94056,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002405 四维图新 2025-09-30  关于对外投资及财务资助的关联交易公告.md.json.validated",
+    "stock_code": "002405",
+    "company_name": "北京四维图新科技股份有限公司",
+    "announcement_date": "2025-09-30",
+    "target_country_name": "开曼群岛",
+    "deal_size_usd": 35152500,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002405 四维图新 2025-12-02  关于对外投资及财务资助的关联交易的进展公告.md.json.validated",
+    "stock_code": "002405",
+    "company_name": "北京四维图新科技股份有限公司",
+    "announcement_date": "2025-12-02",
+    "target_country_name": "开曼群岛",
+    "deal_size_usd": 35355503.33,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002405 四维图新 2025-12-11  关于对外投资及财务资助的关联交易完成的公告.md.json.validated",
+    "stock_code": "002405",
+    "company_name": "北京四维图新科技股份有限公司",
+    "announcement_date": "2025-12-11",
+    "target_country_name": "开曼群岛",
+    "deal_size_usd": 35420547.18,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002448 中原内配 2025-03-18  关于向境外子公司增加投资的公告.md.json.validated",
+    "stock_code": "002448",
+    "company_name": "中原内配集团股份有限公司",
+    "announcement_date": "2025-03-18",
+    "target_country_name": "泰国",
+    "deal_size_usd": 12215194.02,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002448 中原内配 2025-08-27  关于向境外子公司增加投资额度的公告.md.json.validated",
+    "stock_code": "002448",
+    "company_name": "中原内配集团股份有限公司",
+    "announcement_date": "2025-08-27",
+    "target_country_name": "泰国",
+    "deal_size_usd": 20944391.58,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002489 浙江永强 2025-04-22  关于向境外子公司增加投资的公告.md.json.validated",
+    "stock_code": "002489",
+    "company_name": "浙江永强集团股份有限公司",
+    "announcement_date": "2025-04-22",
+    "target_country_name": "香港",
+    "deal_size_usd": 100000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002489 浙江永强 2025-08-07  关于对外投资设立子公司的公告.md.json.validated",
+    "stock_code": "002489",
+    "company_name": "浙江永强集团股份有限公司",
+    "announcement_date": "2025-08-07",
+    "target_country_name": "印度尼西亚",
+    "deal_size_usd": 14101995.64,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002536 飞龙股份 2025-01-08  关于对境外子公司增加注册资本并完成工商变更的公告.md.json.validated",
+    "stock_code": "002536",
+    "company_name": "飞龙汽车部件股份有限公司",
+    "announcement_date": "2025-01-08",
+    "target_country_name": "泰国",
+    "deal_size_usd": 14125161.15,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002536 飞龙股份 2025-01-22  关于对境外全资子公司增加注册资本并完成工商变更的公告.md.json.validated",
+    "stock_code": "002536",
+    "company_name": "飞龙汽车部件股份有限公司",
+    "announcement_date": "2025-01-22",
+    "target_country_name": "新加坡",
+    "deal_size_usd": 82562061.88,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002536 飞龙股份 2025-02-26  关于对境外孙公司增加注册资本并完成工商变更的公告.md.json.validated",
+    "stock_code": "002536",
+    "company_name": "飞龙汽车部件股份有限公司",
+    "announcement_date": "2025-02-26",
+    "target_country_name": "泰国",
+    "deal_size_usd": 77283507.39,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002536 飞龙股份 2025-10-22  关于向境外全资子公司增加投资的公告.md.json.validated",
+    "stock_code": "002536",
+    "company_name": "飞龙汽车部件股份有限公司",
+    "announcement_date": "2025-10-22",
+    "target_country_name": "新加坡",
+    "deal_size_usd": 42095766.32,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002590 万安科技 2025-01-25  关于对外投资设立合资公司暨关联交易的公告.md.json.validated",
+    "stock_code": "002590",
+    "company_name": "浙江万安科技股份有限公司",
+    "announcement_date": "2025-01-25",
+    "target_country_name": "墨西哥",
+    "deal_size_usd": 30000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002590 万安科技 2025-03-20  关于对外投资设立合资公司暨关联交易的公告.md.json.validated",
+    "stock_code": "002590",
+    "company_name": "浙江万安科技股份有限公司",
+    "announcement_date": "2025-03-20",
+    "target_country_name": "摩洛哥",
+    "deal_size_usd": 32499000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002655 共达电声 2025-06-04  共达电声股份有限公司关于完成对境外子公司的增资暨企业变更登记的公告.md.json.validated",
+    "stock_code": "002655",
+    "company_name": "共达电声股份有限公司",
+    "announcement_date": "2025-06-04",
+    "target_country_name": "马来西亚",
+    "issues": [
+      "Missing deal_size_usd"
+    ]
+  },
+  {
+    "source_file": "002705 新宝股份 2025-04-29  关于对公司境外全资子公司增资的公告.md.json.validated",
+    "stock_code": "002705",
+    "company_name": "广东新宝电器股份有限公司",
+    "announcement_date": "2025-04-29",
+    "target_country_name": "印度尼西亚",
+    "deal_size_usd": 50000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "002735 王子新材 2025-03-29  关于设立海外子公司的公告.md.json.validated",
+    "stock_code": "002735",
+    "company_name": "深圳王子新材料股份有限公司",
+    "announcement_date": "2025-03-29",
+    "target_country_name": "越南",
+    "deal_size_usd": 2754321.55,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300043 星辉娱乐 2025-04-28  关于境外全资子公司对控股孙公司借款转增资的公告.md.json.validated",
+    "stock_code": "300043",
+    "company_name": "星辉互动娱乐股份有限公司",
+    "announcement_date": "2025-04-28",
+    "target_country_name": "西班牙",
+    "deal_size_usd": 51111000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300283 温州宏丰 2025-04-18  关于对境外全资子公司增资的公告.md.json.validated",
+    "stock_code": "300283",
+    "company_name": "温州宏丰电工合金股份有限公司",
+    "announcement_date": "2025-04-18",
+    "target_country_name": "马来西亚",
+    "deal_size_usd": 1369723.89,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300660 江苏雷利 2025-09-01  关于对境外子公司增加投资的公告.md.json.validated",
+    "stock_code": "300660",
+    "company_name": "江苏雷利电机股份有限公司",
+    "announcement_date": "2025-09-01",
+    "target_country_name": "马来西亚",
+    "deal_size_usd": 61617037.1,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300666 江丰电子 2025-04-16  关于向境外全资孙公司增加投资的公告.md.json.validated",
+    "stock_code": "300666",
+    "company_name": "宁波江丰电子材料股份有限公司",
+    "announcement_date": "2025-04-16",
+    "target_country_name": "韩国",
+    "deal_size_usd": 47905039.72,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300703 创源股份 2025-01-22  关于向全资子公司增资及其对外投资设立子公司的公告.md.json.validated",
+    "stock_code": "300703",
+    "company_name": "宁波创源文化发展股份有限公司",
+    "announcement_date": "2025-01-22",
+    "target_country_name": "新加坡",
+    "deal_size_usd": 18000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300759 康龙化成 2025-03-11  关于追加投资境外参股公司暨关联交易的进展公告.md.json.validated",
+    "stock_code": "300759",
+    "company_name": "康龙化成（北京）新药技术股份有限公司",
+    "announcement_date": "2025-03-11",
+    "target_country_name": "新加坡",
+    "deal_size_usd": 10500000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300759 康龙化成 2025-08-22  关于追加投资境外参股公司暨关联交易的公告.md.json.validated",
+    "stock_code": "300759",
+    "company_name": "康龙化成（北京）新药技术股份有限公司",
+    "announcement_date": "2025-08-22",
+    "target_country_name": "新加坡",
+    "deal_size_usd": 10500000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300811 铂科新材 2025-12-18  关于全资子公司对外投资成立合资公司的公告.md.json.validated",
+    "stock_code": "300811",
+    "company_name": "深圳市铂科新材料股份有限公司",
+    "announcement_date": "2025-12-18",
+    "target_country_name": "中国香港",
+    "deal_size_usd": 12851189.82,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300843 胜蓝股份 2025-12-12  关于全资子公司向境外孙公司增资暨关联交易的公告.md.json.validated",
+    "stock_code": "300843",
+    "company_name": "胜蓝科技股份有限公司",
+    "announcement_date": "2025-12-12",
+    "target_country_name": "泰国",
+    "deal_size_usd": 12844348.09,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300891 惠云钛业 2025-05-14  关于设立境外参股子公司完成注册登记的公告.md.json.validated",
+    "stock_code": "300891",
+    "company_name": "广东惠云钛业股份有限公司",
+    "announcement_date": "2025-05-14",
+    "target_country_name": "新加坡",
+    "deal_size_usd": 770033.65,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300910 瑞丰新材 2025-10-28  关于公司对外投资并设立合资公司的公告.md.json.validated",
+    "stock_code": "300910",
+    "company_name": "新乡市瑞丰新材料股份有限公司",
+    "announcement_date": "2025-10-28",
+    "target_country_name": "沙特阿拉伯",
+    "deal_size_usd": 147999491.46,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "300910 瑞丰新材 2025-11-10  关于公司对外投资并设立合资公司的进展公告.md.json.validated",
+    "stock_code": "300910",
+    "company_name": "新乡市瑞丰新材料股份有限公司",
+    "announcement_date": "2025-11-10",
+    "target_country_name": "沙特阿拉伯",
+    "deal_size_usd": 246000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "301022 海泰科 2025-02-27  关于向境外全资子公司增资的公告.md.json.validated",
+    "stock_code": "301022",
+    "company_name": "青岛海泰科模塑科技股份有限公司",
+    "announcement_date": "2025-02-27",
+    "target_country_name": "泰国",
+    "deal_size_usd": 5505011.36,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "301057 汇隆新材 2025-02-24  关于公司对外投资的公告.md.json.validated",
+    "stock_code": "301057",
+    "company_name": "浙江汇隆新材料股份有限公司",
+    "announcement_date": "2025-02-24",
+    "target_country_name": "新加坡",
+    "deal_size_usd": 5000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "301270 汉仪股份 2025-08-11  关于对外投资的进展公告.md.json.validated",
+    "stock_code": "301270",
+    "company_name": "北京汉仪创新科技股份有限公司",
+    "announcement_date": "2025-08-11",
+    "target_country_name": "开曼群岛",
+    "deal_size_usd": 444351,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "301377 鼎泰高科 2025-04-23  关于向境外全资子公司增加投资的公告.md.json.validated",
+    "stock_code": "301377",
+    "company_name": "广东鼎泰高科技术股份有限公司",
+    "announcement_date": "2025-04-23",
+    "target_country_name": "泰国",
+    "deal_size_usd": 27440233.66,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "301383 天键股份 2025-07-24  关于控股孙公司完成增资及工商变更登记暨对外投资进展的公告.md.json.validated",
+    "stock_code": "301383",
+    "company_name": "天键电声股份有限公司",
+    "announcement_date": "2025-07-24",
+    "target_country_name": "泰国",
+    "deal_size_usd": 4888391.28,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "301386 未来电器 2025-12-26  关于对外投资设立合资公司的公告.md.json.validated",
+    "stock_code": "301386",
+    "company_name": "苏州未来电器股份有限公司",
+    "announcement_date": "2025-12-25",
+    "target_country_name": "印度尼西亚",
+    "deal_size_usd": 3000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "301458 钧崴电子 2025-12-18  关于全资子公司对外投资成立合资公司的公告.md.json.validated",
+    "stock_code": "301458",
+    "company_name": "钧崴电子科技股份有限公司",
+    "announcement_date": "2025-12-18",
+    "target_country_name": "中国香港",
+    "deal_size_usd": 12851189.82,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "301528 多浦乐 2025-03-14  关于对外投资的公司完成工商变更的公告.md.json.validated",
+    "stock_code": "301528",
+    "company_name": "广州多浦乐电子科技股份有限公司",
+    "announcement_date": "2025-03-14",
+    "target_country_name": "香港特别行政区",
+    "deal_size_usd": 1543900.28,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "301552 科力装备 2025-10-22  关于设立境外控股子公司暨完成注册的公告.md.json.validated",
+    "stock_code": "301552",
+    "company_name": "河北科力汽车装备股份有限公司",
+    "announcement_date": "2025-10-22",
+    "target_country_name": "日本",
+    "deal_size_usd": 1560000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "600232 金鹰股份 2025-03-25  关于境外投资的进展公告.md.json.validated",
+    "stock_code": "600232",
+    "company_name": "浙江金鹰股份有限公司",
+    "announcement_date": "2025-03-25",
+    "target_country_name": "越南",
+    "deal_size_usd": 51242840,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "600679 上海凤凰 2025-08-16  上海凤凰关于设立海外控股子公司的进展公告.md.json.validated",
+    "stock_code": "600679",
+    "company_name": "上海凤凰企业（集团）股份有限公司",
+    "announcement_date": "2025-08-16",
+    "target_country_name": "保加利亚",
+    "deal_size_usd": 11683000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603005 晶方科技 2025-04-19  晶方科技对外投资进展暨关联交易的公告.md.json.validated",
+    "stock_code": "603005",
+    "company_name": "苏州晶方半导体科技股份有限公司",
+    "announcement_date": "2025-04-19",
+    "target_country_name": "马来西亚",
+    "deal_size_usd": 22721821.83,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603017 中衡设计 2025-04-22  中衡设计关于对海外全资子公司进行增资的公告.md.json.validated",
+    "stock_code": "603017",
+    "company_name": "中衡设计集团股份有限公司",
+    "announcement_date": "2025-04-22",
+    "target_country_name": "新加坡",
+    "deal_size_usd": 6000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603057 紫燕食品 2025-04-18  紫燕食品关于对全资子公司增资并对外投资设立境外全资孙公司及建设生产加工基地项目的公告.md.json.validated",
+    "stock_code": "603057",
+    "company_name": "上海紫燕食品股份有限公司",
+    "announcement_date": "2025-04-18",
+    "target_country_name": "尼泊尔",
+    "deal_size_usd": 41091716.82,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603070 万控智造 2025-02-27  万控智造关于投资设立境外控股孙公司的公告.md.json.validated",
+    "stock_code": "603070",
+    "company_name": "万控智造股份有限公司",
+    "announcement_date": "2025-02-27",
+    "target_country_name": "沙特阿拉伯",
+    "deal_size_usd": 2550000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603083 剑桥科技 2025-12-09  关于向境外全资子公司增资的公告.md.json.validated",
+    "stock_code": "603083",
+    "company_name": "上海剑桥科技股份有限公司",
+    "announcement_date": "2025-12-09",
+    "target_country_name": "美国",
+    "deal_size_usd": 100000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603215 比依股份 2025-03-18  浙江比依电器股份有限公司关于拟合资设立境外子公司的公告.md.json.validated",
+    "stock_code": "603215",
+    "company_name": "浙江比依电器股份有限公司",
+    "announcement_date": "2025-03-18",
+    "target_country_name": "泰国",
+    "deal_size_usd": 4000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603220 中贝通信 2025-07-30  关于控股子公司贝通信国际终止股权收购事项的公告.md.json.validated",
+    "stock_code": "603220",
+    "company_name": "中贝通信集团股份有限公司",
+    "announcement_date": "2025-07-30",
+    "target_country_name": "印度尼西亚",
+    "deal_size_usd": 25000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603269 海鸥股份 2025-04-25  江苏海鸥冷却塔股份有限公司关于境外子公司对外投资进展公告.md.json.validated",
+    "stock_code": "603269",
+    "company_name": "江苏海鸥冷却塔股份有限公司",
+    "announcement_date": "2025-04-25",
+    "target_country_name": "澳大利亚",
+    "deal_size_usd": 6381412.6,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603309 维力医疗 2025-05-22  维力医疗关于对外投资设立境外孙公司暨关联交易的公告.md.json.validated",
+    "stock_code": "603309",
+    "company_name": "广州维力医疗器械股份有限公司",
+    "announcement_date": "2025-05-22",
+    "target_country_name": "印度尼西亚",
+    "deal_size_usd": 2775998.13,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603393 新天然气 2025-12-25  新天然气-关于境外附属公司供股结果暨向境外附属公司其他股东发起强制性全面要约的公告.md.json.validated",
+    "stock_code": "603393",
+    "company_name": "新疆鑫泰天然气股份有限公司",
+    "announcement_date": "2025-12-25",
+    "target_country_name": "开曼群岛",
+    "deal_size_usd": 50286024.27,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603612 索通发展 2025-12-16  索通发展股份有限公司关于对外投资暨与阿联酋环球铝业公司（EGA）签署合资协议的公告.md.json.validated",
+    "stock_code": "603612",
+    "company_name": "索通发展股份有限公司",
+    "announcement_date": "2025-12-16",
+    "target_country_name": "阿联酋",
+    "deal_size_usd": 162250000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "603650 彤程新材 2025-03-08  彤程新材关于子公司对外投资设立控股子公司建设泰国生产基地暨关联交易的公告.md.json.validated",
+    "stock_code": "603650",
+    "company_name": "彤程新材料集团股份有限公司",
+    "announcement_date": "2025-03-08",
+    "target_country_name": "泰国",
+    "deal_size_usd": 35700000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "605598 上海港湾 2025-04-30  关于向境外全资孙公司增加投资的公告.md.json.validated",
+    "stock_code": "605598",
+    "company_name": "上海港湾基础建设（集团）股份有限公司",
+    "announcement_date": "2025-04-30",
+    "target_country_name": "阿联酋",
+    "deal_size_usd": 10000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "688090 瑞松科技 2025-05-24  关于自愿披露控股子公司境外投资设立合资公司的公告.md.json.validated",
+    "stock_code": "688090",
+    "company_name": "广州瑞松智能科技股份有限公司",
+    "announcement_date": "2025-05-24",
+    "target_country_name": "马来西亚",
+    "deal_size_usd": 567779.12,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "688205 德科立 2025-11-12  无锡市德科立光电子技术股份有限公司关于向境外子公司追加投资的公告.md.json.validated",
+    "stock_code": "688205",
+    "company_name": "无锡市德科立光电子技术股份有限公司",
+    "announcement_date": "2025-11-12",
+    "target_country_name": "新加坡",
+    "deal_size_usd": 42155351.36,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "688668 鼎通科技 2025-05-15  关于向境外全资子公司追加投资的公告.md.json.validated",
+    "stock_code": "688668",
+    "company_name": "东莞市鼎通精密科技股份有限公司",
+    "announcement_date": "2025-05-15",
+    "target_country_name": "马来西亚",
+    "deal_size_usd": 2000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "831445 龙竹科技 2025-02-26  [临时公告]龙竹科技_关于全资子公司对外投资设立控股子公司并取得营业执照的公告.md.json.validated",
+    "stock_code": "831445",
+    "company_name": "龙竹科技集团股份有限公司",
+    "announcement_date": "2025-02-26",
+    "target_country_name": "罗马尼亚",
+    "deal_size_usd": 1048700,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "832089 禾昌聚合 2025-08-20  [临时公告]禾昌聚合_关于对外投资设立泰国控股孙公司的公告.md.json.validated",
+    "stock_code": "832089",
+    "company_name": "苏州禾昌聚合材料股份有限公司",
+    "announcement_date": "2025-08-20",
+    "target_country_name": "泰国",
+    "deal_size_usd": 123314.51,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "833075 柏星龙 2025-07-18  [临时公告]柏星龙_关于对外投资暨投资设立全资二级子公司、合资三级子公司的公告.md.json.validated",
+    "stock_code": "833075",
+    "company_name": "深圳市柏星龙创意包装股份有限公司",
+    "announcement_date": "2025-07-18",
+    "target_country_name": "越南",
+    "deal_size_usd": 1065765.4,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "834950 迅安科技 2025-01-24  [临时公告]迅安科技_关于境外控股子公司完成注册的公告.md.json.validated",
+    "stock_code": "834950",
+    "company_name": "常州迅安科技股份有限公司",
+    "announcement_date": "2025-01-24",
+    "target_country_name": "泰国",
+    "deal_size_usd": 1543929.69,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "873593 鼎智科技 2025-03-13  [临时公告]鼎智科技_对外投资设立境外控股子公司取得投资证书和备案的公告.md.json.validated",
+    "stock_code": "873593",
+    "company_name": "江苏鼎智智能控制科技股份有限公司",
+    "announcement_date": "2025-03-13",
+    "target_country_name": "泰国",
+    "deal_size_usd": 999999.4,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "920403 康农种业 2025-12-15  [临时公告]康农种业_关于对全资子公司增加注册资本并拟设立境外二级子公司的公告.md.json.validated",
+    "stock_code": "920403",
+    "company_name": "湖北康农种业股份有限公司",
+    "announcement_date": "2025-12-15",
+    "target_country_name": "香港特别行政区",
+    "deal_size_usd": 141903.31,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "920541 铁大科技 2025-10-10  [临时公告]铁大科技_关于公司全资子公司对外投资进展公告.md.json.validated",
+    "stock_code": "920541",
+    "company_name": "上海铁大电信科技股份有限公司",
+    "announcement_date": "2025-10-10",
+    "target_country_name": "中国",
+    "deal_size_usd": 3000000,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  },
+  {
+    "source_file": "920593 鼎智科技 2025-10-09  [临时公告]鼎智科技_关于境外控股子公司完成注册的公告.md.json.validated",
+    "stock_code": "920593",
+    "company_name": "江苏鼎智智能控制科技股份有限公司",
+    "announcement_date": "2025-10-09",
+    "target_country_name": "法国",
+    "deal_size_usd": 232220,
+    "issues": [
+      "Unknown issue (may be duplicate or DB error)"
+    ]
+  }
+]
