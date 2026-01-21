@@ -95,3 +95,9 @@
 - [x] 确认Investor和Target列标题已正确翻译
 - [x] 修复StatusBadge组件支持中文状态值
 - [x] 修复RecentDealsTable使用正确的announcement_stage字段
+
+## 修复Status Badge颜色区分问题
+- [x] 更新StatusBadge组件支持翻译（筹划→Planning, 进展→In Progress, 完成→Completed）
+- [x] 为不同状态设置独特颜色（Planning=黄色, In Progress=蓝色, Completed=绿色）
+- [x] 在Deals页面测试Status Badge显示
+- [x] 验证中英文切换时Status Badge正确翻译和显示颜色

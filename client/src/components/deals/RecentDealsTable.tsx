@@ -60,7 +60,7 @@ function StatusBadge({ status }: { status: string }) {
   
   // Determine color based on status value
   const isCompleted = status === 'Completed' || status === '完成';
-  const isPending = status === 'Pending' || status === '筹划';
+  const isPlanning = status === 'Planning' || status === '筹划';
   const isProgress = status === 'In Progress' || status === '进展';
   const isTerminated = status === 'Terminated' || status === '终止';
   
@@ -68,9 +68,10 @@ function StatusBadge({ status }: { status: string }) {
     <span
       className={cn(
         'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
-        isCompleted && 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]',
-        (isPending || isProgress) && 'bg-[oklch(0.769_0.188_70.08/0.12)] text-[oklch(0.6_0.188_70.08)]',
-        isTerminated && 'bg-[oklch(0.577_0.245_27.325/0.12)] text-[oklch(0.5_0.245_27.325)]'
+        isCompleted && 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)]', // Green for Completed
+        isPlanning && 'bg-[oklch(0.769_0.188_70.08/0.12)] text-[oklch(0.6_0.188_70.08)]', // Yellow for Planning
+        isProgress && 'bg-[oklch(0.585_0.233_292.717/0.12)] text-[oklch(0.485_0.233_292.717)]', // Blue for In Progress
+        isTerminated && 'bg-[oklch(0.577_0.245_27.325/0.12)] text-[oklch(0.5_0.245_27.325)]' // Red for Terminated
       )}
     >
       {translatedStatus}
