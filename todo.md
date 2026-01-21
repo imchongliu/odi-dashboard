@@ -157,3 +157,8 @@
 - [x] 在zh.ts的countries中将香港翻译改为"中国香港"
 - [x] 在en.ts的provinces中将香港相关条目改为"Hong Kong (PRC)"
 - [x] 测试所有页面的香港显示
+
+## 修复translateCountry函数使中文模式也使用映射
+- [x] 检查LanguageContext中translateCountry的实现逻辑
+- [x] 修改translateCountry函数，让中文模式也查找映射表
+- [x] 测试Deals页面和首页的香港显示为"中国香港"

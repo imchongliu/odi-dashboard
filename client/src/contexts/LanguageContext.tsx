@@ -34,17 +34,14 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   const translateCountry = (countryZh: string): string => {
-    if (language === 'zh') return countryZh;
     return translations[language].countries[countryZh as keyof typeof translations.en.countries] || countryZh;
   };
 
   const translateIndustry = (industryZh: string): string => {
-    if (language === 'zh') return industryZh;
     return translations[language].industries[industryZh as keyof typeof translations.en.industries] || industryZh;
   };
 
   const translateProvince = (provinceZh: string): string => {
-    if (language === 'zh') return provinceZh;
     return translations[language].provinces[provinceZh as keyof typeof translations.en.provinces] || provinceZh;
   };
 
