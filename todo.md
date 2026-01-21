@@ -107,3 +107,9 @@
 - [x] 更新中英文翻译文件
 - [x] 删除首页的"Recent Deals"表格部分
 - [x] 测试修改后的首页显示
+
+## 修改Deal Size Top 10显示单笔交易
+- [x] 创建TopDealsTable组件显示按交易金额排序的前10笔交易
+- [x] 在首页替换TopCountriesTable为TopDealsTable
+- [x] 添加"View More Deals"链接跳转到Deals页面
+- [x] 测试新组件显示和链接功能

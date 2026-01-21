@@ -17,7 +17,7 @@ import { TypeStatCards } from '@/components/stats/TypeStatCards';
 import { MonthlyTrendChart } from '@/components/charts/MonthlyTrendChart';
 import { CountryBarChart } from '@/components/charts/CountryBarChart';
 import { IndustryBarChart } from '@/components/charts/IndustryBarChart';
-import { TopCountriesTable } from '@/components/stats/TopCountriesTable';
+import { TopDealsTable } from '@/components/stats/TopDealsTable';
 import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
 import { formatCurrency } from '@/lib/api';
@@ -152,9 +152,9 @@ export default function Home() {
             <IndustryBarChart data={industryStats} limit={8} />
           </div>
           
-          {/* Top Countries Table */}
+          {/* Top Deals Table */}
           <div className="mb-6">
-            <TopCountriesTable data={countryStats} limit={10} />
+            <TopDealsTable deals={investments || []} limit={10} />
           </div>
         </section>
 

@@ -39,6 +39,7 @@ export const zh: TranslationKeys = {
     topIndustriesByValue: '按投资额排名的主要行业',
     topCountries: 'Deal Size Top 10',
     topCountriesSubtitle: '按投资额排名的国家',
+    topDealsSubtitle: '按交易金额排名的最大交易',
     topIndustries: '投资额前10行业',
     recentDeals: '最新交易',
     recentDealsSubtitle: '最新投资公告',
