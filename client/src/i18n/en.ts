@@ -35,7 +35,7 @@ export const en = {
     monthlyTrendSubtitle: 'Number of deals by month',
     topDestinationsByValue: 'Top Destinations by Value',
     topIndustriesByValue: 'Top Industries by Value',
-    topCountries: 'Top 10 Countries by Value',
+    topCountries: 'Deal Size Top 10',
     topCountriesSubtitle: 'Countries ranked by investment value',
     topIndustries: 'Top 10 Industries by Value',
     recentDeals: 'Recent Deals',

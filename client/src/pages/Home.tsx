@@ -5,9 +5,9 @@
  * - Hero section with key metrics
  * - Type-specific stat cards (M&A vs Greenfield)
  * - Charts section with monthly trend and distributions
- * - Recent deals table
+ * - Deal Size Top 10 table
  * 
- * Layout: Top KPI cards → Charts grid → Recent deals table
+ * Layout: Top KPI cards → Charts grid → Deal Size Top 10 table
  */
 
 import { Header } from '@/components/layout/Header';
@@ -18,8 +18,6 @@ import { MonthlyTrendChart } from '@/components/charts/MonthlyTrendChart';
 import { CountryBarChart } from '@/components/charts/CountryBarChart';
 import { IndustryBarChart } from '@/components/charts/IndustryBarChart';
 import { TopCountriesTable } from '@/components/stats/TopCountriesTable';
-import { RecentDealsTable } from '@/components/deals/RecentDealsTable';
-import { InvestmentDetailModal } from '@/components/deals/InvestmentDetailModal';
 import { useState } from 'react';
 import { trpc } from '@/lib/trpc';
 import { formatCurrency } from '@/lib/api';
@@ -28,8 +26,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Home() {
   const { t, translateCountry, translateIndustry } = useLanguage();
-  const [selectedInvestment, setSelectedInvestment] = useState<any | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
+
   
   // Fetch data from database via tRPC
   const { data: stats, isLoading: statsLoading } = trpc.investments.stats.useQuery();
@@ -87,30 +84,7 @@ export default function Home() {
   const topCountry = countryStats[0]?.country || 'N/A';
   const topIndustry = industryStats[0]?.industry || 'N/A';
   
-  // Get recent deals (last 8) - transform to match Investment interface
-  const recentDeals = (investments || [])
-    .sort((a, b) => new Date(b.announcementDate).getTime() - new Date(a.announcementDate).getTime())
-    .slice(0, 8)
-    .map(inv => ({
-      id: inv.id,
-      announcement_date: inv.announcementDate instanceof Date 
-        ? inv.announcementDate.toISOString().split('T')[0] 
-        : String(inv.announcementDate).split('T')[0],
-      investor_name: inv.companyName,
-      investor_stock_code: inv.stockCode || null,
-      target_country: inv.targetCountryName,
-      target_company_name: inv.targetName || 'New project',
-      target_industry: inv.targetIndustry || null,
-      investment_type: (inv.investmentType === 'M&A' || inv.investmentType === 'Greenfield' 
-        ? inv.investmentType : 'M&A') as 'M&A' | 'Greenfield',
-      deal_size_usd: parseFloat(inv.dealSizeUsd || '0'),
-      status: (inv.announcementStage === '完成' ? 'Completed' : 
-               inv.announcementStage === '筹划' ? 'Pending' : 'Pending') as 'Completed' | 'Pending' | 'Terminated',
-      deal_specifics: null as any,
-      created_at: inv.createdAt instanceof Date 
-        ? inv.createdAt.toISOString() 
-        : String(inv.createdAt || new Date().toISOString()),
-    }));
+
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -184,31 +158,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Recent Deals Section */}
-        <section className="container pb-12">
-          <RecentDealsTable 
-            deals={recentDeals} 
-            showViewAll={true}
-            onDealClick={(deal) => {
-              // Convert Investment type to modal format
-              const inv = investments?.find(i => i.id === deal.id);
-              if (inv) {
-                setSelectedInvestment(inv);
-                setModalOpen(true);
-              }
-            }}
-          />
-        </section>
+
       </main>
 
       <Footer />
-      
-      {/* Investment Detail Modal */}
-      <InvestmentDetailModal
-        investment={selectedInvestment}
-        open={modalOpen}
-        onOpenChange={setModalOpen}
-      />
     </div>
   );
 }

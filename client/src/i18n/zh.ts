@@ -37,7 +37,7 @@ export const zh: TranslationKeys = {
     monthlyTrendSubtitle: '每月交易数量',
     topDestinationsByValue: '按投资额排名的主要目的地',
     topIndustriesByValue: '按投资额排名的主要行业',
-    topCountries: '投资额前10国家',
+    topCountries: 'Deal Size Top 10',
     topCountriesSubtitle: '按投资额排名的国家',
     topIndustries: '投资额前10行业',
     recentDeals: '最新交易',

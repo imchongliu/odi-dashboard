@@ -101,3 +101,9 @@
 - [x] 为不同状态设置独特颜色（Planning=黄色, In Progress=蓝色, Completed=绿色）
 - [x] 在Deals页面测试Status Badge显示
 - [x] 验证中英文切换时Status Badge正确翻译和显示颜色
+
+## 修改首页布局
+- [x] 将"Top 10 Countries by Value"改名为"Deal Size Top 10"
+- [x] 更新中英文翻译文件
+- [x] 删除首页的"Recent Deals"表格部分
+- [x] 测试修改后的首页显示
