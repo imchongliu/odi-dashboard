@@ -51,3 +51,9 @@
 - [x] 在首页添加Other类型筛选选项
 - [x] 在Deals Database页面添加Other类型筛选选项
 - [x] 测试筛选功能
+
+## 添加投资详情模态框
+- [x] 创建InvestmentDetailModal组件
+- [x] 在Deals页面集成模态框
+- [x] 实现点击表格行打开模态框功能
+- [x] 测试模态框显示和关闭功能

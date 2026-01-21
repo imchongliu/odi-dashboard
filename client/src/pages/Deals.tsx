@@ -33,6 +33,7 @@ import { Search, Filter, X, ChevronLeft, ChevronRight, Loader2 } from 'lucide-re
 import { cn } from '@/lib/utils';
 import { trpc } from '@/lib/trpc';
 import { formatCurrency, formatDate } from '@/lib/api';
+import { InvestmentDetailModal } from '@/components/deals/InvestmentDetailModal';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -86,6 +87,8 @@ export default function Deals() {
     search: '',
   });
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedInvestment, setSelectedInvestment] = useState<any | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // Fetch data from database via tRPC
   const { data: investments, isLoading } = trpc.investments.list.useQuery({});
@@ -326,7 +329,10 @@ export default function Deals() {
                     <TableRow
                       key={deal.id}
                       className="table-row-hover cursor-pointer"
-                      onClick={() => window.location.href = `/deals/${deal.id}`}
+                      onClick={() => {
+                        setSelectedInvestment(deal);
+                        setModalOpen(true);
+                      }}
                     >
                       <TableCell className="font-medium tabular-nums text-muted-foreground">
                         {formatDate(deal.announcementDate instanceof Date 
@@ -399,6 +405,13 @@ export default function Deals() {
       </main>
 
       <Footer />
+      
+      {/* Investment Detail Modal */}
+      <InvestmentDetailModal
+        investment={selectedInvestment}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
     </div>
   );
 }

@@ -1,0 +1,280 @@
+/**
+ * InvestmentDetailModal Component
+ * 
+ * Displays detailed information about an investment in a modal dialog
+ */
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { formatCurrency, formatDate } from '@/lib/api';
+import { Building2, Globe, Factory, Calendar, DollarSign, FileText, TrendingUp } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+interface Investment {
+  id: number;
+  announcementDate: string | Date;
+  announcementTitle: string | null;
+  announcementStage: string | null;
+  stockCode: string | null;
+  companyName: string;
+  exchange: string | null;
+  companyProvince: string | null;
+  companyIndustry: string | null;
+  investmentType: string;
+  investmentRationale: string | null;
+  targetName: string | null;
+  targetIndustry: string | null;
+  targetCountryCode: string | null;
+  targetCountryName: string;
+  targetRegion: string | null;
+  dealSizeOriginal: string | null;
+  originalCurrency: string | null;
+  dealSizeUsd: string;
+  dealSpecifics: any;
+}
+
+interface InvestmentDetailModalProps {
+  investment: Investment | null;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+function TypeBadge({ type }: { type: string }) {
+  const isMA = type === 'M&A';
+  const isGreenfield = type === 'Greenfield';
+  const isOther = type === 'Other';
+  return (
+    <Badge
+      className={cn(
+        isMA
+          ? 'bg-[oklch(0.585_0.233_292.717/0.12)] text-[oklch(0.485_0.233_292.717)] hover:bg-[oklch(0.585_0.233_292.717/0.2)]'
+          : isGreenfield
+          ? 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)] hover:bg-[oklch(0.696_0.17_162.48/0.2)]'
+          : isOther
+          ? 'bg-[oklch(0.75_0.15_50/0.12)] text-[oklch(0.65_0.15_50)] hover:bg-[oklch(0.75_0.15_50/0.2)]'
+          : 'bg-muted text-muted-foreground'
+      )}
+    >
+      {type}
+    </Badge>
+  );
+}
+
+function StatusBadge({ status }: { status: string }) {
+  const isCompleted = status === '完成' || status === 'Completed';
+  const isPending = status === '筹划' || status === 'Pending';
+  const isInProgress = status === '进展' || status === 'In Progress';
+  
+  return (
+    <Badge
+      className={cn(
+        isCompleted && 'bg-[oklch(0.696_0.17_162.48/0.12)] text-[oklch(0.55_0.17_162.48)] hover:bg-[oklch(0.696_0.17_162.48/0.2)]',
+        isPending && 'bg-[oklch(0.769_0.188_70.08/0.12)] text-[oklch(0.6_0.188_70.08)] hover:bg-[oklch(0.769_0.188_70.08/0.2)]',
+        isInProgress && 'bg-[oklch(0.585_0.233_292.717/0.12)] text-[oklch(0.485_0.233_292.717)] hover:bg-[oklch(0.585_0.233_292.717/0.2)]'
+      )}
+    >
+      {status}
+    </Badge>
+  );
+}
+
+function InfoRow({ icon: Icon, label, value }: { icon: any; label: string; value: string | null | undefined }) {
+  if (!value || value === 'null' || value === 'N/A') return null;
+  
+  return (
+    <div className="flex items-start gap-3">
+      <Icon className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium text-muted-foreground">{label}</p>
+        <p className="text-sm mt-0.5 break-words">{value}</p>
+      </div>
+    </div>
+  );
+}
+
+export function InvestmentDetailModal({ investment, open, onOpenChange }: InvestmentDetailModalProps) {
+  if (!investment) return null;
+
+  const dealSizeUsd = parseFloat(investment.dealSizeUsd || '0');
+  const formattedDate = formatDate(investment.announcementDate);
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
+        <DialogHeader>
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1 min-w-0">
+              <DialogTitle className="text-xl break-words">
+                {investment.companyName}
+              </DialogTitle>
+              <DialogDescription className="mt-1 break-words">
+                {investment.targetName || 'New Investment Project'}
+              </DialogDescription>
+            </div>
+            <div className="flex gap-2 flex-shrink-0">
+              <TypeBadge type={investment.investmentType} />
+              {investment.announcementStage && (
+                <StatusBadge status={investment.announcementStage} />
+              )}
+            </div>
+          </div>
+        </DialogHeader>
+
+        <div className="space-y-6 mt-4">
+          {/* Deal Overview */}
+          <div>
+            <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
+              <TrendingUp className="h-4 w-4" />
+              Deal Overview
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <InfoRow
+                icon={Calendar}
+                label="Announcement Date"
+                value={formattedDate}
+              />
+              <InfoRow
+                icon={DollarSign}
+                label="Deal Size"
+                value={dealSizeUsd > 0 ? formatCurrency(dealSizeUsd) : 'Undisclosed'}
+              />
+              {investment.dealSizeOriginal && investment.originalCurrency && (
+                <InfoRow
+                  icon={DollarSign}
+                  label="Original Amount"
+                  value={`${investment.dealSizeOriginal} ${investment.originalCurrency}`}
+                />
+              )}
+              {investment.stockCode && (
+                <InfoRow
+                  icon={Building2}
+                  label="Stock Code"
+                  value={`${investment.stockCode}${investment.exchange ? ` (${investment.exchange})` : ''}`}
+                />
+              )}
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Investor Information */}
+          <div>
+            <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
+              <Building2 className="h-4 w-4" />
+              Investor Information
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <InfoRow
+                icon={Building2}
+                label="Company Name"
+                value={investment.companyName}
+              />
+              <InfoRow
+                icon={Factory}
+                label="Industry"
+                value={investment.companyIndustry}
+              />
+              <InfoRow
+                icon={Globe}
+                label="Province"
+                value={investment.companyProvince}
+              />
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Target Information */}
+          <div>
+            <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
+              <Globe className="h-4 w-4" />
+              Target Information
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <InfoRow
+                icon={Building2}
+                label="Target Name"
+                value={investment.targetName || 'New Project'}
+              />
+              <InfoRow
+                icon={Globe}
+                label="Country"
+                value={investment.targetCountryName}
+              />
+              <InfoRow
+                icon={Factory}
+                label="Target Industry"
+                value={investment.targetIndustry}
+              />
+              <InfoRow
+                icon={Globe}
+                label="Region"
+                value={investment.targetRegion}
+              />
+            </div>
+          </div>
+
+          {/* Investment Rationale */}
+          {investment.investmentRationale && (
+            <>
+              <Separator />
+              <div>
+                <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                  <FileText className="h-4 w-4" />
+                  Investment Rationale
+                </h3>
+                <p className="text-sm text-muted-foreground whitespace-pre-wrap break-words">
+                  {investment.investmentRationale}
+                </p>
+              </div>
+            </>
+          )}
+
+          {/* Announcement Details */}
+          {investment.announcementTitle && (
+            <>
+              <Separator />
+              <div>
+                <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                  <FileText className="h-4 w-4" />
+                  Announcement Details
+                </h3>
+                <p className="text-sm text-muted-foreground break-words">
+                  {investment.announcementTitle}
+                </p>
+              </div>
+            </>
+          )}
+
+          {/* Deal Specifics */}
+          {investment.dealSpecifics && typeof investment.dealSpecifics === 'object' && Object.keys(investment.dealSpecifics).length > 0 && (
+            <>
+              <Separator />
+              <div>
+                <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                  <FileText className="h-4 w-4" />
+                  Deal Specifics
+                </h3>
+                <div className="text-sm text-muted-foreground space-y-2">
+                  {Object.entries(investment.dealSpecifics).map(([key, value]) => (
+                    <div key={key} className="flex gap-2">
+                      <span className="font-medium">{key}:</span>
+                      <span className="break-words">{String(value)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
