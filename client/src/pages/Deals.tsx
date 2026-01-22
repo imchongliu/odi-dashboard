@@ -195,7 +195,7 @@ export default function Deals() {
         <main className="flex-1 flex items-center justify-center">
           <div className="flex flex-col items-center gap-4">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <p className="text-muted-foreground">Loading deals...</p>
+            <p className="text-muted-foreground">{t.deals.loadingDeals}</p>
           </div>
         </main>
         <Footer />
@@ -211,9 +211,9 @@ export default function Deals() {
         <div className="container py-8">
           {/* Page Header */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold tracking-tight">Deals Database</h1>
+            <h1 className="text-2xl font-bold tracking-tight">{t.deals.title}</h1>
             <p className="text-muted-foreground mt-1">
-              Browse and filter all investment transactions
+              {t.deals.subtitle}
             </p>
           </div>
 
@@ -224,7 +224,7 @@ export default function Deals() {
               <div className="relative flex-1 min-w-[200px]">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Search investor, target, or country..."
+                  placeholder={t.deals.searchPlaceholder}
                   value={filters.search}
                   onChange={(e) => handleFilterChange('search', e.target.value)}
                   className="pl-9"
@@ -237,10 +237,10 @@ export default function Deals() {
                 onValueChange={(value) => handleFilterChange('type', value)}
               >
                 <SelectTrigger className="w-[140px]">
-                  <SelectValue placeholder="Type" />
+                  <SelectValue placeholder={t.deals.type} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Types</SelectItem>
+                  <SelectItem value="all">{t.deals.allTypes}</SelectItem>
                   <SelectItem value="M&A">M&A</SelectItem>
                   <SelectItem value="Greenfield">Greenfield</SelectItem>
                   <SelectItem value="Other">Other</SelectItem>
@@ -253,7 +253,7 @@ export default function Deals() {
                 onValueChange={(value) => handleFilterChange('country', value)}
               >
                 <SelectTrigger className="w-[160px]">
-                  <SelectValue placeholder="Country" />
+                  <SelectValue placeholder={t.deals.country} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t.deals.allCountries}</SelectItem>
@@ -271,7 +271,7 @@ export default function Deals() {
                 onValueChange={(value) => handleFilterChange('industry', value)}
               >
                 <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Industry" />
+                  <SelectValue placeholder={t.deals.industry} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t.deals.allIndustries}</SelectItem>
@@ -289,7 +289,7 @@ export default function Deals() {
                 onValueChange={(value) => handleFilterChange('status', value)}
               >
                 <SelectTrigger className="w-[140px]">
-                  <SelectValue placeholder="Status" />
+                  <SelectValue placeholder={t.deals.status} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t.deals.allStatus}</SelectItem>
@@ -308,14 +308,14 @@ export default function Deals() {
                   className="text-muted-foreground"
                 >
                   <X className="h-4 w-4 mr-1" />
-                  Clear
+                  {t.common.clear}
                 </Button>
               )}
             </div>
 
             {/* Results count */}
             <div className="mt-3 text-sm text-muted-foreground">
-              Showing {paginatedDeals.length} of {filteredDeals.length} deals
+              {t.common.showingOf.replace('{{current}}', paginatedDeals.length.toString()).replace('{{total}}', filteredDeals.length.toString())}
             </div>
           </div>
 
@@ -387,7 +387,7 @@ export default function Deals() {
             {totalPages > 1 && (
               <div className="flex items-center justify-between px-4 py-3 border-t border-border">
                 <div className="text-sm text-muted-foreground">
-                  Page {currentPage} of {totalPages}
+                  {t.common.page} {currentPage} {t.common.of} {totalPages}
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
@@ -397,7 +397,7 @@ export default function Deals() {
                     disabled={currentPage === 1}
                   >
                     <ChevronLeft className="h-4 w-4 mr-1" />
-                    Previous
+                    {t.common.previous}
                   </Button>
                   <Button
                     variant="outline"
@@ -405,7 +405,7 @@ export default function Deals() {
                     onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                     disabled={currentPage === totalPages}
                   >
-                    Next
+                    {t.common.next}
                     <ChevronRight className="h-4 w-4 ml-1" />
                   </Button>
                 </div>

@@ -9,7 +9,7 @@ export const zh: TranslationKeys = {
     insights: '并购洞察',
   },
 
-  // Common
+   // 通用
   common: {
     loading: '加载中...',
     error: '错误',
@@ -20,6 +20,10 @@ export const zh: TranslationKeys = {
     noData: '暂无数据',
     deals: '交易',
     total: '总计',
+    page: '第',
+    of: '页，共',
+    previous: '上一页',
+    next: '下一页',
   },
 
   // Overview Page
@@ -61,6 +65,7 @@ export const zh: TranslationKeys = {
     allCountries: '全部国家',
     industry: '行业',
     allIndustries: '全部行业',
+    loadingDeals: '加载交易中...',
     columns: {
       date: '日期',
       type: '类型',

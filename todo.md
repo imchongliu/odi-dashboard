@@ -180,3 +180,9 @@
 - [x] 搜索所有组件文件中的嵌套anchor标签
 - [x] 修复TopDealsTable或其他组件中的嵌套anchor标签
 - [x] 测试首页是否还有错误
+
+## 为Deals页面提供完整英文翻译
+- [x] 检查Deals页面所有文本的翻译实现
+- [x] 检查InvestmentDetailModal所有字段的翻译实现
+- [x] 补充缺失的翻译键
+- [x] 测试Deals页面和模态框的中英文显示

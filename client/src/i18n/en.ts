@@ -18,6 +18,10 @@ export const en = {
     noData: 'No data available',
     deals: 'Deals',
     total: 'Total',
+    page: 'Page',
+    of: 'of',
+    previous: 'Previous',
+    next: 'Next',
   },
 
   // Overview Page
@@ -59,6 +63,7 @@ export const en = {
     allCountries: 'All Countries',
     industry: 'Industry',
     allIndustries: 'All Industries',
+    loadingDeals: 'Loading deals...',
     columns: {
       date: 'Date',
       type: 'Type',
