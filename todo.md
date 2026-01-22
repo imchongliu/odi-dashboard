@@ -194,3 +194,9 @@
 - [x] 检查Region字段并使用translateProvince
 - [x] 检查Investment Rationale字段是否需要翻译
 - [x] 测试中英文切换效果
+
+## 修复Google Maps API多次加载错误
+- [x] 检查Destinations页面Map组件的使用
+- [x] 检查Map组件是否有重复加载API的逻辑
+- [x] 修复重复加载问题
+- [x] 测试首页和Destinations页面是否还有错误
