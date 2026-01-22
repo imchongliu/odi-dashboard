@@ -104,11 +104,9 @@ export function TopDealsTable({ deals, limit = 10 }: TopDealsTableProps) {
             {t.overview.topDealsSubtitle || 'Largest deals by transaction value'}
           </p>
         </div>
-        <Link href="/deals">
-          <a className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline">
-            {t.common.viewAll}
-            <ArrowRight className="h-4 w-4" />
-          </a>
+        <Link href="/deals" className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline">
+          {t.common.viewAll}
+          <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
       
