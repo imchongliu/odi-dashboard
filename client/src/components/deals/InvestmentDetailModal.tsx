@@ -4,6 +4,7 @@
  * Displays detailed information about an investment in a modal dialog
  */
 
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -17,6 +18,7 @@ import { formatCurrency, formatDate } from '@/lib/api';
 import { Building2, Globe, Factory, Calendar, DollarSign, FileText, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { trpc } from '@/lib/trpc';
 
 interface Investment {
   id: number;
@@ -101,7 +103,60 @@ function InfoRow({ icon: Icon, label, value }: { icon: any; label: string; value
 }
 
 export function InvestmentDetailModal({ investment, open, onOpenChange }: InvestmentDetailModalProps) {
-  const { t, translateCountry, translateIndustry, translateProvince, translateExchange } = useLanguage();
+  const { t, translateCountry, translateIndustry, translateProvince, translateExchange, language } = useLanguage();
+  const [translatedIndustry, setTranslatedIndustry] = useState<string | null>(null);
+  const [translatedRegion, setTranslatedRegion] = useState<string | null>(null);
+  
+  // Use tRPC mutation to translate text
+  const translateMutation = trpc.investments.translate.useMutation();
+  
+  // Translate Target Industry when modal opens and language is English
+  useEffect(() => {
+    if (investment?.targetIndustry && language === 'en' && !translatedIndustry) {
+      translateMutation.mutate(
+        { text: investment.targetIndustry, type: 'industry' },
+        {
+          onSuccess: (data) => {
+            if (data?.translated) {
+              setTranslatedIndustry(data.translated);
+            } else {
+              setTranslatedIndustry(investment.targetIndustry);
+            }
+          },
+          onError: (error) => {
+            console.error('Failed to translate industry:', error);
+            setTranslatedIndustry(investment.targetIndustry);
+          },
+        }
+      );
+    } else if (language === 'zh') {
+      setTranslatedIndustry(null);
+    }
+  }, [investment?.targetIndustry, language]);
+  
+  // Translate Target Region when modal opens and language is English
+  useEffect(() => {
+    if (investment?.targetRegion && language === 'en' && !translatedRegion) {
+      translateMutation.mutate(
+        { text: investment.targetRegion, type: 'region' },
+        {
+          onSuccess: (data) => {
+            if (data?.translated) {
+              setTranslatedRegion(data.translated);
+            } else {
+              setTranslatedRegion(investment.targetRegion);
+            }
+          },
+          onError: (error) => {
+            console.error('Failed to translate region:', error);
+            setTranslatedRegion(investment.targetRegion);
+          },
+        }
+      );
+    } else if (language === 'zh') {
+      setTranslatedRegion(null);
+    }
+  }, [investment?.targetRegion, language]);
   
   if (!investment) return null;
 
@@ -214,12 +269,12 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
               <InfoRow
                 icon={Factory}
                 label={t.modal.targetIndustry}
-                value={investment.targetIndustry ? translateIndustry(investment.targetIndustry) : null}
+                value={language === 'en' && translatedIndustry ? translatedIndustry : (investment.targetIndustry ? translateIndustry(investment.targetIndustry) : null)}
               />
               <InfoRow
                 icon={Globe}
                 label={t.modal.region}
-                value={investment.targetRegion ? translateProvince(investment.targetRegion) : null}
+                value={language === 'en' && translatedRegion ? translatedRegion : (investment.targetRegion ? translateProvince(investment.targetRegion) : null)}
               />
             </div>
           </div>

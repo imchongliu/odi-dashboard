@@ -3,6 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
+import { invokeLLM } from "./_core/llm";
 import {
   getAllInvestments,
   getInvestmentById,
@@ -110,6 +111,39 @@ export const appRouter = router({
         }));
         const success = await createManyInvestments(data);
         return { success };
+      }),
+
+    // Translate Chinese text to English using LLM
+    translate: publicProcedure
+      .input(z.object({ text: z.string(), type: z.enum(['industry', 'region']).optional() }))
+      .mutation(async ({ input }) => {
+        if (!input.text || input.text.length === 0) {
+          return { text: input.text, translated: input.text };
+        }
+
+        try {
+          const prompt = input.type === 'region' 
+            ? `Translate the following Chinese region/location name to English. Return only the translated name, nothing else:\n${input.text}`
+            : `Translate the following Chinese industry name to English. Return only the translated name, nothing else:\n${input.text}`;
+
+          const response = await invokeLLM({
+            messages: [
+              {
+                role: 'user',
+                content: prompt,
+              },
+            ],
+          });
+
+          const translated = response.choices[0]?.message.content;
+          if (typeof translated === 'string') {
+            return { text: input.text, translated: translated.trim() };
+          }
+          return { text: input.text, translated: input.text };
+        } catch (error) {
+          console.error('[Translation] Failed to translate:', error);
+          return { text: input.text, translated: input.text };
+        }
       }),
   }),
 });

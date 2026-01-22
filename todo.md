@@ -200,3 +200,10 @@
 - [x] 检查Map组件是否有重复加载API的逻辑
 - [x] 修复重复加载问题
 - [x] 测试首页和Destinations页面是否还有错误
+
+## 为Company Name、Target Industry、Region字段值添加英文翻译
+- [x] 检查数据库中这些字段的实际值
+- [x] 为Target Industry字段值添加翻译映射
+- [x] 为Region字段值添加翻译映射
+- [x] 在InvestmentDetailModal中应用翻译函数
+- [x] 测试中英文切换效果
