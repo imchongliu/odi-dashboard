@@ -101,7 +101,7 @@ function InfoRow({ icon: Icon, label, value }: { icon: any; label: string; value
 }
 
 export function InvestmentDetailModal({ investment, open, onOpenChange }: InvestmentDetailModalProps) {
-  const { t, translateCountry, translateIndustry, translateProvince } = useLanguage();
+  const { t, translateCountry, translateIndustry, translateProvince, translateExchange } = useLanguage();
   
   if (!investment) return null;
 
@@ -159,7 +159,7 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
                 <InfoRow
                   icon={Building2}
                   label={t.modal.stockCode}
-                  value={`${investment.stockCode}${investment.exchange ? ` (${investment.exchange})` : ''}`}
+                  value={`${investment.stockCode}${investment.exchange ? ` (${translateExchange(investment.exchange)})` : ''}`}
                 />
               )}
             </div>

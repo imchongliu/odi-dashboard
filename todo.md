@@ -186,3 +186,11 @@
 - [x] 检查InvestmentDetailModal所有字段的翻译实现
 - [x] 补充缺失的翻译键
 - [x] 测试Deals页面和模态框的中英文显示
+
+## 为InvestmentDetailModal字段值添加英文翻译
+- [x] 检查Company Name字段是否需要翻译
+- [x] 检查Exchange字段并添加英文翻译
+- [x] 检查Target Industry字段并使用translateIndustry
+- [x] 检查Region字段并使用translateProvince
+- [x] 检查Investment Rationale字段是否需要翻译
+- [x] 测试中英文切换效果

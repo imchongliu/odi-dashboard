@@ -281,6 +281,18 @@ export const en = {
     '中区': 'Central',
   },
 
+  // Exchanges
+  exchanges: {
+    '上交所': 'Shanghai Stock Exchange',
+    '深交所': 'Shenzhen Stock Exchange',
+    '香港交易所': 'Hong Kong Stock Exchange',
+    '纽交所': 'New York Stock Exchange',
+    '纳斯达克': 'NASDAQ',
+    '伦敦交易所': 'London Stock Exchange',
+    '东京交易所': 'Tokyo Stock Exchange',
+    '新加坡交易所': 'Singapore Exchange',
+  },
+
   // Industries (major ones)
   industries: {
     '工业': 'Industrials',
