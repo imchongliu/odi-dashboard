@@ -88,7 +88,7 @@ export const en = {
     mapSubtitle: 'Click on markers to view destination details',
     allDestinations: 'All Destinations',
     allDestinationsSubtitle: 'Complete list of investment destinations',
-    selectCountry: 'Select a country',
+    selectCountry: 'Select a destination',
     selectCountrySubtitle: 'Click on a table row to view deals',
     dealsIn: 'Deals in {{country}}',
     columns: {

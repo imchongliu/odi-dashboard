@@ -90,7 +90,7 @@ export const zh: TranslationKeys = {
     mapSubtitle: '点击标记查看目的地详情',
     allDestinations: '全部目的地',
     allDestinationsSubtitle: '投资目的地完整列表',
-    selectCountry: '选择国家',
+    selectCountry: '选择目的地',
     selectCountrySubtitle: '点击表格行查看交易',
     dealsIn: '{{country}}的交易',
     columns: {
