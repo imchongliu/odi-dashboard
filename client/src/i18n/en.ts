@@ -52,7 +52,7 @@ export const en = {
   deals: {
     title: 'Deals Database',
     subtitle: 'Complete database of Chinese outbound investments',
-    searchPlaceholder: 'Search by investor, target, or country...',
+    searchPlaceholder: 'Search by investor, target, or destinations...',
     filters: 'Filters',
     type: 'Type',
     allTypes: 'All Types',
