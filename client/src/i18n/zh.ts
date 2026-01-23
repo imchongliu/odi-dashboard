@@ -62,7 +62,7 @@ export const zh: TranslationKeys = {
     allStatuses: '所有状态',
     allStatus: '所有状态',
     country: '国家',
-    allCountries: '全部国家',
+    allDestinations: '全部目的地',
     industry: '行业',
     allIndustries: '全部行业',
     loadingDeals: '加载交易中...',

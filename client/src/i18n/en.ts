@@ -60,7 +60,7 @@ export const en = {
     allStatuses: 'All Statuses',
     allStatus: 'All Status',
     country: 'Country',
-    allCountries: 'All Countries',
+    allDestinations: 'All Destinations',
     industry: 'Industry',
     allIndustries: 'All Industries',
     loadingDeals: 'Loading deals...',

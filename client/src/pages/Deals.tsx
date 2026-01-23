@@ -261,7 +261,7 @@ export default function Deals() {
                   <SelectValue placeholder={t.deals.country} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">{t.deals.allCountries}</SelectItem>
+                  <SelectItem value="all">{t.deals.allDestinations}</SelectItem>
                   {countries.map((country: string) => (
                     <SelectItem key={country} value={country}>
                       {translateCountry(country)}
