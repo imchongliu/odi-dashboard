@@ -111,42 +111,6 @@ export default function Deals() {
   const countries: string[] = countriesData || [];
   const industries: string[] = industriesData || [];
 
-  // Translate company and target names when language changes
-  useEffect(() => {
-    if (language === 'en' && paginatedDeals && paginatedDeals.length > 0) {
-      paginatedDeals.forEach(deal => {
-        const companyName = deal.companyName || '';
-        const targetName = deal.targetName || '';
-        if (companyName && !translatedNames[companyName]) {
-          translateMutation.mutate(
-            { text: companyName },
-            {
-              onSuccess: (result) => {
-                setTranslatedNames(prev => ({
-                  ...prev,
-                  [companyName]: result.translated
-                }));
-              }
-            }
-          );
-        }
-        if (targetName && !translatedNames[targetName]) {
-          translateMutation.mutate(
-            { text: targetName },
-            {
-              onSuccess: (result) => {
-                setTranslatedNames(prev => ({
-                  ...prev,
-                  [targetName]: result.translated
-                }));
-              }
-            }
-          );
-        }
-      });
-    }
-  }, [language])
-
   // Filter investments
   const filteredDeals = useMemo(() => {
     if (!investments) return [];
@@ -201,6 +165,42 @@ export default function Deals() {
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
+
+  // Translate company and target names when language changes to English
+  useEffect(() => {
+    if (language === 'en' && paginatedDeals && paginatedDeals.length > 0) {
+      paginatedDeals.forEach(deal => {
+        const companyName = deal.companyName || '';
+        const targetName = deal.targetName || '';
+        if (companyName && !translatedNames[companyName]) {
+          translateMutation.mutate(
+            { text: companyName },
+            {
+              onSuccess: (result) => {
+                setTranslatedNames(prev => ({
+                  ...prev,
+                  [companyName]: result.translated
+                }));
+              }
+            }
+          );
+        }
+        if (targetName && !translatedNames[targetName]) {
+          translateMutation.mutate(
+            { text: targetName },
+            {
+              onSuccess: (result) => {
+                setTranslatedNames(prev => ({
+                  ...prev,
+                  [targetName]: result.translated
+                }));
+              }
+            }
+          );
+        }
+      });
+    }
+  }, [language]);
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters(prev => ({ ...prev, [key]: value }));
