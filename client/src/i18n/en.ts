@@ -80,7 +80,7 @@ export const en = {
   destinations: {
     title: 'Investment Destinations',
     subtitle: 'Explore Chinese outbound investments by destination',
-    countries: 'Countries',
+    countries: 'Destinations',
     totalValue: 'Total Value',
     maDeals: 'M&A Deals',
     greenfield: 'Greenfield',

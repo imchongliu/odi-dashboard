@@ -82,7 +82,7 @@ export const zh: TranslationKeys = {
   destinations: {
     title: '投资目的地',
     subtitle: '按目的地探索中国对外投资',
-    countries: '国家数',
+    countries: '目的地数',
     totalValue: '总投资额',
     maDeals: '并购交易',
     greenfield: '绿地投资',
