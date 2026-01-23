@@ -69,7 +69,7 @@ export const en = {
       type: 'Type',
       investor: 'Investor',
       target: 'Target',
-      country: 'Country',
+      country: 'Destination',
       industry: 'Industry',
       dealSize: 'Deal Size',
       status: 'Status',

@@ -71,7 +71,7 @@ export const zh: TranslationKeys = {
       type: '类型',
       investor: '投资方',
       target: '目标公司',
-      country: '国家',
+      country: '目的地',
       industry: '行业',
       dealSize: '交易规模',
       status: '状态',
