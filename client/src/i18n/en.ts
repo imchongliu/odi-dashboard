@@ -79,7 +79,7 @@ export const en = {
   // Destinations Page
   destinations: {
     title: 'Investment Destinations',
-    subtitle: 'Explore Chinese outbound investments by destination country',
+    subtitle: 'Explore Chinese outbound investments by destination',
     countries: 'Countries',
     totalValue: 'Total Value',
     maDeals: 'M&A Deals',
@@ -93,7 +93,7 @@ export const en = {
     dealsIn: 'Deals in {{country}}',
     columns: {
       rank: '#',
-      country: 'Country',
+      country: 'Destination',
       deals: 'Deals',
       totalValue: 'Total Value',
     },

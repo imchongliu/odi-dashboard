@@ -81,7 +81,7 @@ export const zh: TranslationKeys = {
   // Destinations Page
   destinations: {
     title: '投资目的地',
-    subtitle: '按目的地国家探索中国对外投资',
+    subtitle: '按目的地探索中国对外投资',
     countries: '国家数',
     totalValue: '总投资额',
     maDeals: '并购交易',
@@ -95,7 +95,7 @@ export const zh: TranslationKeys = {
     dealsIn: '{{country}}的交易',
     columns: {
       rank: '排名',
-      country: '国家',
+      country: '目的地',
       deals: '交易数',
       totalValue: '总投资额',
     },
