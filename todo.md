@@ -215,3 +215,9 @@
 - [x] 为Investment Rationale字段增加翻译
 - [x] 为Announcement Details字段增加翻译
 - [x] 测试中英文切换效果
+
+## 为Deals页面Investor和Target列添加英文翻译
+- [x] 检查Deals页面表格中Investor和Target列的数据来源
+- [x] 为Investor和Target列添加翻译支持
+- [x] 在英文模式下自动翻译非英文的Investor和Target值
+- [x] 测试中英文切换效果
