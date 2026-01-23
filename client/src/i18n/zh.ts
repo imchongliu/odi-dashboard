@@ -87,7 +87,7 @@ export const zh: TranslationKeys = {
     maDeals: '并购交易',
     greenfield: '绿地投资',
     mapTitle: '全球投资分布',
-    mapSubtitle: '点击标记查看国家详情',
+    mapSubtitle: '点击标记查看目的地详情',
     allDestinations: '全部目的地',
     allDestinationsSubtitle: '投资目的地完整列表',
     selectCountry: '选择国家',

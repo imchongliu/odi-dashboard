@@ -85,7 +85,7 @@ export const en = {
     maDeals: 'M&A Deals',
     greenfield: 'Greenfield',
     mapTitle: 'Global Investment Distribution',
-    mapSubtitle: 'Click on markers to view country details',
+    mapSubtitle: 'Click on markers to view destination details',
     allDestinations: 'All Destinations',
     allDestinationsSubtitle: 'Complete list of investment destinations',
     selectCountry: 'Select a country',
