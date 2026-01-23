@@ -100,7 +100,7 @@ export default function Deals() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedInvestment, setSelectedInvestment] = useState<any | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [translatedNames, setTranslatedNames] = useState<Record<string, string>>({});
+  // Translation state removed - Investor and Target columns display original values
   const translateMutation = trpc.investments.translate.useMutation();
 
   // Fetch data from database via tRPC
@@ -166,41 +166,8 @@ export default function Deals() {
     currentPage * ITEMS_PER_PAGE
   );
 
-  // Translate company and target names when language changes to English
-  useEffect(() => {
-    if (language === 'en' && paginatedDeals && paginatedDeals.length > 0) {
-      paginatedDeals.forEach(deal => {
-        const companyName = deal.companyName || '';
-        const targetName = deal.targetName || '';
-        if (companyName && !translatedNames[companyName]) {
-          translateMutation.mutate(
-            { text: companyName },
-            {
-              onSuccess: (result) => {
-                setTranslatedNames(prev => ({
-                  ...prev,
-                  [companyName]: result.translated
-                }));
-              }
-            }
-          );
-        }
-        if (targetName && !translatedNames[targetName]) {
-          translateMutation.mutate(
-            { text: targetName },
-            {
-              onSuccess: (result) => {
-                setTranslatedNames(prev => ({
-                  ...prev,
-                  [targetName]: result.translated
-                }));
-              }
-            }
-          );
-        }
-      });
-    }
-  }, [language]);
+  // Translation for Investor and Target columns is disabled due to API limitations
+  // These columns now display original values without translation
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters(prev => ({ ...prev, [key]: value }));
@@ -392,13 +359,13 @@ export default function Deals() {
                         <TypeBadge type={deal.investmentType || 'Other'} />
                       </TableCell>
                       <TableCell className="font-medium">
-                        <div className="max-w-[180px] truncate" title={language === 'en' && translatedNames[deal.companyName] ? translatedNames[deal.companyName] : deal.companyName}>
-                          {language === 'en' && translatedNames[deal.companyName] ? translatedNames[deal.companyName] : deal.companyName}
+                        <div className="max-w-[180px] truncate" title={deal.companyName}>
+                          {deal.companyName}
                         </div>
                       </TableCell>
                       <TableCell>
-                        <div className="max-w-[160px] truncate text-muted-foreground" title={language === 'en' && deal.targetName && translatedNames[deal.targetName] ? translatedNames[deal.targetName] : (deal.targetName || 'N/A')}>
-                          {language === 'en' && deal.targetName && translatedNames[deal.targetName] ? translatedNames[deal.targetName] : (deal.targetName || <span className="italic">New project</span>)}
+                        <div className="max-w-[160px] truncate text-muted-foreground" title={deal.targetName || 'N/A'}>
+                          {deal.targetName || <span className="italic">New project</span>}
                         </div>
                       </TableCell>
                       <TableCell className="text-muted-foreground">
