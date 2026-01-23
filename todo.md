@@ -207,3 +207,11 @@
 - [x] 为Region字段值添加翻译映射
 - [x] 在InvestmentDetailModal中应用翻译函数
 - [x] 测试中英文切换效果
+
+## 为详情页字段增加英文翻译支持
+- [x] 为Company Name字段增加翻译
+- [x] 为Target Name字段增加翻译
+- [x] 为Target Industry字段增加翻译
+- [x] 为Investment Rationale字段增加翻译
+- [x] 为Announcement Details字段增加翻译
+- [x] 测试中英文切换效果

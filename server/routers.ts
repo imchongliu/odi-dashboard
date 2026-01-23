@@ -115,7 +115,7 @@ export const appRouter = router({
 
     // Translate Chinese text to English using LLM
     translate: publicProcedure
-      .input(z.object({ text: z.string(), type: z.enum(['industry', 'region']).optional() }))
+      .input(z.object({ text: z.string(), type: z.enum(['industry', 'region', 'company', 'target', 'rationale', 'announcement']).optional() }))
       .mutation(async ({ input }) => {
         if (!input.text || input.text.length === 0) {
           return { text: input.text, translated: input.text };

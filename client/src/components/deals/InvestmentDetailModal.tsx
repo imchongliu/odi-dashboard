@@ -106,6 +106,10 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
   const { t, translateCountry, translateIndustry, translateProvince, translateExchange, language } = useLanguage();
   const [translatedIndustry, setTranslatedIndustry] = useState<string | null>(null);
   const [translatedRegion, setTranslatedRegion] = useState<string | null>(null);
+  const [translatedCompanyName, setTranslatedCompanyName] = useState<string | null>(null);
+  const [translatedTargetName, setTranslatedTargetName] = useState<string | null>(null);
+  const [translatedRationale, setTranslatedRationale] = useState<string | null>(null);
+  const [translatedAnnouncement, setTranslatedAnnouncement] = useState<string | null>(null);
   
   // Use tRPC mutation to translate text
   const translateMutation = trpc.investments.translate.useMutation();
@@ -158,6 +162,82 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
     }
   }, [investment?.targetRegion, language]);
   
+  // Translate Company Name
+  useEffect(() => {
+    if (investment?.companyName && language === 'en') {
+      translateMutation.mutate(
+        { text: investment.companyName, type: 'company' },
+        {
+          onSuccess: (data) => {
+            setTranslatedCompanyName(data?.translated || investment.companyName);
+          },
+          onError: () => {
+            setTranslatedCompanyName(investment.companyName);
+          },
+        }
+      );
+    } else if (language === 'zh') {
+      setTranslatedCompanyName(null);
+    }
+  }, [investment?.companyName, language, open]);
+  
+  // Translate Target Name
+  useEffect(() => {
+    if (investment?.targetName && language === 'en') {
+      translateMutation.mutate(
+        { text: investment.targetName, type: 'target' },
+        {
+          onSuccess: (data) => {
+            setTranslatedTargetName(data?.translated || investment.targetName);
+          },
+          onError: () => {
+            setTranslatedTargetName(investment.targetName);
+          },
+        }
+      );
+    } else if (language === 'zh') {
+      setTranslatedTargetName(null);
+    }
+  }, [investment?.targetName, language, open]);
+  
+  // Translate Investment Rationale
+  useEffect(() => {
+    if (investment?.investmentRationale && language === 'en') {
+      translateMutation.mutate(
+        { text: investment.investmentRationale, type: 'rationale' },
+        {
+          onSuccess: (data) => {
+            setTranslatedRationale(data?.translated || investment.investmentRationale);
+          },
+          onError: () => {
+            setTranslatedRationale(investment.investmentRationale);
+          },
+        }
+      );
+    } else if (language === 'zh') {
+      setTranslatedRationale(null);
+    }
+  }, [investment?.investmentRationale, language, open]);
+  
+  // Translate Announcement Details
+  useEffect(() => {
+    if (investment?.announcementTitle && language === 'en') {
+      translateMutation.mutate(
+        { text: investment.announcementTitle, type: 'announcement' },
+        {
+          onSuccess: (data) => {
+            setTranslatedAnnouncement(data?.translated || investment.announcementTitle);
+          },
+          onError: () => {
+            setTranslatedAnnouncement(investment.announcementTitle);
+          },
+        }
+      );
+    } else if (language === 'zh') {
+      setTranslatedAnnouncement(null);
+    }
+  }, [investment?.announcementTitle, language, open]);
+  
   if (!investment) return null;
 
   const dealSizeUsd = parseFloat(investment.dealSizeUsd || '0');
@@ -170,10 +250,10 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1 min-w-0">
               <DialogTitle className="text-xl break-words">
-                {investment.companyName}
+                {language === 'en' && translatedCompanyName ? translatedCompanyName : investment.companyName}
               </DialogTitle>
               <DialogDescription className="mt-1 break-words">
-                {investment.targetName || 'New Investment Project'}
+                {language === 'en' && translatedTargetName ? translatedTargetName : (investment.targetName || 'New Investment Project')}
               </DialogDescription>
             </div>
             <div className="flex gap-2 flex-shrink-0">
@@ -232,7 +312,7 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
               <InfoRow
                 icon={Building2}
                 label={t.modal.companyName}
-                value={investment.companyName}
+                value={language === 'en' && translatedCompanyName ? translatedCompanyName : investment.companyName}
               />
               <InfoRow
                 icon={Factory}
@@ -259,7 +339,7 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
               <InfoRow
                 icon={Building2}
                 label={t.modal.targetName}
-                value={investment.targetName || 'New Project'}
+                value={language === 'en' && translatedTargetName ? translatedTargetName : (investment.targetName || 'New Project')}
               />
               <InfoRow
                 icon={Globe}
@@ -289,7 +369,7 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
                   {t.modal.investmentRationale}
                 </h3>
                 <p className="text-sm text-muted-foreground whitespace-pre-wrap break-words">
-                  {investment.investmentRationale}
+                  {language === 'en' && translatedRationale ? translatedRationale : investment.investmentRationale}
                 </p>
               </div>
             </>
@@ -305,7 +385,7 @@ export function InvestmentDetailModal({ investment, open, onOpenChange }: Invest
                   {t.modal.announcementDetails}
                 </h3>
                 <p className="text-sm text-muted-foreground break-words">
-                  {investment.announcementTitle}
+                  {language === 'en' && translatedAnnouncement ? translatedAnnouncement : investment.announcementTitle}
                 </p>
               </div>
             </>
