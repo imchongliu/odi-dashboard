@@ -64,7 +64,7 @@ export function CountryBarChart({ data, limit = 8 }: CountryBarChartProps) {
     <div className="chart-container">
       <div className="mb-4">
         <h3 className="text-lg font-semibold">{t.overview.topDestinationsByValue}</h3>
-        <p className="text-sm text-muted-foreground">Investment amount by country</p>
+        <p className="text-sm text-muted-foreground">Investment amount by destination</p>
       </div>
       <div className="h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
